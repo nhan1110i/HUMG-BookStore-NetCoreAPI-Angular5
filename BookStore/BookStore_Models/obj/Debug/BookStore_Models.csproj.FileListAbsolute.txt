@@ -1,0 +1,13 @@
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\obj\Debug\BookStore_Models.csprojAssemblyReference.cache
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\obj\Debug\BookStore_Models.csproj.CoreCompileInputs.cache
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\BookStore_Models.dll
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\BookStore_Models.pdb
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Dapper.dll
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Dapper.xml
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\obj\Debug\BookStore_Models.csproj.CopyComplete
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\obj\Debug\BookStore_Models.dll
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\obj\Debug\BookStore_Models.pdb
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Microsoft.AspNetCore.Cryptography.Internal.xml
+D:\_TN94\Chuyên đề\BookStore\BookStore_Models\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml

@@ -1,0 +1,97 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {}
+  },
+  "projects": {
+    "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
+        "projectName": "BookStore_Controller",
+        "projectPath": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
+        "packagesPath": "C:\\Users\\trong\\.nuget\\packages\\",
+        "outputPath": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Controller\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\trong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {
+              "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
+                "projectPath": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.4, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.1.9, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Models\\BookStore_Models.csproj",
+        "projectName": "BookStore_Models",
+        "projectPath": "D:\\_TN94\\Chuyên đề\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}
