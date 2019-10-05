@@ -1,0 +1,53 @@
+<div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card text-drank border-primary">
+              <div class="card-body">
+                <div class="card-title text-primary">
+                  <h5>FILTER PRODUCT</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 mt-15">
+            <div class="card text-drank border-primary">
+              <div class="card-body">
+                <h5 class="card-title text-primary">PRODUCTS</h5>
+                <hr>
+                <button class="btn btn-success"><i class="fa fa-plus"></i> Thêm mới</button> &nbsp;
+                <button class="btn-warning btn"><i class="fa-file-pdf fas"></i> Xuất File</button>
+                <hr>
+                <div class="table-responsive">
+                  <table class="table">
+                      <tr class="text-light bg-primary">
+                        <th>#</th>
+                        <th>Code</th>
+                        <th>Tên</th>
+                        <th>Ảnh</th>
+                        <th>Danh mục</th>
+                        <th>Giá bán</th>
+                        <th>Giá gốc</th>
+                        <th>Trạng thái</th>
+                        <th>Năm</th>
+                        <th>Action</th>
+                      </tr>
+                      <tr *ngFor="let product of products">
+                        <td></td>
+                        <td>{{ product.product.productCode }}</td>
+                        <td>{{ product.product.productName }}</td>
+                        <td>{{ product.product.productImageList }}</td>
+                        <td>{{ product.category.categoryName }}</td>
+                        <td>{{ formatMoney(+product.product.productDiscount)}}</td>
+                        <td>{{ formatMoney(+product.product.productPrice) }}</td>
+                        <td><span [ngClass]="product.product.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(product.product.isActive) }}</span></td>
+                        <td>{{ product.product.publishYear }}</td>
+                        <td><a class="fa fa-edit fa-lg text-warning"></a>&nbsp;<a class="fa fa-times fa-lg text-danger"></a></td>
+                      </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
