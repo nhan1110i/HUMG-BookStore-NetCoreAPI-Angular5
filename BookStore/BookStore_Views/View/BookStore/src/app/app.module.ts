@@ -10,6 +10,8 @@ import { CategoryComponent } from './Admin/directive/category/category.component
 import { ProductComponent } from './Admin/directive/product/product.component';
 import { LoginComponent } from './Admin/login/login.component';
 
+import { AddNewProductComponent } from './Admin/directive/add-new-product/add-new-product.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,9 @@ import { LoginComponent } from './Admin/login/login.component';
     SidebarComponent,
     CategoryComponent,
     ProductComponent,
-    LoginComponent
+    LoginComponent,
+
+    AddNewProductComponent
   ],
   imports: [
     HttpClientModule,

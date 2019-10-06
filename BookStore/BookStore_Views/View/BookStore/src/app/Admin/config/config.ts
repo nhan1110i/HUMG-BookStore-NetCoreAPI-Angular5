@@ -12,6 +12,12 @@ export var url = {
     },
     product:{
         products: "Product/GetProducts"
+    },
+    author: {
+        authors: "Author/GetAuthors"
+    },
+    publishing: {
+        publishings :"PublishingHouse/GetListPublishing"
     }
 }
 export var config = {

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-drank border-success">
+        <div class="card-body">
+          <div class="card-title ">
+            <h5 class="text-success">ADD NEW PRODUCT</h5>
+            <hr>
+            <div class="form-group row">
+              <div class="col-sm-3 border-success"></div>
+              <div class="col-sm-9">
+                <div class="form-group">
+                  <strong>Product Code :</strong>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                  <strong>Product Name :</strong>
+                  <input type="text" class="form-control">
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 form-group">
+                    <strong>Product Price</strong>
+                    <input type="number" class="form-control">
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <strong>Product Price</strong>
+                    <input type="number" class="form-control">
+                  </div>
+                  <div class="col-sm-4 form-group">
+                    <strong>Author</strong>
+                    <select class="form-control">
+                      <option class="form-control" *ngFor="let author of authors" value="author.id">{{ author.authorName }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-8">
+                    <strong>Category</strong>
+                    <select class="form-control">
+                      <option *ngFor="let category of categories" value="{{ category.category.id }}">{{ category.category.categoryName }}</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-4">
+                    <strong>Publishing</strong>
+                    <select class="form-control">
+                      <option *ngFor="let publishing of publishings" value="publishing.id">
+                        {{ publishing.publishingName }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="container">
+                    <div class="form-group">
+                      <strong>Active</strong><br>
+                      <div class="form-group form-check ">
+                        <input class="form-check-input" type="checkbox"> <span class="">Active
+                          Product</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <strong>Description</strong>
+                <textarea class="form-control">
+
+                </textarea>
+              </div>
+              <div class="container">
+                    <button class="btn btn-success">Insert Product</button> &nbsp;
+                    <button class="btn btn-danger">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
