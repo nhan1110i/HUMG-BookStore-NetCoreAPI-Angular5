@@ -31,6 +31,13 @@ namespace BookStore_Controller
             {
                 c.SwaggerDoc("v1", new Info { Title = "BookStore API", Version = "v1.0" });
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                 {
+                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                 });
+            });
         
     }
 
@@ -45,6 +52,7 @@ namespace BookStore_Controller
             {
                 app.UseHsts();
             }
+            app.UseCors("EnableCORS");
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),

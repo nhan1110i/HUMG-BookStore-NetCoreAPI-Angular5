@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookStore_Controller.Helper;
 using BookStore_Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore_Controller.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
         Admin admin = new Admin();
         // GET: api/Admin
         [HttpGet]
-        public JsonResult CheckLogin()
+        public bool Login([FromBody] Admin adminLogin, string salt)
         {
-            return new JsonResult(new Notice(0, "0"));
+            //adminLogin.Password = Cryptography.Create(adminLogin.Password, salt);
+            //return await admin.Login(adminLogin);
+            return true;
         }
 
         // GET: api/Admin/5
@@ -29,17 +32,10 @@ namespace BookStore_Controller.Controllers
 
         // POST: api/Admin
         [HttpPost]
-        public async Task<JsonResult> CheckLogin([FromBody] Admin adminLogin)
+        public async Task<bool> CheckLogin([FromBody] Admin adminLogin)
         {
-            var rs = await admin.CheckLogin(adminLogin);
-            if (rs)
-            {
-                return new JsonResult(new Notice(0, "ok"));
-            }
-            else
-            {
-                return new JsonResult(new Notice(1, "Wrong username or password"));
-            }
+            adminLogin.Password = Cryptography.Create(adminLogin.Password);
+            return await admin.Login(adminLogin);
         }
 
         // PUT: api/Admin/5

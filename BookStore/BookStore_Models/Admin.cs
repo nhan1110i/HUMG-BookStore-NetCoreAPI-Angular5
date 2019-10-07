@@ -26,18 +26,18 @@ namespace BookStore_Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public async Task<bool> CheckLogin(Admin admin)
+        public async Task<bool> Login(Admin admin)
         {
             using (DataConnection.Connection())
             {
                 
-                string Query = "SELECT * FROM Admin WHERE Username = @Username";
+                string Query = "SELECT * FROM Admin WHERE Username = @Username AND Password = @Password";
                 var param = new DynamicParameters();
                 param.Add("@Username", admin.Username);
-               // param.Add("@Password",admin.Password ); //hash.CreateHash(admin.Password)
+                param.Add("@Password",admin.Password); 
                 CommandType command = new CommandType();
                 var rs = await DataConnection.Connection().QueryAsync<Admin>(Query, param, null, null, command);
-                if(admin.Password == rs.Single().Password)
+                if(rs.Count() != 0)
                 {
                     return true;
                 }

@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 
 namespace BookStore_Controller.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class AuthorController : ControllerBase
     {
         private Author author = new Author();
 
         [HttpGet]
-        public async Task<JsonResult> GetListAuthor()
+        public async Task<JsonResult> GetAuthors()
         {
             // var rs = await author.GetListAuthor();
             return new JsonResult(await author.GetListAuthor());

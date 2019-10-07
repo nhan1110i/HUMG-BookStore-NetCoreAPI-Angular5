@@ -61,14 +61,14 @@ namespace BookStore_Models
         public DateTime UpdateAt { get; set; }
 
         // function
-        public async Task<IEnumerable<Product>> GetListProduct()
+        public async Task<List<Product>> GetProducts()
         {
             using (DataConnection.Connection())
             {
                 string Query = "SELECT * FROM product";
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Product>(Query, null, null, null, command);
-                return rs;
+                return rs.ToList();
             }
         }
         public async Task<Product> GetProductById(int Id)

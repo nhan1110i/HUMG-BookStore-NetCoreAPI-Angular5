@@ -9,8 +9,8 @@ namespace BookStore_Controller.Helper
 {
     public class Cryptography
     {
-        static string salt = "tingting";
-        public string CreateHash(string password)
+        public static string salt = "tingting";
+        public static string Create(string password)
         { 
             var Hashed = KeyDerivation.Pbkdf2(
                     password: password,
@@ -20,6 +20,17 @@ namespace BookStore_Controller.Helper
                     numBytesRequested: 256 / 8
                     );
             return Convert.ToBase64String(Hashed);
+        }
+        public static bool Validate(string password, string value)
+        {
+            if(Create(password) == value)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

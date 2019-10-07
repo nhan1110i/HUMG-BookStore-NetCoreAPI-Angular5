@@ -31,14 +31,14 @@ namespace BookStore_Models
         public string AuthorDescription { get; set; }
 
         // function
-        public async Task<IEnumerable<Author>> GetListAuthor()
+        public async Task<List<Author>> GetListAuthor()
         {
             using (DataConnection.Connection())
             {
                 string Query = "SELECT * FROM Author";
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Author>(Query, null, null,null, command);
-                return rs;
+                return rs.ToList();
             }
         }
         public async Task<Author> GetAuthorById(int Id)
