@@ -7,59 +7,72 @@
             <h5 class="text-success">ADD NEW PRODUCT</h5>
             <hr>
             <div class="form-group row">
-              <div class="col-sm-3 border-success"></div>
+              <div class="col-sm-3 border-success">
+                <div>
+                  <img [src]="localUrl" alt="" class="mx-auto d-block mt-15">
+                </div>
+              </div>
               <div class="col-sm-9">
                 <div class="form-group">
                   <strong>Product Code :</strong>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="product.productCode">
                 </div>
                 <div class="form-group">
                   <strong>Product Name :</strong>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" [(ngModel)]="product.productName">
                 </div>
                 <div class="row">
                   <div class="col-sm-4 form-group">
                     <strong>Product Price</strong>
-                    <input type="number" class="form-control">
+                    <input type="number" class="form-control" [(ngModel)]="product.productPrice">
                   </div>
                   <div class="col-sm-4 form-group">
-                    <strong>Product Price</strong>
-                    <input type="number" class="form-control">
+                    <strong>Product Discount</strong>
+                    <input type="number" class="form-control" [(ngModel)]="product.productDiscount">
                   </div>
                   <div class="col-sm-4 form-group">
                     <strong>Author</strong>
-                    <select class="form-control">
-                      <option class="form-control" *ngFor="let author of authors" value="author.id">{{ author.authorName }}</option>
+                    <select class="form-control" [(ngModel)]="product.authorId">
+                      <option class="form-control" *ngFor="let author of authors" value="{{ author.id }}">
+                        {{ author.authorName }}</option>
                     </select>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-sm-8">
                     <strong>Category</strong>
-                    <select class="form-control">
-                      <option *ngFor="let category of categories" value="{{ category.category.id }}">{{ category.category.categoryName }}</option>
+                    <select class="form-control" [(ngModel)]="product.categoryId">
+                      <option *ngFor="let category of categories" value="{{ category.category.id }}">
+                        {{ category.category.categoryName }}</option>
                     </select>
                   </div>
                   <div class="col-sm-4">
                     <strong>Publishing</strong>
-                    <select class="form-control">
-                      <option *ngFor="let publishing of publishings" value="publishing.id">
+                    <select class="form-control" [(ngModel)]="product.publishingId">
+                      <option *ngFor="let publishing of publishings" value="{{ publishing.id }}">
                         {{ publishing.publishingName }}
                       </option>
                     </select>
                   </div>
                 </div>
+                <br>
                 <div class="row">
-                  <div class="container">
-                    <div class="form-group">
-                      <strong>Active</strong><br>
-                      <div class="form-group form-check ">
-                        <input class="form-check-input" type="checkbox"> <span class="">Active
-                          Product</span>
+
+                    <div class="col-sm-3">
+                      <strong>File</strong>
+                      <input type="file" [(ngModel)]="file" class="btn btn-success" (change)="showFile($event)">
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <strong>Active</strong><br>
+                        <div class="form-group form-check ">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="product.isActive"> <span
+                            class="">Active
+                            Product</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+
                 </div>
 
               </div>
@@ -68,13 +81,13 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <strong>Description</strong>
-                <textarea class="form-control">
+                <textarea class="form-control" placeholder="description" [(ngModel)]="product.productDescription">
 
                 </textarea>
               </div>
               <div class="container">
-                    <button class="btn btn-success">Insert Product</button> &nbsp;
-                    <button class="btn btn-danger">Cancel</button>
+                <button class="btn btn-success" (click)="insertProduct(product)">Insert Product</button> &nbsp;
+                <button class="btn btn-danger">Cancel</button>
               </div>
             </div>
           </div>

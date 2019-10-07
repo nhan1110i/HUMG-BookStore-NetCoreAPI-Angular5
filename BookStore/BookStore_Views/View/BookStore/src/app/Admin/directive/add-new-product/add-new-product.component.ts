@@ -8,13 +8,51 @@ import { PublishingService } from '../../services/publishing/publishing.service'
   styleUrls: ['./add-new-product.component.css']
 })
 export class AddNewProductComponent implements OnInit {
-  categories :any;
+  categories : Array<any>;
   publishings: any;
   authors: any;
+  product : any={
+    productName: "",
+    productCode: "",
+    productPrice: 0,
+    productDiscount: 0,
+    authorId: 0,
+    productDescription: "",
+    categoryId: 0,
+    publishingId: 0,
+    isActive: true,
+    productImage: ""
+    // this.categories[1].category.id
+  }
+  // action
+  insertProduct(product : any){
+    console.log(product)
+    console.log(this.file);
+  }
+  localUrl: any[];
+  showFile(event: any) {
+    console.log(event)
+      if (event.target.files && event.target.files[0]) {
+          var reader = new FileReader();
+          reader.onload = (event: any) => {
+              this.localUrl = event.target.result;
+          }
+          reader.readAsDataURL(event.target.files[0]);
+      }
+  }
+  file : File;
+  // get form
   getCategories() :void{
     this.categoryService.getCategories().subscribe(
       (rs)=>{
+        rs.unshift({
+          category : {
+            id : 0,
+            categoryName: "Select Category"
+          }
+        })
         this.categories = rs;
+        
     console.log(this.categories)
       },(err)=>{
         console.log(err);
@@ -24,6 +62,12 @@ export class AddNewProductComponent implements OnInit {
   getAuthors() : void{
     this.authorService.getAuthors().subscribe(
       (rs)=>{
+        rs.unshift({
+          
+            id : 0,
+            authorName: "Select Author"
+          
+        })
         this.authors = rs;
       },(err)=>{
         console.log(err);
@@ -33,6 +77,12 @@ export class AddNewProductComponent implements OnInit {
   getPublishings() : void{
     this.publishingService.getPublishings().subscribe(
       (rs)=>{
+        rs.unshift({
+
+            id : 0,
+            publishingName: "Select Publishing"
+
+        })
         this.publishings = rs
       },(err)=>{
         console.log(err)
@@ -48,7 +98,8 @@ export class AddNewProductComponent implements OnInit {
   ngOnInit() {
     this.getCategories(),
     this.getAuthors(),
-    this.getPublishings()
+    this.getPublishings(),
+    console.log(this.product)
   }
 
 }

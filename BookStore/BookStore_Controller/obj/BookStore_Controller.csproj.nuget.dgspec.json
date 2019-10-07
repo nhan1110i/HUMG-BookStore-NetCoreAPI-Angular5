@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {}
+    "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {}
   },
   "projects": {
-    "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {
+    "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
+        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
         "projectName": "BookStore_Controller",
-        "projectPath": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
+        "projectPath": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Controller\\BookStore_Controller.csproj",
         "packagesPath": "C:\\Users\\trong\\.nuget\\packages\\",
-        "outputPath": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Controller\\obj\\",
+        "outputPath": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Controller\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
-              "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
-                "projectPath": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
+              "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
+                "projectPath": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
               }
             }
           }
@@ -82,12 +82,12 @@
         }
       }
     },
-    "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
+    "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Models\\BookStore_Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Models\\BookStore_Models.csproj",
+        "projectUniqueName": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Models\\BookStore_Models.csproj",
         "projectName": "BookStore_Models",
-        "projectPath": "D:\\_TN94\\Chuyên đề\\New folder\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
+        "projectPath": "D:\\_TN94\\Chuyên đề\\BTL\\BookStore\\BookStore_Models\\BookStore_Models.csproj"
       },
       "frameworks": {
         "net472": {}

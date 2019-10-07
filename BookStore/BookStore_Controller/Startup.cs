@@ -52,6 +52,7 @@ namespace BookStore_Controller
             {
                 app.UseHsts();
             }
+            app.UseStaticFiles();
             app.UseCors("EnableCORS");
             app.UseSwagger();
 

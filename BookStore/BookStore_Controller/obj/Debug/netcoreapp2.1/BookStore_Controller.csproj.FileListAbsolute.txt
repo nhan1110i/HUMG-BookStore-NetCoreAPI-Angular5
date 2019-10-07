@@ -32,3 +32,20 @@ D:\_TN94\Chuyên đề\New folder\BookStore\BookStore_Controller\obj\Debug\netco
 D:\_TN94\Chuyên đề\New folder\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.csproj.CopyComplete
 D:\_TN94\Chuyên đề\New folder\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.dll
 D:\_TN94\Chuyên đề\New folder\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.pdb
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Controller.deps.json
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Controller.runtimeconfig.json
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Controller.runtimeconfig.dev.json
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Controller.dll
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Controller.pdb
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Models.dll
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\bin\Debug\netcoreapp2.1\BookStore_Models.pdb
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.csprojAssemblyReference.cache
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.csproj.CoreCompileInputs.cache
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.RazorAssemblyInfo.cache
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.RazorAssemblyInfo.cs
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.AssemblyInfoInputs.cache
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.AssemblyInfo.cs
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.RazorTargetAssemblyInfo.cache
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.csproj.CopyComplete
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.dll
+D:\_TN94\Chuyên đề\BTL\BookStore\BookStore_Controller\obj\Debug\netcoreapp2.1\BookStore_Controller.pdb
