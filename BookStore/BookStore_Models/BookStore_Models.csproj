@@ -59,6 +59,7 @@
     <Compile Include="Cryptography.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DataConnection.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Notice.cs" />
     <Compile Include="Order.cs" />

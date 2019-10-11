@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Dapper;
 namespace BookStore_Models
 {
     public class Product
@@ -160,6 +159,38 @@ namespace BookStore_Models
                 IdUpdate = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);
                 return IdUpdate;
             }
+        }
+        public async Task<List<Product>> GetProductByCategoryId(int Id)
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT * FROM product WHERE CategoryId = @id";
+                var param = new DynamicParameters();
+                param.Add("@id",Id);
+                CommandType comm = CommandType.Text;
+                var rs= await DataConnection.Connection().QueryAsync<Product>(Query, param, null, null, comm);
+                return rs.ToList();
+            }
+        }
+        public async Task<int> DeleteProducts(int [] Id)
+        {
+            foreach(int id in Id)
+            {
+                using (DataConnection.Connection())
+                {
+                    var rs = await DeleteProducById(id);
+                }
+            }
+            return 0;
+        }
+        public async Task<int> DuplicateProducts(int [] Id)
+        {
+            foreach(int id in Id)
+            {
+                Product product = await GetProductById(id);
+                await InsertProduct(product);
+            }
+            return 0;
         }
     }
 }

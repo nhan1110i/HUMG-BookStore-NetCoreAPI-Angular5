@@ -39,6 +39,19 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(rs);
             }
         }
+        [HttpGet("{Id}")]
+        public async Task<JsonResult> GetProductByCategoryId(int Id)
+        {
+            var rs = await product.GetProductByCategoryId(Id);
+            if(rs.Count() == 0)
+            {
+                return new JsonResult(new Notice(0, "not found product"));
+            }
+            else
+            {
+                return new JsonResult(rs);
+            }
+        }
         [HttpPost]
         public async Task<JsonResult> InsertProduct([FromBody] Product product)
         {

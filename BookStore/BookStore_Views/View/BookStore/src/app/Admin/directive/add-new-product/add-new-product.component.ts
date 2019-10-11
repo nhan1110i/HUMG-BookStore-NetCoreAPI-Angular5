@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CategoryService} from '../../services/category/category.service'
 import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
+import { CKEditorModule } from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-add-new-product',
   templateUrl: './add-new-product.component.html',
