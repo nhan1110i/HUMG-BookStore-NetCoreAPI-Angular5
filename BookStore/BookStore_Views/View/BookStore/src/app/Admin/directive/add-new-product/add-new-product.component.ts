@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoryService} from '../../services/category/category.service'
+import { CategoryService } from '../../services/category/category.service'
 import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
-import { CKEditorModule } from '@ckeditor/ckeditor5-build-classic';
+
+import { ProductService } from '../../services/product/product.service';
+declare var require: any
+
 @Component({
   selector: 'app-add-new-product',
   templateUrl: './add-new-product.component.html',
   styleUrls: ['./add-new-product.component.css']
 })
 export class AddNewProductComponent implements OnInit {
-  categories : Array<any>;
+  categories: Array<any>;
   publishings: any;
   authors: any;
-  product : any={
+  product: any = {
     productName: "",
     productCode: "",
     productPrice: 0,
@@ -25,82 +28,100 @@ export class AddNewProductComponent implements OnInit {
     productImage: ""
     // this.categories[1].category.id
   }
+ 
   // action
-  insertProduct(product : any){
-    console.log(product)
-    console.log(this.file);
-  }
+  public progress: number;
+  public message: string;
+
+ 
   localUrl: any[];
+  selectedImage : File;
   showFile(event: any) {
-    console.log(event)
-      if (event.target.files && event.target.files[0]) {
-          var reader = new FileReader();
-          reader.onload = (event: any) => {
-              this.localUrl = event.target.result;
-          }
-          reader.readAsDataURL(event.target.files[0]);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      this.selectedImage = <File> event.target.files[0];
+      reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
       }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    console.log(this.selectedImage)
+    
   }
-  file : File;
+  insertProduct(){
+    const fd = new FormData();
+     fd.append("Image",this.selectedImage, this.selectedImage.name);
+    //fd.append("Image","Nhan");
+    this.productService.insertProduct(fd,this.product).subscribe(
+      rs=>{
+        console.log(this.product)
+        console.log("ok")
+      },err =>{
+        console.log("err");
+      }
+    )
+    console.log(fd.getAll("Image"));
+  }
+  file: File;
   // get form
-  getCategories() :void{
+  getCategories(): void {
     this.categoryService.getCategories().subscribe(
-      (rs)=>{
+      (rs) => {
         rs.unshift({
-          category : {
-            id : 0,
+          category: {
+            id: 0,
             categoryName: "Select Category"
           }
         })
         this.categories = rs;
-        
-    console.log(this.categories)
-      },(err)=>{
+
+        console.log(this.categories)
+      }, (err) => {
         console.log(err);
       }
     )
   }
-  getAuthors() : void{
+  getAuthors(): void {
     this.authorService.getAuthors().subscribe(
-      (rs)=>{
+      (rs) => {
         rs.unshift({
-          
-            id : 0,
-            authorName: "Select Author"
-          
+          id: 0,
+          authorName: "Select Author"
+
         })
         this.authors = rs;
-      },(err)=>{
+      }, (err) => {
         console.log(err);
       }
     )
   }
-  getPublishings() : void{
+  getPublishings(): void {
     this.publishingService.getPublishings().subscribe(
-      (rs)=>{
+      (rs) => {
         rs.unshift({
 
-            id : 0,
-            publishingName: "Select Publishing"
+          id: 0,
+          publishingName: "Select Publishing"
 
         })
         this.publishings = rs
-      },(err)=>{
+      }, (err) => {
         console.log(err)
       }
     )
   }
   constructor(
-    private categoryService : CategoryService, 
-    private authorService : AuthorService,
+    private productService: ProductService,
+    private categoryService: CategoryService,
+    private authorService: AuthorService,
     private publishingService: PublishingService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getCategories(),
-    this.getAuthors(),
-    this.getPublishings(),
-    console.log(this.product)
+      this.getAuthors(),
+      this.getPublishings()
+
   }
 
 }

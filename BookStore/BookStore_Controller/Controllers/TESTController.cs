@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing;
 
 namespace BookStore_Controller.Controllers
 {
@@ -20,9 +21,9 @@ namespace BookStore_Controller.Controllers
 
         // GET: api/TEST/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public String Get(int id)
         {
-            return "value";
+            return "1";
         }
 
         // POST: api/TEST

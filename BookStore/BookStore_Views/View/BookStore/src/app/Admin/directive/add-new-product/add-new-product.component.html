@@ -9,7 +9,7 @@
             <div class="form-group row">
               <div class="col-sm-3 border-success">
                 <div>
-                  <img [src]="localUrl" alt="" class="mx-auto d-block mt-15">
+                  <img [src]="localUrl" alt="" class="mx-auto d-block mt-15" *ngIf="localUrl">
                 </div>
               </div>
               <div class="col-sm-9">
@@ -57,10 +57,11 @@
                 </div>
                 <br>
                 <div class="row">
-
+                  <!-- showFile($event) -->
                   <div class="col-sm-3">
                     <strong>File</strong>
-                    <input type="file" [(ngModel)]="file" class="form-control" (change)="showFile($event)">
+                    <input type="file"  class="form-control" (change)="showFile($event)">
+                    <!-- <input type="file" #file (change)="uploadFile(file.files)"> -->
                   </div>
                   <div class="col-sm-3">
                     <div class="form-group">
@@ -81,15 +82,10 @@
             <div class="row">
               <div class="form-group col-sm-12">
                 <strong>Description</strong>
-                <ckeditor [(ngModel)]="product.productDescription"></ckeditor>
-                <script>
-                  CKEDITOR.replace('description');
-
-                </script>
-
+                <ckeditor [(ngModel)]="product.productDescription" ></ckeditor>
               </div>
               <div class="container">
-                <button class="btn btn-success" (click)="insertProduct(product)">Insert Product</button> &nbsp;
+                <button class="btn btn-success" (click)="insertProduct()">Insert Product</button> &nbsp;
                 <button class="btn btn-danger">Cancel</button>
               </div>
             </div>
@@ -99,3 +95,4 @@
     </div>
   </div>
 </div>
+
