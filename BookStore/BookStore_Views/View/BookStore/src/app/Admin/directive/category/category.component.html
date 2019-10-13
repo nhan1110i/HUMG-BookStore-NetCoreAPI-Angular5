@@ -1,124 +1,127 @@
 <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card text-drank border-success">
-              <div class="card-body">
-                <div class="card-title text-success">
-                  <h5>THÊM MỚI DANH MỤC</h5>
-                  <hr>
-                </div>
-                <form action="" class="form-inline" #categoryAdd="ngForm">
-                  &nbsp;
-                  <div class="form-group">
-                    <strong>Tên danh mục: </strong>&nbsp;
-                    <input type="text" class="form-control" name="categoryName" ngModel>
-                  </div>
-                  &nbsp;
-                  <div class="form-group">
-                    <label><strong>Tiêu đề:</strong> </label> &nbsp;
-                    <input type="text" class="form-control" name="categoryTitle" ngModel> &nbsp;
-                  </div>
-                  &nbsp;
-                  <div class="form-group">
-                    <label>Danh mục cha: </label> &nbsp;
-                    <select class="form-control" name="parentId" ngModel>
-                      <option *ngFor="let parentCategory of parentCategories"  value="{{ parentCategory.id }}">
-                        {{ parentCategory.parentName }}</option>
-                    </select>
-                    &nbsp;
-                    <input type="checkbox" name="isActive" ngModel checked>&nbsp; Active
-                    
-                  </div>
-                  &nbsp;&nbsp;
-                  <div class="mt-1 float-sm-right">
-                      <button class="btn btn-success" (click)="addNewCategory(categoryAdd)">Thêm mới</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-drank border-success">
+        <div class="card-body">
+          <div class="card-title text-success">
+            <h5>THÊM MỚI DANH MỤC</h5>
+            <hr>
           </div>
-      <br>
-      <br>
-          <!-- box insert -->
-          
-          <div [ngClass]="categorySelected == null ? 'col-sm-12 mt-15' : 'col-sm-8 mt-15' ">
-            <div class="card text-drank border-primary">
-              <div class="card-body">
-                <h5 class="card-title text-info">QUẢN LÝ DANH MỤC</h5>
-                <hr>
-                <div class="table-responsive">
-                  <table class="table">
-                    <tr class="text-light bg-info">
-                      <th>#</th>
-                      <th>Tên danh mục</th>
-                      <th>Danh mục cha</th>
-                      <th>Tiêu đề</th>
-                      <th>Trạng thái</th>
-                      <th>Hành động</th>
-                    </tr>
-                    <tr *ngFor="let category of categories">
-                      <td ></td>
-                      <td>{{ category.category.categoryName }}</td>
-                      <td>{{ category.parentCategory.parentName }}</td>
-                      <td>{{ category.category.categoryTitle }}</td>
-                      <td><span [ngClass]="category.category.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(category.category.isActive) }}</span></td>
-                      <td class="text-info"><button (click)="selectCategory(category)" class="btn btn-warning btn-sm"><i
-                            class="fa fa-edit"></i></button> &nbsp;
-                        <button (click)="deleteCategory(+category.category.id)" class="btn btn-danger btn-sm"><i
-                            class="fa fa-times"></i></button>
-                      </td>
-      
-                    </tr>
-                  </table>
-                </div>
-              </div>
+          <form action="" class="form-inline" #categoryAdd="ngForm">
+            &nbsp;
+            <div class="form-group">
+              <strong>Tên danh mục: </strong>&nbsp;
+              <input type="text" class="form-control" name="categoryName" ngModel>
             </div>
-          </div>
-          <!-- box-list -->
-          <br>
-          <div class="col-sm-4 mt-15" *ngIf="categorySelected">
-            <div class="card text-drank border-info">
-              <div class="card-body">
-                <h5 class="card-title text-info">UPDATE CATEGORY</h5>
-                <HR>
-                <!-- <form #categoryForm="ngForm"> -->
-                  <div class="form-group">
-                    <label for="email">Tên danh mục:</label>
-                    <!-- value="{{ categorySelected.category.categoryName }} -->
-                    <input type="text" class="form-control" [(ngModel)]="categorySelected.category.categoryName">
-                  </div>
-                  <div class="form-group">
-                    <label for="pwd">Danh mục cha:</label>
-                    <select class="form-control" [(ngModel)]="categorySelected.category.parentId">
-                      <option *ngFor="let parentCategory of parentCategories"
-                        [selected]="categorySelected.category.id == parentCategory.id" [value]="parentCategory.id" >
-                        {{ parentCategory.parentName}}
-                        
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="pwd">Tiêu đề :</label>
-                    <input type="text" class="form-control" [(ngModel)]="categorySelected.category.categoryTitle">
-                  </div>
-                  <div class="form-group">
-                    <label for="pwd">Trạng thái:</label>&nbsp;
-                    <input type="checkbox" class="" [checked]="categorySelected.category.isActive == true" [(ngModel)]="categorySelected.category.isActive"> : <span
-                      class="text-success">{{ showActive(categorySelected.category.isActive)}}</span>
-                  </div>
-      
-                  <button type="submit" class="btn btn-primary btn-sm" (click)="updateCategory(categorySelected.category)">Cập nhật</button> &nbsp;
-                  <button type="submit" class="btn btn-danger btn-sm" (click)="categorySelected = null">Hủy bỏ</button>
-                <!-- </form> -->
-              </div>
+            &nbsp;
+            <div class="form-group">
+              <label><strong>Tiêu đề:</strong> </label> &nbsp;
+              <input type="text" class="form-control" name="categoryTitle" ngModel> &nbsp;
             </div>
-            <br><br>
-            <div class="{{alert.style}} alert-dismissible" *ngIf="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>{{ alert.title }}!</strong> {{ alert.content }}.
+            &nbsp;
+            <div class="form-group">
+              <label>Danh mục cha: </label> &nbsp;
+              <select class="form-control" name="parentId" ngModel>
+                <option *ngFor="let parentCategory of parentCategories" value="{{ parentCategory.id }}">
+                  {{ parentCategory.parentName }}</option>
+              </select>
+              &nbsp;
+              <input type="checkbox" name="isActive" ngModel checked>&nbsp; Active
+
             </div>
-          </div>
-          <!-- box-update -->
+            &nbsp;&nbsp;
+            <div class="mt-1 float-sm-right">
+              <button class="btn btn-success" (click)="addNewCategory(categoryAdd)">Thêm mới</button>
+            </div>
+          </form>
         </div>
       </div>
-      
+    </div>
+    <br>
+    <br>
+    <!-- box insert -->
+
+    <div [ngClass]="categorySelected == null ? 'col-sm-12 mt-15' : 'col-sm-8 mt-15' ">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-info">QUẢN LÝ DANH MỤC</h5>
+          <hr>
+          <div class="table-responsive">
+            <table class="table">
+              <tr class="text-light bg-info">
+                <th>#</th>
+                <th>Tên danh mục</th>
+                <th>Danh mục cha</th>
+                <th>Tiêu đề</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+              <tr *ngFor="let category of categories">
+                <td></td>
+                <td>{{ category.category.categoryName }}</td>
+                <td>{{ category.parentCategory.parentName }}</td>
+                <td>{{ category.category.categoryTitle }}</td>
+                <td><span
+                    [ngClass]="category.category.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(category.category.isActive) }}</span>
+                </td>
+                <td class="text-info"><button (click)="selectCategory(category)" class="btn btn-warning btn-sm"><i
+                      class="fa fa-edit"></i></button> &nbsp;
+                  <button (click)="deleteCategory(+category.category.id)" class="btn btn-danger btn-sm"><i
+                      class="fa fa-times"></i></button>
+                </td>
+
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- box-list -->
+    <br>
+    <div class="col-sm-4 mt-15" *ngIf="categorySelected">
+      <div class="card text-drank border-info">
+        <div class="card-body">
+          <h5 class="card-title text-info">UPDATE CATEGORY</h5>
+          <HR>
+          <!-- <form #categoryForm="ngForm"> -->
+          <div class="form-group">
+            <label for="email">Tên danh mục:</label>
+            <!-- value="{{ categorySelected.category.categoryName }} -->
+            <input type="text" class="form-control" [(ngModel)]="categorySelected.category.categoryName">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Danh mục cha:</label>
+            <select class="form-control" [(ngModel)]="categorySelected.category.parentId">
+              <option *ngFor="let parentCategory of parentCategories"
+                [selected]="categorySelected.category.id == parentCategory.id" [value]="parentCategory.id">
+                {{ parentCategory.parentName}}
+
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Tiêu đề :</label>
+            <input type="text" class="form-control" [(ngModel)]="categorySelected.category.categoryTitle">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Trạng thái:</label>&nbsp;
+            <input type="checkbox" class="" [checked]="categorySelected.category.isActive == true"
+              [(ngModel)]="categorySelected.category.isActive"> : <span
+              class="text-success">{{ showActive(categorySelected.category.isActive)}}</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-sm" (click)="updateCategory(categorySelected.category)">Cập
+            nhật</button> &nbsp;
+          <button type="submit" class="btn btn-danger btn-sm" (click)="categorySelected = null">Hủy bỏ</button>
+          <!-- </form> -->
+        </div>
+      </div>
+      <br><br>
+      <div class="{{alert.style}} alert-dismissible" *ngIf="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>{{ alert.title }}!</strong> {{ alert.content }}.
+      </div>
+    </div>
+    <!-- box-update -->
+  </div>
+</div>

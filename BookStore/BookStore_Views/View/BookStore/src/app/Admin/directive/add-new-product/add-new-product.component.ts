@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category/category.service'
 import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
-
+import { Moment } from 'moment'
 import { ProductService } from '../../services/product/product.service';
+import {Location} from '@angular/common'
+var moment = require('moment');
 declare var require: any
 
 @Component({
@@ -12,57 +14,75 @@ declare var require: any
   styleUrls: ['./add-new-product.component.css']
 })
 export class AddNewProductComponent implements OnInit {
+
   categories: Array<any>;
   publishings: any;
   authors: any;
   product: any = {
-    productName: "",
+    Id: 0,
     productCode: "",
+    productName: "",
     productPrice: 0,
     productDiscount: 0,
-    authorId: 0,
     productDescription: "",
+    productImageList: "",
+    productTitle: "",
     categoryId: 0,
+    authorId: 0,
     publishingId: 0,
+    viewCount: 0,
+    rateCount: 0,
+    rateTotal: 0,
     isActive: true,
-    productImage: ""
+    publishYear: 2019,
+    translator: "Nhan",
+    createAt: moment().format(),
+    updateAt: moment().format(),
     // this.categories[1].category.id
   }
- 
+
   // action
   public progress: number;
   public message: string;
-
- 
   localUrl: any[];
-  selectedImage : File;
+  selectedImage: File;
   showFile(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-      this.selectedImage = <File> event.target.files[0];
+      this.selectedImage = <File>event.target.files[0];
       reader.onload = (event: any) => {
         this.localUrl = event.target.result;
       }
       reader.readAsDataURL(event.target.files[0]);
     }
     console.log(this.selectedImage)
-    
+
   }
-  insertProduct(){
+  insertProduct() {
     const fd = new FormData();
-     fd.append("Image",this.selectedImage, this.selectedImage.name);
+    fd.append("Image", this.selectedImage, this.selectedImage.name);
     //fd.append("Image","Nhan");
-    this.productService.insertProduct(fd,this.product).subscribe(
-      rs=>{
-        console.log(this.product)
-        console.log("ok")
-      },err =>{
+    this.productService.upLoadImage(fd).subscribe(
+      rs => {
+        this.product.productImageList = rs
+        this.productService.insertProduct(this.product).subscribe(
+          irs => {
+            if (irs.error == 0) {
+              console.log("ok")
+            }
+          }, (err) => {
+            console.log("error")
+          }
+        )
+      }, err => {
         console.log("err");
+        console.log(this.product)
       }
     )
-    console.log(fd.getAll("Image"));
+    
   }
   file: File;
+  
   // get form
   getCategories(): void {
     this.categoryService.getCategories().subscribe(
@@ -110,7 +130,11 @@ export class AddNewProductComponent implements OnInit {
       }
     )
   }
+  goBack() {
+    this.location.back();
+  }
   constructor(
+    private location : Location,
     private productService: ProductService,
     private categoryService: CategoryService,
     private authorService: AuthorService,
@@ -121,6 +145,7 @@ export class AddNewProductComponent implements OnInit {
     this.getCategories(),
       this.getAuthors(),
       this.getPublishings()
+      
 
   }
 

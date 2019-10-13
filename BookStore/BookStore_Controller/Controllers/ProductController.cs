@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BookStore_Models;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 namespace BookStore_Controller.Controllers
 {
     [Route("[controller]/[action]")]
@@ -45,7 +48,7 @@ namespace BookStore_Controller.Controllers
             var rs = await product.GetProductByCategoryId(Id);
             if(rs.Count() == 0)
             {
-                return new JsonResult(new Notice(0, "not found product"));
+                return new JsonResult(new Notice(1, "not found product"));
             }
             else
             {
@@ -68,6 +71,9 @@ namespace BookStore_Controller.Controllers
         [HttpDelete("{Id}")]
         public async Task<JsonResult> DeleteProductById(int Id)
         {
+            Product productDelete = await product.GetProductById(Id);
+            string Image = productDelete.ProductImageList;
+            product.DeleteImage(Image);
             var rs = await product.DeleteProducById(Id);
             if (rs == 0)
             {
@@ -76,6 +82,19 @@ namespace BookStore_Controller.Controllers
             else
             {
                 return new JsonResult(new Notice(0, "Deleted"));
+            }
+        }
+        [HttpPost]
+        public async Task<JsonResult> DeleteProducts([FromBody] int[] products)
+        {
+            var rs = await product.DeleteProducts(products);
+            if (rs == 0)
+            {
+                return new JsonResult(new Notice(0, "Deleted"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Cant Delete"));
             }
         }
         [HttpPut("{Id}")]
@@ -91,6 +110,7 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(new Notice(0, "Updated"));
             }
         }
+        
 
     }
 

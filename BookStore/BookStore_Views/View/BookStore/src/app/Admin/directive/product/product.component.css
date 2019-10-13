@@ -1,0 +1,13 @@
+.image {
+  width: 50px;
+  height: 78.8px;
+}
+
+.menu-right {
+
+  height: 150px;
+  position: absolute;
+  left: 90%;
+  right: 0px;
+  top: 100px;
+}

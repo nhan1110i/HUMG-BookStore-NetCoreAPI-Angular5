@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 namespace BookStore_Models
@@ -19,6 +20,7 @@ namespace BookStore_Models
         public Product(int Id, string ProductCode, string ProductName, float ProductPrice, float ProductDiscount, string ProductDescription, string ProductImageList, string ProductTitle, int CategoryId, int AuthorId, int ViewCount, int RateCount, int RateTotal, bool IsActive, float PublishYear, string Tranlator, DateTime CreateAt, DateTime UpdateAt)
         {
             this.Id = Id;
+            this.ProductName = ProductName;
             this.ProductCode = ProductCode;
             this.ProductPrice = ProductPrice;
             this.ProductDiscount = ProductDiscount;
@@ -128,6 +130,11 @@ namespace BookStore_Models
 
             }
         }
+        public void DeleteImage(string image)
+        {
+            string FilePath = @"D:/_TN94/Chuyên đề/BTL/BookStore/BookStore_Controller/wwwroot/Assets/Admin/Products/" + image;
+            File.Delete(FilePath);
+        }
         public async Task<int> UpdateProduct(Product product, int Id)
         {
             using (DataConnection.Connection())
@@ -182,6 +189,21 @@ namespace BookStore_Models
                 }
             }
             return 0;
+        }
+        public async Task<int> ActiveProducts(int [] Id)
+        {
+            using (DataConnection.Connection())
+            {
+                 foreach (int id in Id)
+                {
+                    string Query = "UPDATE Product SET IsActive = True WHERE Id = @Id";
+                    var param = new DynamicParameters();
+                    param.Add("@Id", id);
+                    CommandType com = CommandType.Text;
+                    await DataConnection.Connection().ExecuteAsync(Query, param, null, null, com);
+                }
+                return 0;
+            }
         }
         public async Task<int> DuplicateProducts(int [] Id)
         {

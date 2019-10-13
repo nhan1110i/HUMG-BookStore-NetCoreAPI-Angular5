@@ -9,7 +9,7 @@
             <div class="form-group row">
               <div class="col-sm-3 border-success">
                 <div>
-                  <img [src]="localUrl" alt="" class="mx-auto d-block mt-15" *ngIf="localUrl">
+                  <img [src]="localUrl" alt="" class="mx-auto d-block mt-15 image-insert" *ngIf="localUrl">
                 </div>
               </div>
               <div class="col-sm-9">
@@ -85,8 +85,8 @@
                 <ckeditor [(ngModel)]="product.productDescription" ></ckeditor>
               </div>
               <div class="container">
-                <button class="btn btn-success" (click)="insertProduct()">Insert Product</button> &nbsp;
-                <button class="btn btn-danger">Cancel</button>
+                <a class="btn btn-success" (click)="insertProduct()" routerLink="/Admin/product">Insert Product</a> &nbsp;
+                <a class="btn btn-danger" routerLink="/Admin/product">Cancel</a>
               </div>
             </div>
           </div>

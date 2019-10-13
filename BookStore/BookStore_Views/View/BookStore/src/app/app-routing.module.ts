@@ -5,15 +5,19 @@ import { ProductComponent } from './Admin/directive/product/product.component';
 import { CategoryComponent } from './Admin/directive/category/category.component';
 import { LoginComponent } from './Admin/login/login.component';
 import { AddNewProductComponent } from './Admin/directive/add-new-product/add-new-product.component';
+import { UpdateProductComponent } from './Admin/directive/update-product/update-product.component';
 
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
     path: "Admin", component: AdminComponent, children: [
-      {path : "addnewproduct", component: AddNewProductComponent},
-      { path: "product", component: ProductComponent },
-      { path: "category", component: CategoryComponent }
+      { path: "addnewproduct", component: AddNewProductComponent },
+      {
+        path: "product", component: ProductComponent
+      },
+      { path: "category", component: CategoryComponent },
+      { path: "updateProduct/:id", component : UpdateProductComponent}
     ]
   },
 ]

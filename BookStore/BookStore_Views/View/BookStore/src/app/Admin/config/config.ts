@@ -11,7 +11,11 @@ export var url = {
         login: "Admin/CheckLogin",
     },
     product:{
-        products: "Product/GetProducts"
+        products: "Product/GetProducts",
+        insert : "Product/InsertProduct",
+        delete : "Product/DeleteProductById",
+        deleteProducts: "Product/DeleteProducts",
+        getProductById: "Product/GetProductById/"
     },
     author: {
         authors: "Author/GetAuthors"

@@ -43,7 +43,7 @@ namespace BookStore_Controller.Controllers
                     {
                         file.CopyTo(stream);
                     }
-                    return Json(fileName + ".jpg");
+                    return Json(fileName);
 
                 }
                 else

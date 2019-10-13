@@ -1,53 +1,64 @@
 <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card text-drank border-primary">
-              <div class="card-body">
-                <div class="card-title text-primary">
-                  <h5>FILTER PRODUCT</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 mt-15">
-            <div class="card text-drank border-primary">
-              <div class="card-body">
-                <h5 class="card-title text-primary">PRODUCTS</h5>
-                <hr>
-                <a class="btn btn-success" routerLink="/Admin/addnewproduct"><i class="fa fa-plus"></i> Thêm mới</a> &nbsp;
-                <button class="btn-warning btn"><i class="fa-file-pdf fas"></i> Xuất File</button>
-                <hr>
-                <div class="table-responsive">
-                  <table class="table">
-                      <tr class="text-light bg-primary">
-                        <th>#</th>
-                        <th>Code</th>
-                        <th>Tên</th>
-                        <th>Ảnh</th>
-                        <th>Danh mục</th>
-                        <th>Giá bán</th>
-                        <th>Giá gốc</th>
-                        <th>Trạng thái</th>
-                        <th>Năm</th>
-                        <th>Action</th>
-                      </tr>
-                      <tr *ngFor="let product of products">
-                        <td></td>
-                        <td>{{ product.product.productCode }}</td>
-                        <td>{{ product.product.productName }}</td>
-                        <td>{{ product.product.productImageList }}</td>
-                        <td>{{ product.category.categoryName }}</td>
-                        <td>{{ formatMoney(+product.product.productDiscount)}}</td>
-                        <td>{{ formatMoney(+product.product.productPrice) }}</td>
-                        <td><span [ngClass]="product.product.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(product.product.isActive) }}</span></td>
-                        <td>{{ product.product.publishYear }}</td>
-                        <td><a class="fa fa-edit fa-lg text-warning"></a>&nbsp;<a class="fa fa-times fa-lg text-danger"></a></td>
-                      </tr>
-                    </table>
-                </div>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <div class="card-title text-primary">
+            <h5>FILTER PRODUCT</h5>
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-12 mt-15">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-primary">PRODUCTS</h5>
+          <hr>
+          <a class="btn btn-success" routerLink="/Admin/addnewproduct"><i class="fa fa-plus"></i> Thêm mới</a> &nbsp;
+          <button class="btn-warning btn"><i class="fa-file-pdf fas"></i> Xuất File</button>
+          <hr>
+          <div class="table-responsive">
+            <table class="table">
+              <tr class="text-light bg-primary">
+                <th>#</th>
+                <th>Code</th>
+                <th>Tên</th>
+                <th>Ảnh</th>
+                <th>Danh mục</th>
+                <th>Giá bán</th>
+                <th>Giá gốc</th>
+                <th>Trạng thái</th>
+                <th>Năm</th>
+                <th>Action</th>
+              </tr>
+              <tr *ngFor="let product of products" [class.bg-light]="getSelected(+product.product.id)">
+                <td><input type="checkbox" (click)="selectProduct(+product.product.id)" [checked] = "getSelected(+product.product.id)" ></td>
+                <td>{{ product.product.productCode }}</td>
+                <td>{{ product.product.productName }}</td>
+                <td><img src="https://localhost:44315/image/{{ product.product.productImageList }}" class="image"></td>
+                <td>{{ product.category.categoryName }}</td>
+                <td>{{ formatMoney(+product.product.productDiscount)}}</td>
+                <td>{{ formatMoney(+product.product.productPrice) }}</td>
+                <td><span
+                    [ngClass]="product.product.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(product.product.isActive) }}</span>
+                </td>
+                <td>{{ product.product.publishYear }}</td>
+                <td><a class="fa fa-edit fa-lg text-warning" routerLink="/Admin/updateProduct/{{ product.product.id }}"></a>&nbsp;<a class="fa fa-times fa-lg text-danger"
+                    (click)="deleteProduct(+product.product.id)"></a></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-right" *ngIf="selectedProducts.length > 2">
+      <button class="btn btn-danger btn-block" (click)="deleteProducts()">Xóa sản phẩm</button>
       
+      <button class="btn btn-success btn-block">Mở bán</button>
+      <button class="btn btn-info btn-block">Sao chép </button>
+      
+      <button class="btn btn-default btn-block" (click)="unSelect()">Bỏ chọn</button>
+    </div>
+  </div>
+</div>
+

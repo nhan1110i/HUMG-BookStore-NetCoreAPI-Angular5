@@ -12,6 +12,8 @@ import { LoginComponent } from './Admin/login/login.component';
 import { CKEditorModule } from 'ng2-ckeditor'
 
 import { AddNewProductComponent } from './Admin/directive/add-new-product/add-new-product.component';
+import { UpdateProductComponent } from './Admin/directive/update-product/update-product.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AddNewProductComponent } from './Admin/directive/add-new-product/add-ne
     ProductComponent,
     LoginComponent,
 
-    AddNewProductComponent
+    AddNewProductComponent,
+    UpdateProductComponent,
+    
   ],
   imports: [
     CKEditorModule,

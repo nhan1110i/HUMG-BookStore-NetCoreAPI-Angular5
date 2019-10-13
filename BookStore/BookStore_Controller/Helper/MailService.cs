@@ -1,20 +1,18 @@
 ﻿using BookStore_Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore_Controller.Helper
 {
     public static class MailService
     {
-        static string smtpUserName = "nhan.trong1200@gmail.com";
-        static string smtpPassword = "nhanhanhA1";
-        static string smtpHost = "smtp.gmail.com";
-        static int smtpPort = 25;
+        private static string smtpUserName = "nhan.trong1200@gmail.com";
+        private static string smtpPassword = "nhanhanhA1";
+        private static string smtpHost = "smtp.gmail.com";
+        private static int smtpPort = 25;
+
         public static void Send(Mail mail)
         {
             try
@@ -37,13 +35,12 @@ namespace BookStore_Controller.Helper
                     };
                     msg.To.Add(mail.MailAdd);
                     smtpClient.Send(msg);
- ;
+                    ;
                 }
             }
             catch
             {
                 Console.WriteLine("err");
-                
             }
         }
     }
