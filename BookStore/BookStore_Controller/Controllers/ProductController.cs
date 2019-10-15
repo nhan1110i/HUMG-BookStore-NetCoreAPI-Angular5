@@ -97,10 +97,10 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(new Notice(1, "Cant Delete"));
             }
         }
-        [HttpPut("{Id}")]
-        public async Task<JsonResult> UpdateProduct([FromBody] Product productUpdate, int Id)
+        [HttpPut]
+        public async Task<JsonResult> UpdateProduct([FromBody] Product productUpdate)
         {
-            int rs = await product.UpdateProduct(productUpdate, Id);
+            int rs = await product.UpdateProduct(productUpdate);
             if (rs == 0)
             {
                 return new JsonResult(new Notice(1, "Cant Update"));

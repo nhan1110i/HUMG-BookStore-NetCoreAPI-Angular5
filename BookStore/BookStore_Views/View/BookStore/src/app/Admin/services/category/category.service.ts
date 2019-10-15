@@ -17,13 +17,13 @@ export class CategoryService {
   
   getCategories(): Observable<any>{
     return this.http.get<any>(url.host + url.category.categories).pipe(
-      tap(rs=>{console.log(rs)}), catchError(error =>of([]))
+      tap(rs=>{}), catchError(error =>of([]))
     );
     //  return of(data)
   }
   getParentCategories(): Observable<any>{
     return this.http.get<any>(url.host + url.category.parentCategories).pipe(
-      tap(rs =>{console.log(rs)}), catchError(error =>of([]))
+      tap(rs =>{}), catchError(error =>of([]))
     )
   }
   addCategory(category : any): Observable<any>{

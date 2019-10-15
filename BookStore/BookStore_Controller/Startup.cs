@@ -37,7 +37,7 @@ namespace BookStore_Controller
             {
                 options.AddPolicy("EnableCORS", builder =>
                  {
-                     builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
+                     builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
                  });
             });
         

@@ -19,7 +19,7 @@ namespace BookStore_Controller.Controllers
         [HttpGet]
         public async Task<JsonResult> GetCategories()
         {
-            MailService.Send(new Mail("trongnhan1110i@gmail.com","subject","body"));      
+                
             var Categories = await category.GetCategories();
             List<CategoryDetail> ListCategory = new List<CategoryDetail>();
             foreach(Category category in Categories)

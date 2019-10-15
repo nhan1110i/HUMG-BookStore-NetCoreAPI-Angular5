@@ -13,6 +13,11 @@ import { CKEditorModule } from 'ng2-ckeditor'
 
 import { AddNewProductComponent } from './Admin/directive/add-new-product/add-new-product.component';
 import { UpdateProductComponent } from './Admin/directive/update-product/update-product.component';
+import { CustomerComponent } from './Admin/directive/customer/customer.component';
+import { EmployeeComponent } from './Admin/directive/employee/employee.component';
+import { DashboardComponent } from './Admin/directive/dashboard/dashboard.component';
+import { AuthorPublishingComponent } from './Admin/directive/author-publishing/author-publishing.component';
+import { OrderComponent } from './Admin/directive/order/order.component';
 
 
 @NgModule({
@@ -23,9 +28,13 @@ import { UpdateProductComponent } from './Admin/directive/update-product/update-
     CategoryComponent,
     ProductComponent,
     LoginComponent,
-
+    OrderComponent,
     AddNewProductComponent,
     UpdateProductComponent,
+    CustomerComponent,
+    EmployeeComponent,
+    DashboardComponent,
+    AuthorPublishingComponent,
     
   ],
   imports: [

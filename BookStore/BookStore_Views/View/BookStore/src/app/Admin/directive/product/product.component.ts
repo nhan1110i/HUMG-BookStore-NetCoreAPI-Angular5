@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { formatCurrency } from '../../config/config';
 import { AdminService } from '../../AdminService/admin.service';
+import {alert} from '../../config/config'
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -24,6 +25,7 @@ export class ProductComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe(
       rs => {
         this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
+        this.alert = alert.delete;
       }
     )
   }
@@ -35,13 +37,15 @@ export class ProductComponent implements OnInit {
     });
     this.productService.deleteProducts(this.selectedProducts).subscribe(
       rs => {
-        this.selectedProducts = [0, 0]
+        this.selectedProducts = [0, 0];
+        this.alert = alert.delete;
       }, err => {
         console.log(err)
       }
     )
   }
   // notice
+  alert: any;
   getIsActive(isActive: boolean): string {
     if (isActive) {
       return "Đang bán"

@@ -50,7 +50,7 @@ namespace BookStore_Models
             using (DataConnection.Connection())
             {
                 var insertId = 0;
-                string Query = "INSERT INTO Category VALUES (@ParentId,@CategoryName,@CategoryTitle,@SortOrder,@IsActive)";
+                string Query = "INSERT INTO Category VALUES (@ParentId,@CategoryName,@CategoryTitle,@SortOrder,@IsActive); SELECT SCOPE_IDENTITY()";
                 var param = new DynamicParameters();
                 param.Add("@ParentId", category.ParentId);
                 param.Add("@CategoryName", category.CategoryName);

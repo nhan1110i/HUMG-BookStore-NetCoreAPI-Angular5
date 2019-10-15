@@ -43,6 +43,11 @@ export class ProductService {
       tap(rs =>{}),catchError(error => of(console.log(error)))
     )
   }
+  updateProduct(product : any):Observable <any>{
+    return this.http.put(url.host + url.product.updateProduct,product,httpOptions).pipe(
+      tap(rs =>{}),catchError(error => of([]))
+    )
+  }
   deleteProducts(Ids : number []): Observable<any>{
     return this.http.post(url.host + url.product.deleteProducts,Ids,httpOptions).pipe(
       tap(rs =>{}),catchError(error =>of([]))

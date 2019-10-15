@@ -4,7 +4,8 @@ import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
 import { Moment } from 'moment'
 import { ProductService } from '../../services/product/product.service';
-import {Location} from '@angular/common'
+import {Location} from '@angular/common';
+import {alert} from '../../config/config'
 var moment = require('moment');
 declare var require: any
 
@@ -68,7 +69,7 @@ export class AddNewProductComponent implements OnInit {
         this.productService.insertProduct(this.product).subscribe(
           irs => {
             if (irs.error == 0) {
-              console.log("ok")
+              this.alert = alert.add;
             }
           }, (err) => {
             console.log("error")
@@ -84,6 +85,7 @@ export class AddNewProductComponent implements OnInit {
   file: File;
   
   // get form
+  alert : any;
   getCategories(): void {
     this.categoryService.getCategories().subscribe(
       (rs) => {

@@ -135,12 +135,12 @@ namespace BookStore_Models
             string FilePath = @"D:/_TN94/Chuyên đề/BTL/BookStore/BookStore_Controller/wwwroot/Assets/Admin/Products/" + image;
             File.Delete(FilePath);
         }
-        public async Task<int> UpdateProduct(Product product, int Id)
+        public async Task<int> UpdateProduct(Product product)
         {
             using (DataConnection.Connection())
             {
                 var IdUpdate = 0;
-                string Query = "UPDATE Product SET ProductCode = @ProductCode, ProductName = @ProductName,ProductPrice = @ProductPrice, ProductDiscount = @ProductDiscount,ProductDescription = @ProductDescription,ProductImageList = @ProductImageList,ProductTitle = @ProductTitle,CategoryId = @CategoryId,AuthorId = @AuthorId,PublishingId = @PublishingId,ViewCount = @ViewCount,RateCount = @RateCount,RateTotal = @RateTotal,IsActive = @IsActive,PublishYear = @PublishYear,Translator = @Translator,CreateAt = @CreateAt,UpdateAt = @UpdateAt WHERE Id = @Id";
+                string Query = "UPDATE Product SET ProductCode = @ProductCode, ProductName = @ProductName,ProductPrice = @ProductPrice, ProductDiscount = @ProductDiscount,ProductDescription = @ProductDescription,ProductImageList = @ProductImageList,ProductTitle = @ProductTitle,CategoryId = @CategoryId,AuthorId = @AuthorId,PublishingId = @PublishingId,ViewCount = @ViewCount,RateCount = @RateCount,RateTotal = @RateTotal,IsActive = @IsActive,PublishYear = @PublishYear,Translator = @Translator,UpdateAt = @UpdateAt WHERE Id = @Id";
                 var param = new DynamicParameters();
                 param.Add("@Productcode", product.ProductCode);
                 param.Add("@ProductName", product.ProductName);
@@ -158,10 +158,8 @@ namespace BookStore_Models
                 param.Add("@IsActive", product.IsActive);
                 param.Add("@PublishYear", product.PublishYear);
                 param.Add("@Translator", product.Translator);
-                param.Add("@CreateAt", DateTime.Now);
                 param.Add("@UpdateAt", DateTime.Now);
-
-                param.Add("@Id", Id);
+                param.Add("@Id", product.Id);
                 CommandType command = CommandType.Text;
                 IdUpdate = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);
                 return IdUpdate;

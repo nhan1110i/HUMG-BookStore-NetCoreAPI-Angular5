@@ -21,7 +21,7 @@ export class CategoryComponent implements OnInit {
   getCategories(): void {
     this.categoryService.getCategories().subscribe((rs) => {
       this.categories = rs;
-      console.log(this.categories);
+      
     }, (err) => {
       console.log(err);
     })
@@ -50,7 +50,8 @@ export class CategoryComponent implements OnInit {
     this.categorySelected.parentCategory.parentName = this.parentCategories[this.parentCategories.findIndex(obj => obj.id == this.categorySelected.category.parentId)].parentName;
     this.categoryService.updateCategory(category).subscribe(
       rs=>{
-        console.log("update done")
+        this.alert = alert.update;
+        this.categorySelected = null;
       },(err)=>{
         console.log(err)
       }
@@ -80,7 +81,7 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getParentCategories().subscribe(
       (rs) => {
         this.parentCategories = rs;
-        console.log(rs)
+        
       }, (err) => {
         console.log(err)
       }

@@ -5,7 +5,7 @@ import { ProductService } from '../../services/product/product.service'
 import { CategoryService } from '../../services/category/category.service';
 import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
-
+import {alert} from '../../config/config'
 declare var require: any
 @Component({
   selector: 'app-update-product',
@@ -34,12 +34,47 @@ export class UpdateProductComponent implements OnInit {
     createAt: "",
     updateAt: "",
   }
+  productTemp = this.product;
+  alert : any;
   categories: any;
   authors: any;
-  publishings :any;
+  publishings: any;
   selectedImage: File;
-  localUrl : string ;
+  localUrl: string;
   // action
+  updateProduct() {
+    if (this.selectedImage != null) {
+      const fd = new FormData();
+      fd.append("Image", this.selectedImage, this.selectedImage.name);
+      this.productService.upLoadImage(fd).subscribe(
+        imageName => {
+          this.product.productImageList = imageName;
+          this.productService.updateProduct(this.product).subscribe(
+            rs => {
+              this.alert = alert.update;
+              this.product = this.productTemp;
+              this.localUrl = null;
+            }, error => {
+              console.log(error);
+            }
+          )
+        }, err => {
+          console.log(err);
+        }
+      )
+    }else{
+      this.productService.updateProduct(this.product).subscribe(
+        rs => {
+          this.alert = alert.update;
+          this.product = this.productTemp;
+          this.localUrl = null;
+        }, error => {
+          console.log(error);
+        }
+      )
+    }
+    
+  }
   goBack() {
     this.location.back();
   }
@@ -70,7 +105,7 @@ export class UpdateProductComponent implements OnInit {
   getAuthors(): void {
     this.authorService.getAuthors().subscribe(
       (rs) => {
-       this.authors = rs;
+        this.authors = rs;
       }, (err) => {
         console.log(err);
       }
@@ -85,31 +120,31 @@ export class UpdateProductComponent implements OnInit {
       }
     )
   }
-  getProduct(){
+  getProduct() {
     const id = +this.activeRoute.snapshot.paramMap.get('id');
     this.productService.getProduct(id).subscribe(
-      rs=>{
+      rs => {
         this.product = rs;
-        this.localUrl= "https://localhost:44315/image/" + this.product.productImageList;
-      },err =>{
+        this.localUrl = "https://localhost:44315/image/" + this.product.productImageList;
+      }, err => {
         console.log(err)
       }
     )
   }
   constructor(
     private productService: ProductService,
-    private activeRoute : ActivatedRoute,
-    private location : Location,
+    private activeRoute: ActivatedRoute,
+    private location: Location,
     private categoryService: CategoryService,
     private authorService: AuthorService,
     private publishingService: PublishingService
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.getProduct(),
-    this.getCategories(),
-    this.getAuthors(),
-    this.getPublishings()
+      this.getCategories(),
+      this.getAuthors(),
+      this.getPublishings()
   }
 
 }

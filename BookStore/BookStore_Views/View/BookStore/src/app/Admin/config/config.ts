@@ -15,7 +15,8 @@ export var url = {
         insert : "Product/InsertProduct",
         delete : "Product/DeleteProductById",
         deleteProducts: "Product/DeleteProducts",
-        getProductById: "Product/GetProductById/"
+        getProductById: "Product/GetProductById/",
+        updateProduct : "Product/UpdateProduct"
     },
     author: {
         authors: "Author/GetAuthors"

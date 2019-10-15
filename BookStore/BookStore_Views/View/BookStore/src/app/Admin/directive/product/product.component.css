@@ -6,8 +6,16 @@
 .menu-right {
 
   height: 150px;
-  position: absolute;
+  position: fixed;
   left: 90%;
+  right: 0px;
+  top: 100px;
+}
+
+.notice {
+  height: 50px;
+  position: fixed;
+  left: 70%;
   right: 0px;
   top: 100px;
 }

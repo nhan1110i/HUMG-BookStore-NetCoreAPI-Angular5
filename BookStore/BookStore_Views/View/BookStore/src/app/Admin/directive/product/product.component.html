@@ -5,17 +5,38 @@
         <div class="card-body">
           <div class="card-title text-primary">
             <h5>FILTER PRODUCT</h5>
+            <hr>
+            <div class="form-inline">
+                
+                  <div class="form-group mx-sm-3 mb-2">
+                    <strong  class="form-control-label">Password</strong>
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                  </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-12 mt-15">
+    <div class="col-sm-12 mt-15 ">
       <div class="card text-drank border-primary">
         <div class="card-body">
           <h5 class="card-title text-primary">PRODUCTS</h5>
           <hr>
-          <a class="btn btn-success" routerLink="/Admin/addnewproduct"><i class="fa fa-plus"></i> Thêm mới</a> &nbsp;
-          <button class="btn-warning btn"><i class="fa-file-pdf fas"></i> Xuất File</button>
+          <div class="row">
+              <div class="col-sm-2">
+                  <select name="" id="" class="form-control">
+                    <option>10 / page</option>
+                    <option>20 / page</option>
+                    <option>30 / page</option>
+                  </select>
+                </div>
+                <div class="col-sm-10">
+                    <div class="float-right">
+                        <a class="btn btn-success" routerLink="/Admin/addnewproduct"><i class="fa fa-plus"></i> Thêm mới</a> &nbsp;
+                        <button class="btn-warning btn"><i class="fa-file-pdf fas"></i> Xuất File</button>
+                    </div>
+                </div>
+          </div>
           <hr>
           <div class="table-responsive">
             <table class="table">
@@ -51,14 +72,19 @@
         </div>
       </div>
     </div>
-    <div class="menu-right" *ngIf="selectedProducts.length > 2">
-      <button class="btn btn-danger btn-block" (click)="deleteProducts()">Xóa sản phẩm</button>
-      
-      <button class="btn btn-success btn-block">Mở bán</button>
-      <button class="btn btn-info btn-block">Sao chép </button>
-      
-      <button class="btn btn-default btn-block" (click)="unSelect()">Bỏ chọn</button>
-    </div>
+    
   </div>
+</div>
+<div class="menu-right" *ngIf="selectedProducts.length > 2">
+  <button class="btn btn-danger btn-block" (click)="deleteProducts()">Xóa sản phẩm</button>
+  
+  <button class="btn btn-success btn-block">Mở bán</button>
+  <button class="btn btn-info btn-block">Sao chép </button>
+  
+  <button class="btn btn-default btn-block" (click)="unSelect()">Bỏ chọn</button>
+</div>
+<div class="{{alert.style}} alert-dismissible notice" *ngIf="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{ alert.title }}!</strong> {{ alert.content }}.
 </div>
 
