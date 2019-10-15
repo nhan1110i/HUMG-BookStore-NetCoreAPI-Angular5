@@ -12,9 +12,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AccountService {
-  loginAdmin(admin : any): Observable<boolean>{
-    return this.http.post<boolean>(url.host + url.admin.login,admin,httpOptions).pipe(
-      tap(rs=>{}),catchError(error =>of(false))
+  loginAdmin(admin : any): Observable<any>{
+    return this.http.post<any>(url.host + url.admin.login,admin,httpOptions).pipe(
+      tap(rs=>{}),catchError(error =>of())
     );
   }
   constructor(

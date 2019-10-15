@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
     this.alert = null;
     this.accountService.loginAdmin(this.admin).subscribe(
       (rs)=>{
-        if(rs){
-          window.location.href = "http://localhost:4200/Admin";
-        }else{
+        if(rs.error){
           this.alert = alert.wrongPassword;
+        }else{
+          this.alert = alert.add;
         }
       },(err)=>{
         console.log(err)

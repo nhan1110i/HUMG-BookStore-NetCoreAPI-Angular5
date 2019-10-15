@@ -8,7 +8,10 @@ import { error } from '@angular/compiler/src/util';
 import { JsonPipe } from '@angular/common';
 
 const httpOptions = {
-  headers : new HttpHeaders({'Content-Type' : 'application/json'})
+  headers : new HttpHeaders({
+    'Content-Type' : 'application/json',
+    'Authorization' : 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzEyNTMwNTQsImlzcyI6ImFkbWluIiwiYXVkIjoic3RyaW5nIn0.1xef1hjNrF8nAbezzlbrGn2juBwVSJZekZl0-6gMA-w'
+  })
 }
 @Injectable({
   providedIn: 'root'
@@ -16,13 +19,13 @@ const httpOptions = {
 export class CategoryService {
   
   getCategories(): Observable<any>{
-    return this.http.get<any>(url.host + url.category.categories).pipe(
+    return this.http.get<any>(url.host + url.category.categories,httpOptions).pipe(
       tap(rs=>{}), catchError(error =>of([]))
     );
     //  return of(data)
   }
   getParentCategories(): Observable<any>{
-    return this.http.get<any>(url.host + url.category.parentCategories).pipe(
+    return this.http.get<any>(url.host + url.category.parentCategories,httpOptions).pipe(
       tap(rs =>{}), catchError(error =>of([]))
     )
   }

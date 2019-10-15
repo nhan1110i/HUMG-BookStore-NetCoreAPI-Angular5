@@ -14,12 +14,11 @@ namespace BookStore_Controller.Controllers
     public class AdminController : ControllerBase
     {
         Admin admin = new Admin();
+        Token token = new Token();
         // GET: api/Admin
         [HttpGet]
         public bool Login([FromBody] Admin adminLogin, string salt)
         {
-            //adminLogin.Password = Cryptography.Create(adminLogin.Password, salt);
-            //return await admin.Login(adminLogin);
             return true;
         }
 
@@ -32,10 +31,20 @@ namespace BookStore_Controller.Controllers
 
         // POST: api/Admin
         [HttpPost]
-        public async Task<bool> CheckLogin([FromBody] Admin adminLogin)
+        public async Task<IActionResult> CheckLogin([FromBody] Admin adminLogin)
         {
             adminLogin.Password = Cryptography.Create(adminLogin.Password);
-            return await admin.Login(adminLogin);
+            if(await admin.Login(adminLogin))
+            {
+                Token tokenResult = CreateToken.CreateNewToken(adminLogin);
+                await token.AddToken(tokenResult);
+                return Ok(new JsonResult(tokenResult));
+            }
+            else
+            {
+                return Ok(new JsonResult(new Notice(1, "Wrong username and password")));
+            }
+            
         }
 
         // PUT: api/Admin/5
