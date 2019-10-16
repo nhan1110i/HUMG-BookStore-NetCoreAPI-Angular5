@@ -3,14 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError,map,tap} from 'rxjs/operators';
 
-import {url} from '../../config/config';
+import {url,GetAuthorization} from '../../config/config';
 import { error } from '@angular/compiler/src/util';
 import { JsonPipe } from '@angular/common';
 
 const httpOptions = {
   headers : new HttpHeaders({
     'Content-Type' : 'application/json',
-    'Authorization' : 'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzEyNTMwNTQsImlzcyI6ImFkbWluIiwiYXVkIjoic3RyaW5nIn0.1xef1hjNrF8nAbezzlbrGn2juBwVSJZekZl0-6gMA-w'
+    'Authorization' : GetAuthorization()
   })
 }
 @Injectable({

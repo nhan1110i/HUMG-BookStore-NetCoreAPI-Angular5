@@ -72,3 +72,10 @@ export function formatCurrency(money: number): string{
     var ret = s.replace(regex, ".");
     return ret.toString()+" đ";
 }
+export function GetAuthorization() : string{
+    if(localStorage.getItem("Authorization")){
+        return localStorage.getItem("Authorization");
+    }else{
+        return "noAuthorziation"
+    }
+}

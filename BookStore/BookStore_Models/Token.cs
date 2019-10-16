@@ -40,7 +40,7 @@ namespace BookStore_Models
                 param.Add("@TokenValue", token.TokenValue);
                 param.Add("@CreateAt", token.CreateAt);
                 param.Add("@UpdateAt", token.UpdateAt);
-                param.Add("@ExpireAt", token.UpdateAt);
+                param.Add("@ExpireAt", token.ExpireAt);
                 CommandType command = CommandType.Text;
                 insertId = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);
                 return insertId;

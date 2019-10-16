@@ -1,6 +1,7 @@
 ﻿using BookStore_Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace BookStore_Controller.Middlewares
         {
             if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
             {
-                await context.Response.WriteAsync("not login");
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1,"not login")));
             }
             else
             {
@@ -30,7 +31,7 @@ namespace BookStore_Controller.Middlewares
                 }
                 else
                 {
-                    await context.Response.WriteAsync("Expired Token");
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1,"Token Expire")));
                 }
 
             }

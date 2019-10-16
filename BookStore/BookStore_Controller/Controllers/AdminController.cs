@@ -31,18 +31,18 @@ namespace BookStore_Controller.Controllers
 
         // POST: api/Admin
         [HttpPost]
-        public async Task<IActionResult> CheckLogin([FromBody] Admin adminLogin)
+        public async Task<JsonResult> CheckLogin([FromBody] Admin adminLogin)
         {
             adminLogin.Password = Cryptography.Create(adminLogin.Password);
             if(await admin.Login(adminLogin))
             {
-                Token tokenResult = CreateToken.CreateNewToken(adminLogin);
+                Token tokenResult = JsonWebToken.CreateNewToken(adminLogin);
                 await token.AddToken(tokenResult);
-                return Ok(new JsonResult(tokenResult));
+                return new JsonResult(tokenResult);
             }
             else
             {
-                return Ok(new JsonResult(new Notice(1, "Wrong username and password")));
+                return new JsonResult(new Notice(1, "Wrong username and password"));
             }
             
         }

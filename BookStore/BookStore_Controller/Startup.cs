@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BookStore_Controller.Helper;
+using BookStore_Controller.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
-using BookStore_Controller.Middlewares;
+
 namespace BookStore_Controller
 {
     public class Startup
@@ -46,7 +47,7 @@ namespace BookStore_Controller
             //        await context.Response.WriteAsync("heoo");
             //    }
             //});
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,7 +59,18 @@ namespace BookStore_Controller
             app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Assets", "Admin", "Products")), RequestPath = "/image" });
             app.UseCors("EnableCORS");
             app.UseSwagger();
-            app.UseLoginMiddleware();
+            
+            
+
+            foreach (string url in ControllẻPath.CategoryController())
+            {
+                app.Map(url, mapApp =>
+                {
+                    mapApp.UseLoginMiddleware();
+                    mapApp.UseRoleMiddleware("Category");
+                });
+            }
+            
 
             app.UseSwaggerUI(c =>
             {
