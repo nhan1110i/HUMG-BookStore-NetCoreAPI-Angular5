@@ -34,11 +34,20 @@ namespace BookStore_Controller.Controllers
         public async Task<JsonResult> CheckLogin([FromBody] Admin adminLogin)
         {
             adminLogin.Password = Cryptography.Create(adminLogin.Password);
-            if(await admin.Login(adminLogin))
+            Admin LoginAdmin = await admin.Login(adminLogin);
+            if(LoginAdmin.Role != "")
             {
-                Token tokenResult = JsonWebToken.CreateNewToken(adminLogin);
-                await token.AddToken(tokenResult);
-                return new JsonResult(tokenResult);
+                Token tokenResult = JsonWebToken.CreateNewToken(LoginAdmin);
+                int insertId = await token.AddToken(tokenResult);
+                if(insertId == 1)
+                {
+                    return new JsonResult(tokenResult);
+                }
+                else
+                {
+                    return new JsonResult(new Notice(1, "insert token fail"));
+                }
+                
             }
             else
             {

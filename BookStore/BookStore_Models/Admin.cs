@@ -26,7 +26,7 @@ namespace BookStore_Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Role { get; set; }
-        public async Task<bool> Login(Admin admin)
+        public async Task<Admin> Login(Admin admin)
         {
             using (DataConnection.Connection())
             {
@@ -37,13 +37,13 @@ namespace BookStore_Models
                 param.Add("@Password",admin.Password); 
                 CommandType command = new CommandType();
                 var rs = await DataConnection.Connection().QueryAsync<Admin>(Query, param, null, null, command);
-                if(rs.Count() != 0)
+                if(rs.Count() == 0)
                 {
-                    return true;
+                    return new Admin();
                 }
                 else
                 {
-                    return false;
+                    return rs.First();
                 }
             }
             

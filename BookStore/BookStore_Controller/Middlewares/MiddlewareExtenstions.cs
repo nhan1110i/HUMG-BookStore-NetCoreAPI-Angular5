@@ -4,15 +4,15 @@ namespace BookStore_Controller.Middlewares
 {
     public static class MiddlewareExtenstions
     {
-        public static IApplicationBuilder UseLoginMiddleware(
+        public static IApplicationBuilder UseCheckTokenExpireMiddleware(
             this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<LoginMiddleware>();
+            return builder.UseMiddleware<CheckTokenExpireMiddleware>();
         }
 
-        public static IApplicationBuilder UseRoleMiddleware(this IApplicationBuilder builder, string role)
+        public static IApplicationBuilder UseRoleMiddleware(this IApplicationBuilder builder)
         {
-            return builder.UseMiddleware<RoleMiddleware>(role);
+            return builder.UseMiddleware<RoleMiddleware>();
         }
     }
 }

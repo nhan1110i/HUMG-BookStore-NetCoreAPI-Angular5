@@ -20,8 +20,7 @@ export class CategoryComponent implements OnInit {
   // get Categories
   getCategories(): void {
     this.categoryService.getCategories().subscribe((rs) => {
-      this.categories = rs;
-      
+      this.categories = rs;      
     }, (err) => {
       console.log(err);
     })

@@ -29,22 +29,43 @@ namespace BookStore_Controller.Controllers
             return new JsonResult(ListCategory);
         }
         [HttpPost]
-        public async Task<int> AddCategory([FromBody] Category category)
+        public async Task<JsonResult> AddCategory([FromBody] Category category)
         {
             int rs = await category.AddCategory(category);
-            return rs;
+            if(rs == 1)
+            {
+                return new JsonResult(new Notice(0, "Add Category Ok"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Cant Add Category"));
+            }
         }
         [HttpDelete("{Id}")]
-        public async Task<int> DeleteCategory(int Id)
+        public async Task<JsonResult> DeleteCategory(int Id)
         {
             int rs = await category.DeleteCategory(Id);
-            return rs;
+            if(rs == 1)
+            {
+                return new JsonResult(new Notice(0, "Delete ok"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Delete not ok"));
+            }
         }
         [HttpPut]
-        public async Task<int> UpdateCategory([FromBody] Category category)
+        public async Task<JsonResult> UpdateCategory([FromBody] Category category)
         {
             int rs = await category.UpdateCategory(category);
-            return rs;
+            if(rs == 1)
+            {
+                return new JsonResult(new Notice(0, "Update ok"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Update not ok"));
+            }
         }
     }
 } 

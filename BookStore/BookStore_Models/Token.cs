@@ -35,7 +35,7 @@ namespace BookStore_Models
             using (DataConnection.Connection())
             {
                 var insertId = 0;
-                string Query = "INSERT INTO Token VALUES (@TokenValue,@CreateAt,@UpdateAt,@ExpireAt); SELECT SCOPE_IDENTITY()";
+                string Query = "INSERT INTO Token VALUES (@TokenValue,@CreateAt,@UpdateAt,@ExpireAt)";
                 var param = new DynamicParameters();
                 param.Add("@TokenValue", token.TokenValue);
                 param.Add("@CreateAt", token.CreateAt);

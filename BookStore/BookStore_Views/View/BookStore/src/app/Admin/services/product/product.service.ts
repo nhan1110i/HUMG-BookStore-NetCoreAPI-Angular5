@@ -44,7 +44,7 @@ export class ProductService {
   }
   deleteProduct(Id: any): Observable<any> {
     return this.http.delete(url.host + url.product.delete + "/" + Id.toString(), httpOptions).pipe(
-      tap(rs => { }), catchError(error => of(console.log(error)))
+      tap(rs => { console.log(rs) }), catchError(error => of(console.log(error)))
     )
   }
   updateProduct(product: any): Observable<any> {

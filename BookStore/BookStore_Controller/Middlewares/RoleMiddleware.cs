@@ -3,8 +3,6 @@ using BookStore_Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStore_Controller.Middlewares
@@ -12,32 +10,34 @@ namespace BookStore_Controller.Middlewares
     public class RoleMiddleware
     {
         private readonly RequestDelegate _next;
-        Token token = new Token();
+        private Token token = new Token();
+
         public RoleMiddleware(RequestDelegate Next)
         {
             this._next = Next;
         }
 
-        public async Task Invoke(HttpContext context, string role)
+        public async Task Invoke(HttpContext context)
         {
-            if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
-            {
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, "not login")));
-            }
-            else
+            if(Array.IndexOf(ControllerPath.Path(), context.Request.Path.ToString().Trim()) != -1)
             {
                 string tokenValue = context.Request.Headers["Authorization"].ToString().Trim();
                 string[] arrRole = JsonWebToken.GetRole(tokenValue);
-                if(Array.IndexOf(arrRole,role) == -1)
+                string path = context.Request.Path.ToString().Trim();
+                if (ControllerPath.Role(path, ControllerPath.Path(), arrRole))
                 {
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, "not Authorization")));
+                    await _next(context);
                 }
                 else
                 {
-                    await this._next(context);
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, "The account is not authorized")));
                 }
-
             }
+            else
+            {
+                await _next(context);
+            }
+            
         }
     }
 }

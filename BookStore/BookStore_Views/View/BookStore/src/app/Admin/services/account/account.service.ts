@@ -6,7 +6,10 @@ import {catchError,map,tap} from 'rxjs/operators';
 import {url} from '../../config/config';
 import { error } from 'util';
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization' : ''
+  })
 }
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,7 @@ const httpOptions = {
 export class AccountService {
   loginAdmin(admin : any): Observable<any>{
     return this.http.post<any>(url.host + url.admin.login,admin,httpOptions).pipe(
-      tap(rs=>{}),catchError(error =>of())
+      tap(rs=>{console.log(rs)}),catchError(error =>of())
     );
   }
   constructor(

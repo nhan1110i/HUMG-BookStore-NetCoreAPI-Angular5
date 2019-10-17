@@ -18,17 +18,15 @@ export class LoginComponent implements OnInit {
     this.alert = null;
     this.accountService.loginAdmin(this.admin).subscribe(
       (rs) => {
-        if (rs.error) {
+        if(rs.Error == 1){
           this.alert = alert.wrongPassword;
-        } else {
-
-          console.log(rs.tokenValue)
-          localStorage.setItem("Authorization", rs.tokenValue);
-
-          window.location.href = "http://localhost:4200/Admin/dashboard"
+        }else{
+          localStorage.setItem("Authorization",rs.tokenValue)
+          console.log(rs);
+           window.location.href="http://localhost:4200/Admin"
         }
-      }, (err) => {
-        console.log(err)
+      },err =>{
+
       }
     )
 

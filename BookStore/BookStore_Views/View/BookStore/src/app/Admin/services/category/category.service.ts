@@ -20,23 +20,23 @@ export class CategoryService {
   
   getCategories(): Observable<any>{
     return this.http.get<any>(url.host + url.category.categories,httpOptions).pipe(
-      tap(rs=>{}), catchError(error =>of([]))
+      tap(rs=>{console.log(rs)}), catchError(error =>of([]))
     );
     //  return of(data)
   }
   getParentCategories(): Observable<any>{
     return this.http.get<any>(url.host + url.category.parentCategories,httpOptions).pipe(
-      tap(rs =>{}), catchError(error =>of([]))
+      tap(rs =>{console.log(rs)}), catchError(error =>of([]))
     )
   }
   addCategory(category : any): Observable<any>{
     return this.http.post<any>(url.host + url.category.addCategory,category,httpOptions).pipe(
-      tap(rs =>{}), catchError(error => of(console.log(error)))
+      tap(rs =>{console.log(rs)}), catchError(error => of(console.log(error)))
     )
   }
   deleteCategory(Id : number) : Observable<any>{
     return this.http.delete(url.host+url.category.deleteCategory +"/"+ Id.toString(),httpOptions).pipe(
-      tap(rs =>{console.log("delete done 1")}),catchError(error => of(console.log(error)))
+      tap(rs =>{console.log(rs)}),catchError(error => of(console.log(error)))
     )
   }
   // update category
