@@ -23,6 +23,11 @@ export var url = {
     },
     publishing: {
         publishings :"PublishingHouse/GetListPublishing"
+    },
+    employee: {
+        employees : "Admin/GetAdmins",
+        insert : "Admin/CreateAdmin",
+        update: "Admin/UpdateAdmin"
     }
 }
 export var config = {

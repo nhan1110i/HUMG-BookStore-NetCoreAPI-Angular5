@@ -10,9 +10,9 @@ export class AdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(GetAuthorization() == "noAuthorziation"){
-      window.location.href="http://localhost:4200/login";
-    }
+    // if(GetAuthorization() == "noAuthorziation"){
+    //   window.location.href="http://localhost:4200/login";
+    // }
   }
 
 }

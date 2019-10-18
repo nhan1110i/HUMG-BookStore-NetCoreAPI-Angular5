@@ -1,1 +1,98 @@
-<p>employee works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <div class="card-title">
+            <h5 class="text-success">ADD NEW EMPLOYEE</h5>
+            <hr>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="form-group">
+                  <strong>Username</strong>
+                  <input type="text" class="form-control" [(ngModel)]="employeeAdd.username">
+                </div>
+                <div class="form-group">
+                  <strong>Password</strong>
+                  <input type="password" class="form-control" [(ngModel)]="employeeAdd.password">
+                </div>
+                <div class="form-group">
+                  <strong>Employee Name</strong>
+                  <input type="text" class="form-control" [(ngModel)]="employeeAdd.name">
+                </div>
+              </div>
+              <div class="col-sm-4">
+
+                <div class="form-group">
+                  <strong>Role</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('Product',arrRoleAdd)"> Manage Product <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('Category',arrRoleAdd)"> Manage Category <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('Order',arrRoleAdd)"> Manage Order <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('Author-Publishing',arrRoleAdd)">
+                    Manage Author-Publishing
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-sm-12">
+              <button class="btn btn-success float-right" (click)="insertEmployee()">Add Employee</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 row">
+      <div class="col-sm-6 mt-15" *ngFor="let employee of employees">
+        <div class="card text-drank border-primary">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <strong>Username</strong>
+                  <input type="text" class="form-control" [(ngModel)]="employee.username">
+                </div>
+                <div class="form-group">
+                  <strong>Employee Name</strong>
+                  <input type="text" class="form-control" [(ngModel)]="employee.name">
+                </div>
+                <div class="form-group">
+                  <strong>Employee Password</strong>
+                  <input type="password" class="form-control" [(ngModel)]="employee.password">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <strong>Role</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Product',employee.arrRole)"
+                      (click)="addRole('Product',employee.arrRole)"> Product
+                    <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Category',employee.arrRole)"
+                      (click)="addRole('Category',employee.arrRole)"> Category
+                    <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Order',employee.arrRole)"
+                      (click)="addRole('Order',employee.arrRole)"> Order
+                    <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Author-Publishing',employee.arrRole)"
+                      (click)="addRole('Author-Publishing',employee.arrRole)"> Author-Publishing
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <button class="btn btn-primary" (click)="updateEmployee(employee.id)">Update</button> &nbsp;
+                  <button class="btn btn-danger">Delete </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

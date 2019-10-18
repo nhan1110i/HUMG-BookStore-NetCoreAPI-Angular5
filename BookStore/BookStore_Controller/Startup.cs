@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 
 namespace BookStore_Controller
@@ -28,6 +29,10 @@ namespace BookStore_Controller
                     builder.WithOrigins("http://localhost:4200").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials().Build();
                 });
             });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "BookStore API", Version = "v1.0" });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -46,20 +51,20 @@ namespace BookStore_Controller
             
             app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Assets", "Admin", "Products")), RequestPath = "/image" });
 
-            //app.UseSwagger();
+            app.UseSwagger();
 
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore V1");
-            //});
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookStore V1");
+            });
             //app.Map("/Category/GetCategories", appMap =>
             //{
             //    appMap.UseLoginMiddleware();
             //});
 
-            app.UseCheckTokenExpireMiddleware();
-            
-            app.UseRoleMiddleware();
+            //app.UseCheckTokenExpireMiddleware();
+
+            //app.UseRoleMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

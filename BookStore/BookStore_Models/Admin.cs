@@ -54,10 +54,12 @@ namespace BookStore_Models
             using (DataConnection.Connection())
             {
                 var insertAdmin = 0;
-                string Query = "INSERT INTO Admin VALUES (@Username, @Password) ; SELECT CAST(SCOPE_INDENTITY() as int)";
+                string Query = "INSERT INTO Admin VALUES (@Username, @Password, @Role,@Name)";
                 var param = new DynamicParameters();
                 param.Add("@Username", admin.Username);
                 param.Add("@Password", admin.Password);
+                param.Add("@Role", admin.Role);
+                param.Add("@Name", admin.Name);
                 CommandType command = CommandType.Text;
                 insertAdmin = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);
                 return insertAdmin;

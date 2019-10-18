@@ -81,5 +81,19 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(new Notice(0, "Deleted"));
             }
         }
+        [HttpPost]
+        public async Task<JsonResult> CreateAdmin([FromBody] Admin adminInsert)
+        {
+            adminInsert.Password = Cryptography.Create(adminInsert.Password);
+            int rs = await admin.CreateAdmin(adminInsert);
+            if(rs == 0)
+            {
+                return new JsonResult(new Notice(1, "Cant Insert"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(0, "Inserted"));
+            }
+        }
     }
 }
