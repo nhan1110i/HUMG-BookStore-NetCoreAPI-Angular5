@@ -19,11 +19,12 @@ namespace BookStore_Controller.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            if (Array.IndexOf(ControllerPath.Path(), context.Request.Path.ToString().Trim()) != -1)
+            string path = "/" + context.Request.Path.ToString().Split("/")[1] + "/" + context.Request.Path.ToString().Split("/")[2];
+            if (Array.IndexOf(ControllerPath.Path(), path) != -1)
             {
                 if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
                 {
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, context.Request.Path)));
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(2, "Not Login")));
                 }
                 else
                 {
@@ -34,7 +35,7 @@ namespace BookStore_Controller.Middlewares
                     }
                     else
                     {
-                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, "Token Expire")));
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(2, "Token Expire")));
                     }
                 }
             }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { formatCurrency } from '../../config/config';
 import { AdminService } from '../../AdminService/admin.service';
-import {alert} from '../../config/config'
+import { alert } from '../../config/config'
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -24,21 +24,54 @@ export class ProductComponent implements OnInit {
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe(
       rs => {
-        this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
-        this.alert = alert.delete;
-      }
-    )
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
+            this.alert = alert.delete;
+            break;
+          }
+        }
+      })
   }
   deleteProducts() {
-    this.selectedProducts.shift();
-    this.selectedProducts.shift();
-    this.selectedProducts.forEach(id => {
-      this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
-    });
     this.productService.deleteProducts(this.selectedProducts).subscribe(
       rs => {
-        this.selectedProducts = [0, 0];
-        this.alert = alert.delete;
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            this.selectedProducts.shift();
+            this.selectedProducts.shift();
+            this.selectedProducts.forEach(id => {
+              this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
+            });
+            this.selectedProducts = [0, 0];
+            this.alert = alert.delete;
+            break;
+          }
+        }
       }, err => {
         console.log(err)
       }
@@ -79,7 +112,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private adminService : AdminService
+    private adminService: AdminService
   ) { }
 
   ngOnInit() {

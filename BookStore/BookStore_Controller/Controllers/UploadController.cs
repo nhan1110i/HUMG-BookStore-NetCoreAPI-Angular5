@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookStore_Controller.Controllers
 {
     [Produces("application/json")]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class UploadController : Controller
     {
         private IHostingEnvironment _hostingEnvironment;

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     this.alert = null;
     this.accountService.loginAdmin(this.admin).subscribe(
       (rs) => {
-        if(rs.Error == 1){
+        if(rs.error == 1){
           this.alert = alert.wrongPassword;
         }else{
           localStorage.setItem("Authorization",rs.tokenValue)
@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    if(localStorage.getItem("Authorization")){
+      localStorage.removeItem("Authorization")
+    }
   }
 
 }

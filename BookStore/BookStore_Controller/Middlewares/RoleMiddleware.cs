@@ -19,18 +19,19 @@ namespace BookStore_Controller.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            if(Array.IndexOf(ControllerPath.Path(), context.Request.Path.ToString().Trim()) != -1)
+            string path = "/" + context.Request.Path.ToString().Split("/")[1] + "/" + context.Request.Path.ToString().Split("/")[2];
+            if (Array.IndexOf(ControllerPath.Path(), path) != -1)
             {
                 string tokenValue = context.Request.Headers["Authorization"].ToString().Trim();
                 string[] arrRole = JsonWebToken.GetRole(tokenValue);
-                string path = context.Request.Path.ToString().Trim();
+                
                 if (ControllerPath.Role(path, ControllerPath.Path(), arrRole))
                 {
                     await _next(context);
                 }
                 else
                 {
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(1, "The account is not authorized")));
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(new Notice(3, "The account is not authorized")));
                 }
             }
             else

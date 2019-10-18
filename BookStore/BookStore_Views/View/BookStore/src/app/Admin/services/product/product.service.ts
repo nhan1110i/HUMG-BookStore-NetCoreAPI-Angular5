@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { url } from '../../config/config';
+import { url, GetAuthorization } from '../../config/config';
 import { error } from 'util';
 const httpOptions = {
 
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Token': 'dd'
+    'Authorization': GetAuthorization()
   })
 }
 // application/json
@@ -21,7 +21,7 @@ export class ProductService {
     return this.http.get<any>(url.host + url.product.products).pipe(
       tap(rs => {
         console.log(rs)
-      }), catchError(errorr => of(console.log(error)))
+      }), catchError(error => of(console.log(error)))
     )
   }
   getProduct(id: number): Observable<any> {
@@ -31,7 +31,7 @@ export class ProductService {
   }
   upLoadImage(form: FormData): Observable<any> {
     console.log(form)
-    return this.http.post<any>(url.host + "/upload", form).pipe(
+    return this.http.post<any>(url.host + "upload/UploadFile", form).pipe(
       tap(rs => {
 
       }), catchError(error => of([]))

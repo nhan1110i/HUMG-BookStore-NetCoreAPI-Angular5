@@ -34,6 +34,7 @@ namespace BookStore_Controller
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("EnableCORS");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -42,9 +43,9 @@ namespace BookStore_Controller
             {
                 app.UseHsts();
             }
-
+            
             app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Assets", "Admin", "Products")), RequestPath = "/image" });
-            app.UseCors("EnableCORS");
+
             //app.UseSwagger();
 
             //app.UseSwaggerUI(c =>
@@ -55,12 +56,9 @@ namespace BookStore_Controller
             //{
             //    appMap.UseLoginMiddleware();
             //});
-            
+
             app.UseCheckTokenExpireMiddleware();
-            //app.Map("/Category/DeleteCategory", appMap =>
-            //{
-            //    appMap.UseRoleMiddleware("Category");
-            //});
+            
             app.UseRoleMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -22,10 +22,11 @@ namespace BookStore_Controller.Helper
                 signingCredentials: signCredentials,
                 claims: new[]
                 {
-                    new Claim("AdminName",admin.Username),
+                    new Claim("AdminUsername",admin.Username),
+                    new Claim("AdminName",admin.Name),
                     new Claim("AdminRole", admin.Role)
                 }
-                );
+                ); ;
             return new Token(0, (new JwtSecurityTokenHandler().WriteToken(token)).ToString(), DateTime.Now, DateTime.Now, DateTime.Now.AddMinutes(10));
         }
         public static string[] GetRole(string Token)

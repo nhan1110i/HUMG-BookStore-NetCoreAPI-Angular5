@@ -48,8 +48,24 @@ export var alert = {
         style: "alert alert-danger",
         title: "WRONG",
         content: "Sai tên đăng nhập hoặc mật khẩu"
+    },
+    auth: {
+        style : "alert alert-warning",
+        title : "Authorization",
+        content : "Không đủ quyền để thực hiện"
+    },
+    error : {
+        style : 'alert alert-danger',
+        title: 'Error',
+        content: 'Lỗi không xác định'
+    },
+    expire: {
+        style : 'alert alert-primary',
+        title : 'Expired',
+        content : "Hết phiên đăng nhập"
     }
 }
+
 export var badges ={
     product: (isActive : boolean) : string=>{
         if(isActive == true){
@@ -66,6 +82,16 @@ export var badges ={
         }
     }
 }
+// export function ResponException(rs : any, alert : any) : boolean{
+//     if(rs.Error == 2){
+//         window.location.href = "http://localhost:4200/login";
+//         return false;
+//     }else{
+//         if(rs.Error == 3){
+//             alert = this.alert.auth;
+//         }
+//     }
+// }
 export function formatCurrency(money: number): string{
     var s = money.toString();
     var regex = /\B(?=(\d{3})+(?!\d))/g;
@@ -78,4 +104,7 @@ export function GetAuthorization() : string{
     }else{
         return "noAuthorziation"
     }
+}
+export function CloseAlert(alert : any){
+    alert = null;
 }

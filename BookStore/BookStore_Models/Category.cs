@@ -42,7 +42,7 @@ namespace BookStore_Models
                 param.Add("@Id", Id);
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Category>(Query, param, null, null, command);
-                return rs.Single();
+                return rs.FirstOrDefault();
             }
         } 
         public async Task<int> AddCategory(Category category)

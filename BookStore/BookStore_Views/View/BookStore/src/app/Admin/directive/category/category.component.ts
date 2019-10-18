@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CategoryService } from '../../services/category/category.service';
-import {alert} from '../../config/config';
+import { alert } from '../../config/config';
 
 @Component({
   selector: 'app-category',
@@ -10,7 +10,7 @@ import {alert} from '../../config/config';
 })
 export class CategoryComponent implements OnInit {
   // getCaegories
-  
+
   categories: any;
   parentCategories: any;
   order: number = 1;
@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
   // get Categories
   getCategories(): void {
     this.categoryService.getCategories().subscribe((rs) => {
-      this.categories = rs;      
+      this.categories = rs;
     }, (err) => {
       console.log(err);
     })
@@ -32,75 +32,129 @@ export class CategoryComponent implements OnInit {
     console.log(this.categorySelected)
   }
   // delete category
-  deleteCategory(Id : number){
+  deleteCategory(Id: number) {
     this.categoryService.deleteCategory(Id).subscribe(
-      (rs) =>{
-        this.categories.splice(this.categories.findIndex(category => category.category.id == Id),1);
-        this.alert = alert.delete;
-      },(err) =>{
+      (rs) => {
+        console.log(rs);
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            this.categories.splice(this.categories.findIndex(category => category.category.id == Id), 1);
+            this.alert = alert.delete;
+            break;
+          }
+        }
+      }, (err) => {
         console.log("cant delete");
       }
     )
   }
   // update category
-  updateCategory(category: any){
-    this.categorySelected.category.parentId = +this.categorySelected.category.parentId;
-    this.categorySelected.parentCategory.id = this.categorySelected.category.parentId;
-    this.categorySelected.parentCategory.parentName = this.parentCategories[this.parentCategories.findIndex(obj => obj.id == this.categorySelected.category.parentId)].parentName;
+  updateCategory(category: any) {
+
     this.categoryService.updateCategory(category).subscribe(
-      rs=>{
-        this.alert = alert.update;
-        this.categorySelected = null;
-      },(err)=>{
+      rs => {
+        console.log(rs);
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            this.categorySelected.category.parentId = +this.categorySelected.category.parentId;
+            this.categorySelected.parentCategory.id = this.categorySelected.category.parentId;
+            this.categorySelected.parentCategory.parentName = this.parentCategories[this.parentCategories.findIndex(obj => obj.id == this.categorySelected.category.parentId)].parentName;
+            this.alert = alert.update;
+            this.categorySelected = null;
+            break;
+          }
+        }
+
+      }, (err) => {
         console.log(err)
       }
     )
-    
+
   }
   // Add new Category
   addNewCategory(category: any) {
-    if(category.value.isActive == null){
-
+    if (category.value.isActive == null) {
+      category.value.isActive = false;
     }
-    this.categoryService.addCategory(category.value).subscribe((rs) => { 
-      this.categories.push({
-        id: 0,
-        category: category.value,
-        parentCategory: {
-          id: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].id,
-          parentName: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].parentName
+    this.categoryService.addCategory(category.value).subscribe((rs) => {
+      switch (rs.Error) {
+        case 1: {
+          this.alert = alert.error;
+          break;
         }
-      });
+        case 2: {
+          this.alert = alert.expire;
+          break;
+        }
+        case 3: {
+          this.alert = alert.auth;
+          break;
+        }
+        default: {
+          this.categories.push({
+            id: 0,
+            category: category.value,
+            parentCategory: {
+              id: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].id,
+              parentName: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].parentName
+            }
+          });
 
-      
-     }, (err) => { console.log(err) })
+          break;
+        }
+      }
+    }, (err) => { console.log(err) })
   }
   // Get ParentCategories
   getParentCategories(): void {
     this.categoryService.getParentCategories().subscribe(
       (rs) => {
         this.parentCategories = rs;
-        
+
       }, (err) => {
         console.log(err)
       }
     )
   }
-  toNumber(){
+  toNumber() {
     this.categorySelected.parentCategory.parentId = +this.categorySelected.parentCategory.parentId
   }
 
 
   // notice
-  getIsActive(isActive : boolean): string{
-    if(isActive){
+  getIsActive(isActive: boolean): string {
+    if (isActive) {
       return "Đang mở"
-    }else{
+    } else {
       return "Đang đóng"
     }
   }
-  
-  getOrder(){
+
+  getOrder() {
     this.order++;
   }
   alert: any;

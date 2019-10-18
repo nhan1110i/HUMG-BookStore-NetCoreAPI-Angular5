@@ -17,17 +17,13 @@ namespace BookStore_Controller.Controllers
         Token token = new Token();
         // GET: api/Admin
         [HttpGet]
-        public bool Login([FromBody] Admin adminLogin, string salt)
+        public async Task<JsonResult> GetAdmins()
         {
-            return true;
+            var Admins = await admin.GetAdmins();
+            return new JsonResult(Admins);
         }
 
-        // GET: api/Admin/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        
 
         // POST: api/Admin
         [HttpPost]
@@ -57,15 +53,33 @@ namespace BookStore_Controller.Controllers
         }
 
         // PUT: api/Admin/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<JsonResult> UpdateAdmin([FromBody] Admin AdminUpdate)
         {
+            int rs = await admin.UpdateAdmin(AdminUpdate);
+            if(rs == 0)
+            {
+                return new JsonResult(new Notice(1, "Cant Update"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(0, "Updated"));
+            }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<JsonResult> DeleteAdmin(int id)
         {
+            int rs = await admin.DeleteAdmin(id);
+            if(rs == 0)
+            {
+                return new JsonResult(new Notice(1, "Cant Delete"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(0, "Deleted"));
+            }
         }
     }
 }
