@@ -2,3 +2,10 @@
     width: 20px;
     height: 20px;
 }
+.notice{
+    height: 50px;
+  position: fixed;
+  left: 70%;
+  right: 0px;
+  top: 550px;
+}

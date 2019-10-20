@@ -31,7 +31,7 @@ export class ProductService {
   }
   upLoadImage(form: FormData): Observable<any> {
     console.log(form)
-    return this.http.post<any>(url.host + "upload/UploadFile", form).pipe(
+    return this.http.post<any>(url.host + "Upload/UploadFile", form).pipe(
       tap(rs => {
 
       }), catchError(error => of([]))

@@ -43,7 +43,7 @@ namespace BookStore_Models
                 }
                 else
                 {
-                    return rs.First();
+                    return rs.FirstOrDefault();
                 }
             }
             

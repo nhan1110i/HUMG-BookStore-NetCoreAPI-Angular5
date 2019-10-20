@@ -11,6 +11,7 @@ import { DashboardComponent } from './Admin/directive/dashboard/dashboard.compon
 import { EmployeeComponent } from './Admin/directive/employee/employee.component';
 import { OrderComponent } from './Admin/directive/order/order.component';
 import { AuthorPublishingComponent } from './Admin/directive/author-publishing/author-publishing.component';
+import { OrderDetailComponent } from './Admin/directive/order-detail/order-detail/order-detail.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "order", component: OrderComponent },
+      {path: "orderDetail/:id", component: OrderDetailComponent},
       {path: "author-publishing", component: AuthorPublishingComponent}
     ]
   },

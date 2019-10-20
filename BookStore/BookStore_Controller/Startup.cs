@@ -62,9 +62,9 @@ namespace BookStore_Controller
             //    appMap.UseLoginMiddleware();
             //});
 
-            //app.UseCheckTokenExpireMiddleware();
+            app.UseCheckTokenExpireMiddleware();
 
-            //app.UseRoleMiddleware();
+            app.UseRoleMiddleware();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

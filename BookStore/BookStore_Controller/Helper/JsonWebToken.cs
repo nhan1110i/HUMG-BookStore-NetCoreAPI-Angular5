@@ -23,7 +23,7 @@ namespace BookStore_Controller.Helper
                 claims: new[]
                 {
                     new Claim("AdminUsername",admin.Username),
-                    new Claim("AdminName",admin.Name),
+                    //new Claim("AdminName",admin.Name),
                     new Claim("AdminRole", admin.Role)
                 }
                 ); ;

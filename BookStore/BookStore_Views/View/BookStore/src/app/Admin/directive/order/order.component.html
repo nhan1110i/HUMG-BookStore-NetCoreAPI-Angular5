@@ -1,1 +1,53 @@
-<p>order works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12 mt-15 ">
+        <div class="card text-drank border-primary">
+          <div class="card-body">
+            <h5 class="card-title text-primary">ĐƠN HÀNG</h5>
+            <hr>
+            <div class="row">
+                <div class="col-sm-2">
+                    <select name="" id="" class="form-control">
+                      <option>10 / page</option>
+                      <option>20 / page</option>
+                      <option>30 / page</option>
+                    </select>
+                  </div>
+            </div>
+            <hr>
+            <div class="table-responsive">
+              <table class="table">
+                <tr class="text-light bg-primary">
+                  <th>#</th>
+                  <th>Mã đơn</th>
+                  <th>Tên khách hàng</th>
+                  <th>Số lượng</th>
+                  <th>Tổng tiền</th>
+                  <th>Thanh toán</th>
+                  <th>Trạng thái</th>
+                  <th>Action</th>
+                </tr>
+                <tr *ngFor="let order of orders">
+                  <td><input type="checkbox"></td>
+                  <td>{{ order.order.orderCode }}</td>
+                  <td>{{ order.customerInOrder.customer.customerName }}</td>
+                  <td>{{ order.order.totalQuantity }}</td>
+                  <td>{{ formatMoney(order.order.totalMoney)}}</td>
+                  <td>{{ getPayment(order.order.paymentId) }}</td>
+                  <td><h5 class="{{ getStatusClass(order.order.statusId) }}">{{getStatus(order.order.statusId)}}</h5></td>
+                  <td><a routerLink="/Admin/orderDetail/{{ order.order.id }}" class="btn btn-info btn-sm"><i class="fa fa-window-maximize"></i></a> &nbsp;<button class="btn btn-success btn-sm" (click)="completeOrder(order.order.id)"><i class="fa fa-check"></i></button>&nbsp;<button class="btn btn-warning btn-sm" (click)="declineOrder(order.order.id)"><i class="fa fa-ban"></i></button>&nbsp;<button class="btn btn-danger btn-sm" (click)="deleteOrder(order.order.id)"><i class="fa fa-times"></i></button></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="{{alert.style}} alert-dismissible notice" *ngIf="alert">
+    <button type="button" class="close" data-dismiss="alert" (click)="alert = null">&times;</button>
+    <strong>{{ alert.title }}!</strong> {{ alert.content }}.
+  </div>
+  
+  

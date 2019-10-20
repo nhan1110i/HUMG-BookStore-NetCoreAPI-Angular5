@@ -6,7 +6,7 @@ namespace BookStore_Controller.Helper
     {
         public static string[] Path()
         {
-            string[] rs = { "/Category/AddCategory", "/Category/DeleteCategory", "/Category/UpdateCategory","/Product/InsertProduct", "/Product/DeleteProductById", "/Product/DeleteProducts", "/Product/UpdateProduct" };
+            string[] rs = { "AddCategory", "DeleteCategory", "UpdateCategory","InsertProduct", "DeleteProductById", "DeleteProducts", "UpdateProduct","UpdateAdmin","DeleteAdmin","CreateAdmin","ActiveCustomer","DeleteCustomer"};
             return rs;
         }
 
@@ -14,7 +14,7 @@ namespace BookStore_Controller.Helper
         {
             if (Array.IndexOf(action, path) != -1)
             {
-                if(Array.IndexOf(role,path.Split("/")[1]) != -1)
+                if(Array.IndexOf(role,path) != -1)
                 {
                     return true;
                 }

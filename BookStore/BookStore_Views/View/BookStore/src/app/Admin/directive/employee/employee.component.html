@@ -4,87 +4,187 @@
       <div class="card text-drank border-primary">
         <div class="card-body">
           <div class="card-title">
-            <h5 class="text-success">ADD NEW EMPLOYEE</h5>
+            <h5 class="text-success">THÊM MỚI NHÂN VIÊN</h5>
             <hr>
             <div class="row">
-              <div class="col-sm-8">
+              <div class="col-sm-4">
                 <div class="form-group">
-                  <strong>Username</strong>
+                  <strong>Tên đăng nhập</strong>
                   <input type="text" class="form-control" [(ngModel)]="employeeAdd.username">
                 </div>
                 <div class="form-group">
-                  <strong>Password</strong>
+                  <strong>Mật Khẩu</strong>
                   <input type="password" class="form-control" [(ngModel)]="employeeAdd.password">
                 </div>
                 <div class="form-group">
-                  <strong>Employee Name</strong>
+                  <strong>Tên nhân viên</strong>
                   <input type="text" class="form-control" [(ngModel)]="employeeAdd.name">
                 </div>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-3">
 
                 <div class="form-group">
-                  <strong>Role</strong>
+                  <strong>Sản phẩm</strong>
                   <div class="form-group">
-                    <input type="checkbox" class="cb-lg" (click)="addRole('Product',arrRoleAdd)"> Manage Product <br>
-                    <input type="checkbox" class="cb-lg" (click)="addRole('Category',arrRoleAdd)"> Manage Category <br>
-                    <input type="checkbox" class="cb-lg" (click)="addRole('Order',arrRoleAdd)"> Manage Order <br>
-                    <input type="checkbox" class="cb-lg" (click)="addRole('Author-Publishing',arrRoleAdd)">
-                    Manage Author-Publishing
+                    <input type="checkbox" class="cb-lg" (click)="addRole('InsertProduct',arrRoleAdd)"> Thêm mới sản phẩm <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('UpdateProduct',arrRoleAdd)"> Cập nhật sản phẩm<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeleteProductById',arrRoleAdd)"> Xóa sản phẩm<br>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong>Đơn hàng</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('AcceptOrder',arrRoleAdd)"> Duyệt đơn hàng <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('Decline',arrRoleAdd)"> Từ chối đơi hàng<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeleteOrder',arrRoleAdd)"> Xóa đơn hàng<br>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+
+                <div class="form-group">
+                  <strong>Danh mục</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('AddCategory',arrRoleAdd)"> Thêm mới danh mục<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('UpdateCategory',arrRoleAdd)"> Cập nhật danh mục<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeleteCategory',arrRoleAdd)"> Xóa danh mục<br>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong>Khách hàng</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('SendCustomer',arrRoleAdd)"> Gửi Mail <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeleteCustomer',arrRoleAdd)"> Xoá khách hàng<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeactiveCustomer',arrRoleAdd)"> Từ chối bán hàng<br>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+
+                <div class="form-group">
+                  <strong>Báo cáo</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('ExportReport',arrRoleAdd)"> Xuất báo cáo<br>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong>Quản trị</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" (click)="addRole('CreateAdmin',arrRoleAdd)"> Thêm nhân viên <br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('UpdateAdmin',arrRoleAdd)"> Sửa nhân viên<br>
+                    <input type="checkbox" class="cb-lg" (click)="addRole('DeleteAdmin',arrRoleAdd)"> Xóa nhân viên<br>
                   </div>
                 </div>
               </div>
 
             </div>
             <div class="col-sm-12">
-              <button class="btn btn-success float-right" (click)="insertEmployee()">Add Employee</button>
+              <button class="btn btn-success float-right" (click)="insertEmployee()">THÊM MỚI NHÂN VIÊN</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-12 row">
-      <div class="col-sm-6 mt-15" *ngFor="let employee of employees">
+    <div class="col-sm-12 mt-15 float-right">
+      <button class="btn btn-warning" (click)="showall = true"><i class="fa fa-list-ul"></i></button> &nbsp;
+      <button class="btn btn-info" (click)="showall = false"><i class="fa fa-th"></i></button>
+    </div>
+
+      <div *ngFor="let employee of employees" [ngClass]="showall ? 'col-sm-12 mt-15' : 'col-sm-6 mt-15'" >
         <div class="card text-drank border-primary">
           <div class="card-body">
             <div class="row">
-              <div class="col-sm-6">
+              <div [ngClass]="showall ? 'col-sm-4' : 'col-sm-12'">
                 <div class="form-group">
-                  <strong>Username</strong>
+                  <strong>Tên đăng nhập</strong>
                   <input type="text" class="form-control" [(ngModel)]="employee.username">
                 </div>
                 <div class="form-group">
-                  <strong>Employee Name</strong>
+                  <strong>Tên nhân viên</strong>
                   <input type="text" class="form-control" [(ngModel)]="employee.name">
                 </div>
                 <div class="form-group">
-                  <strong>Employee Password</strong>
+                  <strong>Mật khẩu</strong>
                   <input type="password" class="form-control" [(ngModel)]="employee.password">
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <strong>Role</strong>
-                  <div class="form-group">
-                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Product',employee.arrRole)"
-                      (click)="addRole('Product',employee.arrRole)"> Product
-                    <br>
-                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Category',employee.arrRole)"
-                      (click)="addRole('Category',employee.arrRole)"> Category
-                    <br>
-                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Order',employee.arrRole)"
-                      (click)="addRole('Order',employee.arrRole)"> Order
-                    <br>
-                    <input type="checkbox" class="cb-lg" [checked]="checkRole('Author-Publishing',employee.arrRole)"
-                      (click)="addRole('Author-Publishing',employee.arrRole)"> Author-Publishing
-                  </div>
+              <div class="col-sm-3" *ngIf="showall">
 
+                <div class="form-group">
+                  <strong>Sản phẩm</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('InsertProduct',employee.arrRole)"
+                    (click)="addRole('InsertProduct',employee.arrRole)"> Thêm mới sản phẩm<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('UpdateProduct',employee.arrRole)"
+                    (click)="addRole('UpdateProduct',employee.arrRole)"> Cập nhật sản phẩm<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteProductById',employee.arrRole)"
+                    (click)="addRole('DeleteProductById',employee.arrRole)"> Xóa sản phẩm<br>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong>Đơn hàng</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('AcceptOrder',employee.arrRole)"
+                    (click)="addRole('AcceptOrder',employee.arrRole)"> Duyệt đơn hàng <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeclineOrder',employee.arrRole)"
+                    (click)="addRole('DeclineOrder',employee.arrRole)"> Từ chối đơn hàng<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteOrder',employee.arrRole)"
+                    (click)="addRole('DeleteOrder',employee.arrRole)"> Xóa đơn hàng<br>
+                  </div>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-3" *ngIf="showall">
+
                 <div class="form-group">
-                  <button class="btn btn-primary" (click)="updateEmployee(employee.id)">Update</button> &nbsp;
-                  <button class="btn btn-danger">Delete </button>
+                  <strong>Danh mục</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('AddCategory',employee.arrRole)"
+                    (click)="addRole('AddCategory',employee.arrRole)"> Thêm mới danh mục<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('UpdateCategory',employee.arrRole)"
+                    (click)="addRole('UpdateCategory',employee.arrRole)"> Cập nhật danh mục<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteCategory',employee.arrRole)"
+                    (click)="addRole('DeleteCategory',employee.arrRole)"> Xóa danh mục<br>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <strong>Khách hàng</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('SendCustomer',employee.arrRole)"
+                    (click)="addRole('SendCustomer',employee.arrRole)"> Gửi Mail <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteCustomer',employee.arrRole)"
+                    (click)="addRole('DeleteCustomer',employee.arrRole)"> Xóa khách hàng<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('ActiveCustomer',employee.arrRole)"
+                    (click)="addRole('ActiveCustomer',employee.arrRole)"> Từ chối bán hàng<br>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2" *ngIf="showall">
+
+                <div class="form-group">
+                  <strong>Báo cáo</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('ExportReport',employee.arrRole)"
+                    (click)="addRole('ExportReport',employee.arrRole)"> Xuất báo cáo<br>
+                  </div>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                  <strong>Quản trị</strong>
+                  <div class="form-group">
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('CreateAdmin',employee.arrRole)"
+                    (click)="addRole('CreateAdmin',employee.arrRole)"> Thêm nhân viên <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('UpdateAdmin',employee.arrRole)"
+                    (click)="addRole('UpdateAdmin',employee.arrRole)"> Sửa nhân viên<br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteAdmin',employee.arrRole)"
+                    (click)="addRole('DeleteAdmin',employee.arrRole)"> Xóa nhân viên<br>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <button class="btn btn-primary" (click)="updateEmployee(employee.id)">Cập nhật nhân viên</button> &nbsp;
+                  <button class="btn btn-danger" (click)="deleteEmployee()">Xóa nhân viên </button>
                 </div>
               </div>
             </div>
@@ -92,7 +192,11 @@
         </div>
       </div>
 
-    </div>
+
   </div>
 
+</div>
+<div class="{{alert.style}} alert-dismissible notice" *ngIf="alert">
+  <button type="button" class="close" data-dismiss="alert" (click)="alert = null">&times;</button>
+  <strong>{{ alert.title }}!</strong> {{ alert.content }}.
 </div>

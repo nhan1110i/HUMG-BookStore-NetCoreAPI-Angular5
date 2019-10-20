@@ -4,8 +4,8 @@ import { AuthorService } from '../../services/author/author.service';
 import { PublishingService } from '../../services/publishing/publishing.service';
 import { Moment } from 'moment'
 import { ProductService } from '../../services/product/product.service';
-import {Location} from '@angular/common';
-import {alert} from '../../config/config'
+import { Location } from '@angular/common';
+import { alert } from '../../config/config'
 var moment = require('moment');
 declare var require: any
 
@@ -65,12 +65,29 @@ export class AddNewProductComponent implements OnInit {
     //fd.append("Image","Nhan");
     this.productService.upLoadImage(fd).subscribe(
       rs => {
+        console.log(rs);
         this.product.productImageList = rs
         this.productService.insertProduct(this.product).subscribe(
           irs => {
-            if (irs.error == 0) {
-              this.alert = alert.add;
+            switch (irs.Error) {
+              case 1: {
+                this.alert = alert.error;
+                break;
+              }
+              case 2: {
+                this.alert = alert.expire;
+                break;
+              }
+              case 3: {
+                this.alert = alert.auth;
+                break;
+              }
+              default: {
+                this.alert = alert.add;
+                break;
+              }
             }
+
           }, (err) => {
             console.log("error")
           }
@@ -80,12 +97,12 @@ export class AddNewProductComponent implements OnInit {
         console.log(this.product)
       }
     )
-    
+
   }
   file: File;
-  
+
   // get form
-  alert : any;
+  alert: any;
   getCategories(): void {
     this.categoryService.getCategories().subscribe(
       (rs) => {
@@ -136,7 +153,7 @@ export class AddNewProductComponent implements OnInit {
     this.location.back();
   }
   constructor(
-    private location : Location,
+    private location: Location,
     private productService: ProductService,
     private categoryService: CategoryService,
     private authorService: AuthorService,
@@ -147,7 +164,7 @@ export class AddNewProductComponent implements OnInit {
     this.getCategories(),
       this.getAuthors(),
       this.getPublishings()
-      
+
 
   }
 

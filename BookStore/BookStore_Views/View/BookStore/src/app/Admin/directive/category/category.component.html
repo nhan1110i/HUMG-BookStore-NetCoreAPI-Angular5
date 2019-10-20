@@ -7,32 +7,30 @@
             <h5>THÊM MỚI DANH MỤC</h5>
             <hr>
           </div>
-          <form action="" class="form-inline" #categoryAdd="ngForm">
-            &nbsp;
-            <div class="form-group">
-              <strong>Tên danh mục: </strong>&nbsp;
+          <form action="" class="form-row" #categoryAdd="ngForm">
+            <div class="form-group col-md-4">
+              <label>Tên danh mục: </label>
               <input type="text" class="form-control" name="categoryName" ngModel>
             </div>
-            &nbsp;
-            <div class="form-group">
-              <label><strong>Tiêu đề:</strong> </label> &nbsp;
+            
+            <div class="form-group col-md-3">
+              <label>Tiêu đề</label> 
               <input type="text" class="form-control" name="categoryTitle" ngModel> &nbsp;
             </div>
-            &nbsp;
-            <div class="form-group">
-              <label>Danh mục cha: </label> &nbsp;
+            
+            <div class="form-group col-md-3">
+              <label>Danh mục cha: </label> 
               <select class="form-control" name="parentId" ngModel>
                 <option *ngFor="let parentCategory of parentCategories" value="{{ parentCategory.id }}">
                   {{ parentCategory.parentName }}</option>
               </select>
-              &nbsp;
-              <input type="checkbox" name="isActive" ngModel checked>&nbsp; Active
-
             </div>
-            &nbsp;&nbsp;
-            <div class="mt-1 float-sm-right">
+            <div class="form-group col-md-2">
+              <label for="">Active</label>
+              <br>
+              <input type="checkbox" name="isActive" class="border-primary" ngModel checked> 
+            </div>
               <button class="btn btn-success" (click)="addNewCategory(categoryAdd)">Thêm mới</button>
-            </div>
           </form>
         </div>
       </div>

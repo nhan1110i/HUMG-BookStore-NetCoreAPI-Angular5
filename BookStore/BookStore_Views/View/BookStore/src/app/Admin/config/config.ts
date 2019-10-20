@@ -27,7 +27,15 @@ export var url = {
     employee: {
         employees : "Admin/GetAdmins",
         insert : "Admin/CreateAdmin",
-        update: "Admin/UpdateAdmin"
+        update: "Admin/UpdateAdmin",
+    },
+    customer : {
+        customers: "Customer/GetCustomers",
+        delete: "Customer/DeleteCustomer",
+        active : "Customer/ActiveCustomer"
+    },
+    order : {
+        orders: "Order/GetOrders"
     }
 }
 export var config = {
@@ -36,37 +44,37 @@ export var config = {
 export var alert = {
     update: {
         style: "alert alert-info",
-        title: "UPDATE",
+        title: "THÔNG BÁO",
         content: "Cập nhật thành công"
     },
     delete: {
         style: "alert alert-danger",
-        title: "DELETE",
+        title: "THÔNG BÁO",
         content: "Xóa thành công"
     },
     add: {
         style: "alert alert-success",
-        title: "ADD",
+        title: "THÔNG BÁO",
         content: "Thêm mới thành công"
     },
     wrongPassword: {
         style: "alert alert-danger",
-        title: "WRONG",
+        title: "THÔNG BÁO",
         content: "Sai tên đăng nhập hoặc mật khẩu"
     },
     auth: {
         style : "alert alert-warning",
-        title : "Authorization",
+        title : "THÔNG BÁO",
         content : "Không đủ quyền để thực hiện"
     },
     error : {
         style : 'alert alert-danger',
-        title: 'Error',
+        title: 'THÔNG BÁO',
         content: 'Lỗi không xác định'
     },
     expire: {
         style : 'alert alert-primary',
-        title : 'Expired',
+        title : 'THÔNG BÁO',
         content : "Hết phiên đăng nhập"
     }
 }
@@ -102,6 +110,13 @@ export function formatCurrency(money: number): string{
     var regex = /\B(?=(\d{3})+(?!\d))/g;
     var ret = s.replace(regex, ".");
     return ret.toString()+" đ";
+}
+export function GetUsername() : string {
+    if(localStorage.getItem("Username")){
+        return localStorage.getItem("Username");
+    }else{
+        return "NoName"
+    }
 }
 export function GetAuthorization() : string{
     if(localStorage.getItem("Authorization")){

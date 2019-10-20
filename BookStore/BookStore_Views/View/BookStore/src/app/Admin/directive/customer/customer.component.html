@@ -1,1 +1,55 @@
-<p>customer works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 mt-15 ">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-primary">KHÁCH HÀNG</h5>
+          <hr>
+          <div class="row">
+              <div class="col-sm-2">
+                  <select name="" id="" class="form-control">
+                    <option>10 / page</option>
+                    <option>20 / page</option>
+                    <option>30 / page</option>
+                  </select>
+                </div>
+          </div>
+          <hr>
+          <div class="table-responsive">
+            <table class="table">
+              <tr class="text-light bg-primary">
+                <th>#</th>
+                <th>Tên</th>
+                <th>Phone</th>
+                <th>Mail</th>
+                <th>Địa chỉ</th>
+                <!-- <th>Đã bán</th>
+                <th>Đã hủy</th> -->
+                <th>Active</th>
+                <th>Action</th>
+              </tr>
+              <tr *ngFor="let customer of customers">
+                <td><input type="checkbox"></td>
+                <td>{{ customer.customer.customerName }}</td>
+                <td>{{ customer.customer.customerPhone }}</td>
+                <td>{{ customer.customer.customerMail }}</td>
+                <td>{{ customer.customer.customerAddress }} - {{ customer.town.townName}} - {{ customer.city.cityName }}</td>
+                <!-- <td>{{ customer.customer.totalOrderComplete }}</td>
+                <td>{{ customer.customer.totalOrderCancel }}</td> -->
+                <td><span
+                  [ngClass]="customer.customer.isActive == true? 'badge badge-success' : 'badge badge-danger'">{{ getIsActive(customer.customer.isActive) }}</span></td>
+                <td><button [ngClass]="customer.customer.isActive ? 'btn btn-warning btn-sm' : 'btn btn-success btn-sm'" (click)="activeCustomer(customer.customer.id)" ><i [ngClass]="customer.customer.isActive ? 'fa fa-lock' : 'fa fa-unlock'"></i></button> &nbsp;<button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.customer.id)"><i class="fa fa-times"></i></button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<div class="{{alert.style}} alert-dismissible notice" *ngIf="alert">
+  <button type="button" class="close" data-dismiss="alert" (click)="alert = null">&times;</button>
+  <strong>{{ alert.title }}!</strong> {{ alert.content }}.
+</div>
+

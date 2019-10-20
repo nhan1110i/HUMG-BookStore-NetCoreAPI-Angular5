@@ -19,7 +19,7 @@ namespace BookStore_Controller.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            string path = "/" + context.Request.Path.ToString().Split("/")[1] + "/" + context.Request.Path.ToString().Split("/")[2];
+            string path = context.Request.Path.ToString().Split("/")[2];
             if (Array.IndexOf(ControllerPath.Path(), path) != -1)
             {
                 if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))

@@ -56,6 +56,7 @@ namespace BookStore_Controller.Controllers
         [HttpPut]
         public async Task<JsonResult> UpdateAdmin([FromBody] Admin AdminUpdate)
         {
+            AdminUpdate.Password = Cryptography.Create(AdminUpdate.Password);
             int rs = await admin.UpdateAdmin(AdminUpdate);
             if(rs == 0)
             {

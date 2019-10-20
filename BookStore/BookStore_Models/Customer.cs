@@ -21,6 +21,12 @@ namespace BookStore_Models
         public int TotalOrderComplete { get; set; }
         public int TotalOrderCancel { get; set; }
         public bool IsActive { get; set; }
+        public Customer()
+        {
+            this.Id = this.CityId = this.TotalOrder = this.TotalOrderComplete = this.TotalOrderCancel = this.TownId = 0;
+            this.CustomerName = this.CustomerPhone = this.CustomerMail = this.CustomerAddress = "";
+            this.IsActive = false;
+        }
         public async Task<int> InsertCustomer(Customer customer)
         {
 
@@ -60,7 +66,7 @@ namespace BookStore_Models
             using (DataConnection.Connection())
             {
                 var rs = 0;
-                string Query = "UPDATE Customer SET (IsActive = @Active) WHERE Id = @Id";
+                string Query = "UPDATE Customer SET IsActive = @Active WHERE Id = @Id";
                 var param = new DynamicParameters();
                 if((await GetCustomerById(Id)).IsActive)
                 {
@@ -74,6 +80,30 @@ namespace BookStore_Models
                 CommandType comm = CommandType.Text;
                 rs = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, comm);
                 return rs;
+            }
+        }
+        public async Task<int> DeleteCustomer(int Id)
+        {
+            using (DataConnection.Connection())
+            {
+                var deleteId = 0;
+                string Query = "DELETE Customer WHERE Id = @Id";
+                var param = new DynamicParameters();
+                param.Add("@Id", Id);
+                CommandType c = CommandType.Text;
+                deleteId = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, c);
+                return deleteId;
+            }
+        }
+        public async Task<List<Customer>> GetCustomers()
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT *  FROM Customer";
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().QueryAsync<Customer>(Query, null, null, null, c);
+                return rs.ToList();
+
             }
         }
 

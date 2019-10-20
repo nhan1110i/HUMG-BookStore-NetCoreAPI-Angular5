@@ -62,7 +62,6 @@ export class CategoryComponent implements OnInit {
   }
   // update category
   updateCategory(category: any) {
-
     this.categoryService.updateCategory(category).subscribe(
       rs => {
         console.log(rs);
@@ -122,7 +121,9 @@ export class CategoryComponent implements OnInit {
               id: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].id,
               parentName: this.parentCategories[this.parentCategories.findIndex(obj => obj.id == category.value.parentId)].parentName
             }
-          });
+          })
+          console.log(rs);
+          
 
           break;
         }

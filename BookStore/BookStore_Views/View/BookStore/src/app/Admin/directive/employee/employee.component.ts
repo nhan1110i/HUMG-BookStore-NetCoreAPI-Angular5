@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee/employee.service';
-
+import { GetUsername } from '../../config/config';
+import { alert } from '../../config/config';
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
@@ -24,10 +25,14 @@ export class EmployeeComponent implements OnInit {
     username: ""
   }
   arrRoleAdd: string[] = [];
+  showall: boolean = false;
+  alert: any;
   getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       rs => {
+        console.log(rs);
         rs.splice(rs.findIndex(admin => admin.username == "admin"), 1);
+     //   rs.splice(rs.findIndex(admin => admin.username == GetUsername()), 1);
         this.employees = rs;
         this.employees.forEach(employee => {
           employee.arrRole = employee.role.split('.')
@@ -48,9 +53,27 @@ export class EmployeeComponent implements OnInit {
     console.log(this.employeeAdd);
     this.employeeService.addEmployee(this.employeeAdd).subscribe(
       rs => {
-        let employeeTemp = this.employeeAdd;
-        employeeTemp.arrRole = this.arrRoleAdd;
-        this.employees.push(employeeTemp)
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            let employeeTemp = this.employeeAdd;
+            employeeTemp.arrRole = this.arrRoleAdd;
+            this.employees.push(employeeTemp)
+            break;
+          }
+        }
+
       }, err => {
         console.log(err)
       }
@@ -59,23 +82,44 @@ export class EmployeeComponent implements OnInit {
   updateEmployee(id: number) {
     // console.log(this.employees)
     let roleTemp: string = "";
-    let temp = this.employees[this.employees.findIndex(admin => admin.id == id)];
-    temp.arrRole.forEach(element => {
-      roleTemp = roleTemp + element + ".";
-    });
-    this.empoyeesUpdate.id = id;
-    this.empoyeesUpdate.name = temp.name;
-    this.empoyeesUpdate.password = temp.password;
-    this.empoyeesUpdate.role = roleTemp;
-    this.empoyeesUpdate.username = temp.username;
-    console.log(this.empoyeesUpdate)
+            let temp : any= this.employees[this.employees.findIndex(admin => admin.id == id)];
+            temp.arrRole.forEach(element => {
+              roleTemp = roleTemp + element + ".";
+            });
+            this.empoyeesUpdate.id = id;
+            this.empoyeesUpdate.name = temp.name;
+            this.empoyeesUpdate.password = temp.password;
+            this.empoyeesUpdate.role = roleTemp;
+            this.empoyeesUpdate.username = temp.username;
+            console.log(this.empoyeesUpdate)
+            
     this.employeeService.updateEmployee(this.empoyeesUpdate).subscribe(
-      rs=>{
-
-      },err=>{
+      rs => {
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            this.alert = alert.update;
+            break;
+          }
+        }
+      }, err => {
 
       }
     )
+  }
+  deleteEmployee(){
+    console.log(this.employees);
   }
   checkRole(role: string, arr: any): boolean {
     if (arr.findIndex(roleEm => roleEm == role) != -1) {

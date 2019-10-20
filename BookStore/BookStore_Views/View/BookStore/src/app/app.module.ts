@@ -18,6 +18,7 @@ import { EmployeeComponent } from './Admin/directive/employee/employee.component
 import { DashboardComponent } from './Admin/directive/dashboard/dashboard.component';
 import { AuthorPublishingComponent } from './Admin/directive/author-publishing/author-publishing.component';
 import { OrderComponent } from './Admin/directive/order/order.component';
+import { OrderDetailComponent } from './Admin/directive/order-detail/order-detail/order-detail.component';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { OrderComponent } from './Admin/directive/order/order.component';
     EmployeeComponent,
     DashboardComponent,
     AuthorPublishingComponent,
-    
+    OrderDetailComponent,
   ],
   imports: [
     CKEditorModule,
