@@ -12,6 +12,9 @@ import { EmployeeComponent } from './Admin/directive/employee/employee.component
 import { OrderComponent } from './Admin/directive/order/order.component';
 import { AuthorPublishingComponent } from './Admin/directive/author-publishing/author-publishing.component';
 import { OrderDetailComponent } from './Admin/directive/order-detail/order-detail/order-detail.component';
+import { BookstoreComponent } from './BookStore/bookstore.component';
+import { HomeComponent } from './BookStore/page/home/home.component';
+import { BookStoreCategoryComponent } from './BookStore/page/book-store-category/book-store-category.component';
 
 
 const routes: Routes = [
@@ -26,10 +29,17 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "order", component: OrderComponent },
-      {path: "orderDetail/:id", component: OrderDetailComponent},
-      {path: "author-publishing", component: AuthorPublishingComponent}
+      { path: "orderDetail/:id", component: OrderDetailComponent },
+      { path: "author-publishing", component: AuthorPublishingComponent }
     ]
   },
+  {
+    path: "BookStore", component: BookstoreComponent, children: [
+      { path: "Home", component: HomeComponent },
+      {path : "danh-muc/:id", component : BookStoreCategoryComponent}
+
+    ]
+  }
 ]
 @NgModule({
   declarations: [],

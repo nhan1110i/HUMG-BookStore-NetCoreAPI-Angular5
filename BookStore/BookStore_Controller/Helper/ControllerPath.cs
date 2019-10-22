@@ -6,7 +6,7 @@ namespace BookStore_Controller.Helper
     {
         public static string[] Path()
         {
-            string[] rs = { "AddCategory", "DeleteCategory", "UpdateCategory","InsertProduct", "DeleteProductById", "DeleteProducts", "UpdateProduct","UpdateAdmin","DeleteAdmin","CreateAdmin","ActiveCustomer","DeleteCustomer"};
+            string[] rs = { "AddCategory", "DeleteCategory", "UpdateCategory","InsertProduct", "DeleteProductById", "DeleteProducts", "UpdateProduct","UpdateAdmin","DeleteAdmin","CreateAdmin","ActiveCustomer","DeleteCustomer","CompleteOrder","DeclineOrder","DeleteOrder"};
             return rs;
         }
 

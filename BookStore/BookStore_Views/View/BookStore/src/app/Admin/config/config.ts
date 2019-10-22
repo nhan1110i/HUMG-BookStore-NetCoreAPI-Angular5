@@ -5,7 +5,8 @@ export var url = {
         parentCategories : "ParentCategory/GetParentCategories",
         addCategory : "Category/AddCategory",
         deleteCategory: "Category/DeleteCategory",
-        updateCategory : "Category/UpdateCategory"
+        updateCategory : "Category/UpdateCategory",
+        categoriesActive: "Category/GetCategoriesActive"
     },
     admin : {
         login: "Admin/CheckLogin",
@@ -16,7 +17,9 @@ export var url = {
         delete : "Product/DeleteProductById",
         deleteProducts: "Product/DeleteProducts",
         getProductById: "Product/GetProductById/",
-        updateProduct : "Product/UpdateProduct"
+        updateProduct : "Product/UpdateProduct",
+        productHome : "Product/GetNumberProductsByCategory",
+        productByCategoryId: "Product/GetProductByCategoryId"
     },
     author: {
         authors: "Author/GetAuthors"
@@ -28,6 +31,7 @@ export var url = {
         employees : "Admin/GetAdmins",
         insert : "Admin/CreateAdmin",
         update: "Admin/UpdateAdmin",
+        delete: "Admin/DeleteAdmin",
     },
     customer : {
         customers: "Customer/GetCustomers",
@@ -35,7 +39,10 @@ export var url = {
         active : "Customer/ActiveCustomer"
     },
     order : {
-        orders: "Order/GetOrders"
+        orders: "Order/GetOrders",
+        complete: "Order/CompleteOrder",
+        decline: "Order/DeclineOrder",
+        delete: "Order/DeleteOrder",
     }
 }
 export var config = {

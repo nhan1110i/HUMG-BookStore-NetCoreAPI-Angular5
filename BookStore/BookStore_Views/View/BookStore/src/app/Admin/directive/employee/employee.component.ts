@@ -32,7 +32,7 @@ export class EmployeeComponent implements OnInit {
       rs => {
         console.log(rs);
         rs.splice(rs.findIndex(admin => admin.username == "admin"), 1);
-     //   rs.splice(rs.findIndex(admin => admin.username == GetUsername()), 1);
+        //   rs.splice(rs.findIndex(admin => admin.username == GetUsername()), 1);
         this.employees = rs;
         this.employees.forEach(employee => {
           employee.arrRole = employee.role.split('.')
@@ -82,17 +82,17 @@ export class EmployeeComponent implements OnInit {
   updateEmployee(id: number) {
     // console.log(this.employees)
     let roleTemp: string = "";
-            let temp : any= this.employees[this.employees.findIndex(admin => admin.id == id)];
-            temp.arrRole.forEach(element => {
-              roleTemp = roleTemp + element + ".";
-            });
-            this.empoyeesUpdate.id = id;
-            this.empoyeesUpdate.name = temp.name;
-            this.empoyeesUpdate.password = temp.password;
-            this.empoyeesUpdate.role = roleTemp;
-            this.empoyeesUpdate.username = temp.username;
-            console.log(this.empoyeesUpdate)
-            
+    let temp: any = this.employees[this.employees.findIndex(admin => admin.id == id)];
+    temp.arrRole.forEach(element => {
+      roleTemp = roleTemp + element + ".";
+    });
+    this.empoyeesUpdate.id = id;
+    this.empoyeesUpdate.name = temp.name;
+    this.empoyeesUpdate.password = temp.password;
+    this.empoyeesUpdate.role = roleTemp;
+    this.empoyeesUpdate.username = temp.username;
+    console.log(this.empoyeesUpdate)
+
     this.employeeService.updateEmployee(this.empoyeesUpdate).subscribe(
       rs => {
         switch (rs.Error) {
@@ -118,8 +118,32 @@ export class EmployeeComponent implements OnInit {
       }
     )
   }
-  deleteEmployee(){
-    console.log(this.employees);
+  deleteEmployee(id: number) {
+    this.employeeService.deleteAdmin(id).subscribe(
+      rs => {
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            let index = this.employees.findIndex(emp => emp.id == id);
+            this.employees.splice(index, 1);
+            this.alert = alert.delete;
+            break;
+          }
+        }
+      }
+    )
+
   }
   checkRole(role: string, arr: any): boolean {
     if (arr.findIndex(roleEm => roleEm == role) != -1) {

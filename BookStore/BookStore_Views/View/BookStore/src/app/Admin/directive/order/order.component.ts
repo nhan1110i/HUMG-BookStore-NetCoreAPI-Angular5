@@ -9,37 +9,128 @@ import { alert } from '../../config/config'
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-
+  alert: any;
   orders: any;
+  ordersTemp: any;
+  filter: number = 0;
   getOrders() {
     this.orderService.getOrder().subscribe(
       rs => {
         this.orders = rs;
+        this.ordersTemp = rs;
       }, err => {
         console.log(err)
       }
     )
   }
-  completeOrder(id : number){
-    let index : number = this.orders.findIndex(order => order.order.id == id);
-    this.orders[index].order.statusId = 2;
+  filterOrder() {
+
+    if (this.filter == 0) {
+      this.orders = this.ordersTemp;
+    } else {
+      this.orders = this.ordersTemp;
+      this.orders = this.orders.filter(order => order.order.statusId == this.filter)
+    }
   }
-  declineOrder(id : number){
-    let index : number = this.orders.findIndex(order => order.order.id == id);
-    this.orders[index].order.statusId = 3;
+  completeOrder(id: number) {
+    this.orderService.completeOrder(id).subscribe(
+      rs => {
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            let index: number = this.orders.findIndex(order => order.order.id == id);
+            this.orders[index].order.statusId = 2;
+            this.alert = alert.update;
+            console.log(rs)
+            break;
+          }
+        }
+      }, err => {
+        console.log(err);
+      }
+    )
+
   }
-  deleteOrder(id : number){
-    let index : number = this.orders.findIndex(order => order.order.id == id);
-    this.orders.splice(index,1);
+  declineOrder(id: number) {
+    console.log(id);
+    this.orderService.declineOrder(id).subscribe(
+      rs => {
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            let index: number = this.orders.findIndex(order => order.order.id == id);
+            this.orders[index].order.statusId = 3;
+            this.alert = alert.update;
+            console.log(rs)
+            break;
+          }
+        }
+      }, err => {
+        console.log(err)
+      }
+    )
+
+  }
+  deleteOrder(id: number) {
+    this.orderService.deleteOrder(id).subscribe(
+      rs => {
+        switch (rs.Error) {
+          case 1: {
+            this.alert = alert.error;
+            break;
+          }
+          case 2: {
+            this.alert = alert.expire;
+            break;
+          }
+          case 3: {
+            this.alert = alert.auth;
+            break;
+          }
+          default: {
+            let index: number = this.orders.findIndex(order => order.order.id == id);
+            this.orders.splice(index, 1);
+            this.alert = alert.delete;
+            console.log(rs)
+            break;
+          }
+        }
+      }, err => {
+        console.log(err)
+      }
+    )
+
   }
   formatMoney(money: number): string {
     return formatCurrency(money)
 
   }
-  getPayment(payment : number) : string{
+  getPayment(payment: number): string {
     switch (payment) {
       case 1:
-        return  "Online";
+        return "Online";
         break;
       case 2:
         return "Ship COD";
@@ -52,7 +143,7 @@ export class OrderComponent implements OnInit {
   getStatus(status: number): string {
     switch (status) {
       case 1:
-        return  "Chưa xử lý";
+        return "Chưa xử lý";
         break;
       case 2:
         return "Đã xử lý";
@@ -65,10 +156,10 @@ export class OrderComponent implements OnInit {
         break;
     }
   }
-  getStatusClass(status : number) : string{
+  getStatusClass(status: number): string {
     switch (status) {
       case 1:
-        return  "badge badge-info";
+        return "badge badge-info";
         break;
       case 2:
         return "badge badge-primary";

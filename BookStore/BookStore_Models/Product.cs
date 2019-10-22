@@ -72,6 +72,7 @@ namespace BookStore_Models
                 return rs.ToList();
             }
         }
+        
         public async Task<Product> GetProductById(int Id)
         {
             using (DataConnection.Connection())
@@ -176,6 +177,16 @@ namespace BookStore_Models
                 var rs= await DataConnection.Connection().QueryAsync<Product>(Query, param, null, null, comm);
                 return rs.ToList();
             }
+        }
+        public async Task<List<Product>> GetNumberProductsByCategory(int Id)
+        {
+            string Query = "SELECT * FROM dbo.Product WHERE CategoryId = @Id ORDER BY CreateAt DESC";
+            var param = new DynamicParameters();
+            //param.Add("@nop", nop);
+            param.Add("@Id", Id);
+            CommandType c = CommandType.Text;
+            var rs = await DataConnection.Connection().QueryAsync<Product>(Query, param, null, null, c);
+            return rs.ToList();
         }
         public async Task<int> DeleteProducts(int [] Id)
         {

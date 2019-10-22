@@ -65,10 +65,23 @@ namespace BookStore_Controller.Controllers
             }
         }
         [HttpPut]
-        public async Task<JsonResult> UpdateOrder(int Id, int status)
+        public async Task<JsonResult> CompleteOrder(int Id)
         {
-            var rs = await order.UpdateOrder(Id, status);
+            var rs = await order.UpdateOrder(Id, 2);
             if(rs == 0)
+            {
+                return new JsonResult(new Notice(1, "Cant Update"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(0, "Updated"));
+            }
+        }
+        [HttpPut]
+        public async Task<JsonResult> DeclineOrder( [FromBody] int Id)
+        {
+            var rs = await order.UpdateOrder(Id, 3);
+            if (rs == 0)
             {
                 return new JsonResult(new Notice(1, "Cant Update"));
             }

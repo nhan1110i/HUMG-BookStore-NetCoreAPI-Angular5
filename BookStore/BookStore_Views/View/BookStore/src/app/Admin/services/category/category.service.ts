@@ -45,6 +45,14 @@ export class CategoryService {
       tap(rs =>{console.log(rs)}),catchError(error =>of(console.log(error)))
     )
   }
+
+  // BookStore 
+
+  getCategorisActive(): Observable<any>{
+    return this.http.get<any>(url.host + url.category.categoriesActive,httpOptions).pipe(
+      tap(rs=>{}), catchError(error =>of([]))
+    );
+  }
   constructor(                  
     private http: HttpClient,
   ) { }

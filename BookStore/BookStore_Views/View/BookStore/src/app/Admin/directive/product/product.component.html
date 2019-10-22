@@ -76,7 +76,7 @@
                 <th>Năm</th>
                 <th>Action</th>
               </tr>
-              <tr *ngFor="let product of products" [class.bg-light]="getSelected(+product.product.id)">
+              <tr *ngFor="let product of products | paginate: { itemsPerPage: 4, currentPage: p }" [class.bg-light]="getSelected(+product.product.id)">
                 <td><input type="checkbox" (click)="selectProduct(+product.product.id)" [checked] = "getSelected(+product.product.id)" ></td>
                 <td>{{ product.product.productCode }}</td>
                 <td>{{ product.product.productName }}</td>
@@ -92,6 +92,7 @@
                     (click)="deleteProduct(+product.product.id)"></a></td>
               </tr>
             </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
           </div>
         </div>
       </div>

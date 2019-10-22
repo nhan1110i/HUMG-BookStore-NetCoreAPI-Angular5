@@ -28,6 +28,12 @@ namespace BookStore_Controller.Controllers
             }
             return new JsonResult(ListCategory);
         }
+        [HttpGet]
+        public async Task<JsonResult> GetCategoriesActive()
+        {
+            var Categories = await category.GetCategoriesActive();
+            return new JsonResult(Categories);
+        }
         [HttpPost]
         public async Task<JsonResult> AddCategory([FromBody] Category category)
         {

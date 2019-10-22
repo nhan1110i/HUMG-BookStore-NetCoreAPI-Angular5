@@ -68,6 +68,17 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(new Notice(0, "Insert Complete"));
             }
         }
+        [HttpPost]
+        public async Task<JsonResult> GetNumberProductsByCategory([FromBody] Category [] categories )
+        {
+            List<ProductInCategory> products = new List<ProductInCategory>();
+            foreach(Category cate in categories)
+            {
+                var productInCate = await product.GetNumberProductsByCategory(cate.Id);
+                products.Add(new ProductInCategory(productInCate, cate));
+            }
+            return new JsonResult(products);
+        }
         [HttpDelete("{Id}")]
         public async Task<JsonResult> DeleteProductById(int Id)
         {

@@ -10,7 +10,7 @@ import { CategoryComponent } from './Admin/directive/category/category.component
 import { ProductComponent } from './Admin/directive/product/product.component';
 import { LoginComponent } from './Admin/login/login.component';
 import { CKEditorModule } from 'ng2-ckeditor'
-
+import {NgxPaginationModule} from 'ngx-pagination'
 import { AddNewProductComponent } from './Admin/directive/add-new-product/add-new-product.component';
 import { UpdateProductComponent } from './Admin/directive/update-product/update-product.component';
 import { CustomerComponent } from './Admin/directive/customer/customer.component';
@@ -19,6 +19,10 @@ import { DashboardComponent } from './Admin/directive/dashboard/dashboard.compon
 import { AuthorPublishingComponent } from './Admin/directive/author-publishing/author-publishing.component';
 import { OrderComponent } from './Admin/directive/order/order.component';
 import { OrderDetailComponent } from './Admin/directive/order-detail/order-detail/order-detail.component';
+import { HomeComponent } from './BookStore/page/home/home.component';
+import { BookstoreComponent } from './BookStore/bookstore.component';
+import { BookStoreCategoryComponent } from './BookStore/page/book-store-category/book-store-category.component';
+
 
 
 @NgModule({
@@ -37,13 +41,19 @@ import { OrderDetailComponent } from './Admin/directive/order-detail/order-detai
     DashboardComponent,
     AuthorPublishingComponent,
     OrderDetailComponent,
+    HomeComponent,
+    BookstoreComponent,
+    BookStoreCategoryComponent,
+    
+
   ],
   imports: [
     CKEditorModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -21,7 +21,7 @@ namespace BookStore_Models
                 var param = new DynamicParameters();
                 param.Add("@Id", Id);
                 var rs = await DataConnection.Connection().QueryAsync<ParentCategory>(Query, param, null, null, command);
-                return rs.Single();
+                return rs.FirstOrDefault();
             }
         }
         public async Task<List<ParentCategory>> GetParentCategories()

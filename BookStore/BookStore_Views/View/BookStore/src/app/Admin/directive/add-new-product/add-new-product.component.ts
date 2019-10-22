@@ -66,7 +66,8 @@ export class AddNewProductComponent implements OnInit {
     this.productService.upLoadImage(fd).subscribe(
       rs => {
         console.log(rs);
-        this.product.productImageList = rs
+        this.product.productImageList = rs;
+        console.log(this.product);
         this.productService.insertProduct(this.product).subscribe(
           irs => {
             switch (irs.Error) {

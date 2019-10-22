@@ -124,8 +124,8 @@
                 <div class="form-group">
                   <strong>Đơn hàng</strong>
                   <div class="form-group">
-                    <input type="checkbox" class="cb-lg" [checked]="checkRole('AcceptOrder',employee.arrRole)"
-                    (click)="addRole('AcceptOrder',employee.arrRole)"> Duyệt đơn hàng <br>
+                    <input type="checkbox" class="cb-lg" [checked]="checkRole('CompleteOrder',employee.arrRole)"
+                    (click)="addRole('CompleteOrder',employee.arrRole)"> Duyệt đơn hàng <br>
                     <input type="checkbox" class="cb-lg" [checked]="checkRole('DeclineOrder',employee.arrRole)"
                     (click)="addRole('DeclineOrder',employee.arrRole)"> Từ chối đơn hàng<br>
                     <input type="checkbox" class="cb-lg" [checked]="checkRole('DeleteOrder',employee.arrRole)"
@@ -184,7 +184,7 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <button class="btn btn-primary" (click)="updateEmployee(employee.id)">Cập nhật nhân viên</button> &nbsp;
-                  <button class="btn btn-danger" (click)="deleteEmployee()">Xóa nhân viên </button>
+                  <button class="btn btn-danger" (click)="deleteEmployee(employee.id)">Xóa nhân viên </button>
                 </div>
               </div>
             </div>

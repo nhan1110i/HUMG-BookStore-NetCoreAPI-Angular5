@@ -24,6 +24,26 @@ export class OrderService {
       }), catchError(error => of(console.log(error)))
     )
   }
+  completeOrder(id : number): Observable<any>{
+    return this.http.put(url.host + url.order.complete,id,httpOptions).pipe(
+      tap(rs =>{
+        console.log(rs);
+      }),catchError(error => of(console.log(error)))
+    )
+  }
+  declineOrder(id : number): Observable<any>{
+    return this.http.put(url.host + url.order.decline,id,httpOptions).pipe(
+      tap(rs =>{
+        console.log(rs);
+      }),catchError(error => of(console.log(error)))
+    )
+  }
+  deleteOrder(id : number): Observable<any>{
+    return this.http.delete(url.host + url.order.delete + "/" + id.toString(),httpOptions).pipe(
+      tap(rs => {console.log(rs)}),catchError(error => of(console.log(error)))
+    )
+  }
+  
 
   constructor(
     private http: HttpClient

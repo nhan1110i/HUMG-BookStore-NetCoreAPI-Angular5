@@ -41,7 +41,7 @@ namespace BookStore_Controller.Controllers
             }
             else
             {
-                return new JsonResult(new Notice(0, "Success"));
+                return new JsonResult(new Notice(0, rs.ToString() + " Success"));
             }
         }
 

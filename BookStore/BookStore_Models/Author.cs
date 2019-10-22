@@ -67,7 +67,7 @@ namespace BookStore_Models
                 param.Add("@AuthorDescription", author.AuthorDescription);
                // param.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
                 CommandType command = CommandType.Text;
-                IdInsert = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);                
+                IdInsert = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, command);
                 return IdInsert;
             }
         }

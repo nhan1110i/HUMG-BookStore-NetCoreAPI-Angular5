@@ -27,7 +27,7 @@ namespace BookStore_Controller.Helper
                     new Claim("AdminRole", admin.Role)
                 }
                 ); ;
-            return new Token(0, (new JwtSecurityTokenHandler().WriteToken(token)).ToString(), DateTime.Now, DateTime.Now, DateTime.Now.AddMinutes(10));
+            return new Token(0, (new JwtSecurityTokenHandler().WriteToken(token)).ToString(), DateTime.Now, DateTime.Now, DateTime.Now.AddMinutes(30));
         }
         public static string[] GetRole(string Token)
         {

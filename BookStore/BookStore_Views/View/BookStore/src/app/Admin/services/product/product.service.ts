@@ -58,6 +58,19 @@ export class ProductService {
     )
   }
 
+  // Bookstore
+
+  getProductsInCategory(categries : any[]):Observable<any>{
+    return this.http.post<any>(url.host + url.product.productHome,categries,httpOptions).pipe(
+      tap(rs =>{}),catchError(error => of([]))
+    )
+  }
+  getProductsByCategoryId(id : number): Observable<any>{
+    return this.http.get(url.host + url.product.productByCategoryId + "/" + id.toString(),httpOptions).pipe(
+      tap(rs =>{}),catchError(error => of([]))
+    )
+  }
+
   constructor(
     private http: HttpClient
   ) { }

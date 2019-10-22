@@ -32,5 +32,10 @@ export class EmployeeService {
       tap(rs =>{}),catchError(error => of())
     )
   }
+  deleteAdmin(id : number) : Observable<any>{
+    return this.http.delete(url.host + url.employee.delete + "/" + id.toString(),httpOptions).pipe(
+      tap(rs => {}),catchError(error => of())
+    )
+  }
   constructor(private http: HttpClient,) { }
 }

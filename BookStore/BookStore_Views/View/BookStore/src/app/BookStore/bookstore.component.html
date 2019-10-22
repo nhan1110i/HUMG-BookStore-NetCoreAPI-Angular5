@@ -1,0 +1,128 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
+  <div class="container">
+    <a class="navbar-brand">HUMG BookStore</a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
+      aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="responsive-navbar">
+      <ul class="navbar-nav ml-auto navbar-nav-list">
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="shop_dropdown" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Shop</a>
+          <div class="dropdown-menu" aria-labelledby="shop_dropdown">
+            <a class="dropdown-item" href="product-single.html">Single Product</a>
+            <a class="dropdown-item" href="cart.html">Cart</a>
+            <a class="dropdown-item" href="checkout.html">Checkout</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span><i
+              class="icon ion-ios-cart"></i>&nbsp;[0]</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="shop__banner ff" style="background-image: url('http://getwallpapers.com/wallpaper/full/d/d/6/165874.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1><span class="badge badge-info">BOOKSTORE HOME</span></h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="shop__container ff">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 col-md-12">
+              <ul class="product-category">
+                  <li><a href="#" class="active">All</a></li>
+                  <li *ngFor="let category of categories"><a href="/BookStore/danh-muc/{{ category.id }}">{{ category.categoryName }}</a></li>
+              </ul>
+          </div>
+      </div>
+      <router-outlet></router-outlet>  
+  </div>
+</div>
+
+
+
+<button class="shop__to-top"><i class="ion-ios-arrow-up"></i></button>
+
+
+<div class="shop__subscribe ff">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <h4 class="mb-0">Theo dõi HUMG-BookStore</h4>
+        <p class="mb-0">Nhập Email để nhận những thông tin mới</p>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <form>
+          <div class="form-group d-flex mb-0">
+            <input type="email" placeholder="Enter your email address" class="form-control">
+            <button type="submit" class="submit-btn">Subcribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="shop__footer ff">
+  <div class="container">
+    <div class="row" style="margin: 2rem 0;">
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <p class="fw-700 fs-18">HUMG BookStore</p>
+        <p>Thích ăn thịt, thích máy tính và thích luôn cả ngủ ngày.</p>
+        <ul class="social-link">
+          <li><a href="#"><i class="icon ion-logo-facebook"></i></a></li>
+          <li><a href="#"><i class="icon ion-logo-twitter"></i></a></li>
+          <li><a href="#"><i class="icon ion-logo-instagram"></i></a></li>
+        </ul>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <p class="fw-700 fs-18">Menu</p>
+        <ul>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Về chúng tôi</a></li>
+          <li><a href="#">Nhân111Oi</a></li>
+          <li><a href="#">Liên lạc</a></li>
+        </ul>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <p class="fw-700 fs-18">Help</p>
+        <ul>
+          <li><a href="#">Shipping information</a></li>
+          <li><a href="#">Returns & Exchange</a></li>
+          <li><a href="#">Terms & Condition</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <p class="fw-700 fs-18">Have a question ?</p>
+        <ul>
+          <li>
+            <span><i class="icon ion-ios-pin"></i></span>
+            <span>7 phố Viên. phường Đức Thắng, Nam Từ Liêm, Hà Nôi</span>
+          </li>
+          <li>
+            <span><i class="icon ion-ios-call"></i></span>
+            <span>+84 775 331 777</span>
+          </li>
+          <li>
+            <span><i class="icon ion-ios-mail"></i></span>
+            <span>ptnhan109@gmail.com</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <p class="text-center">Copyleft ©2019 HUMG BookStore</p>
+      </div>
+    </div>
+  </div>
+</div>
