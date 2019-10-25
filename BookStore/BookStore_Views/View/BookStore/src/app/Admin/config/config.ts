@@ -21,6 +21,9 @@ export var url = {
         productHome : "Product/GetNumberProductsByCategory",
         productByCategoryId: "Product/GetProductByCategoryId"
     },
+    statistical : {
+        statistical : "Statistical/GetStatistical"
+    },
     author: {
         authors: "Author/GetAuthors"
     },
@@ -36,13 +39,20 @@ export var url = {
     customer : {
         customers: "Customer/GetCustomers",
         delete: "Customer/DeleteCustomer",
-        active : "Customer/ActiveCustomer"
+        active : "Customer/ActiveCustomer",
+        insert : "Customer/InsertAccountInCustomer"
     },
     order : {
         orders: "Order/GetOrders",
         complete: "Order/CompleteOrder",
         decline: "Order/DeclineOrder",
         delete: "Order/DeleteOrder",
+    },
+    city :{
+        cities : "City/GetCities"
+    },
+    town :{
+        townsByCityId : "Town/GetTownByCityId"
     }
 }
 export var config = {

@@ -22,6 +22,11 @@ import { OrderDetailComponent } from './Admin/directive/order-detail/order-detai
 import { HomeComponent } from './BookStore/page/home/home.component';
 import { BookstoreComponent } from './BookStore/bookstore.component';
 import { BookStoreCategoryComponent } from './BookStore/page/book-store-category/book-store-category.component';
+import { SingleProductComponent } from './BookStore/page/single-product/single-product.component';
+import { CartComponent } from './BookStore/page/cart/cart.component';
+import { ClientLoginComponent } from './BookStore/page/client-login/client-login.component';
+import { SignUpComponent } from './BookStore/page/sign-up/sign-up.component';
+import { CheckoutComponent } from './BookStore/page/checkout/checkout.component';
 
 
 
@@ -44,6 +49,11 @@ import { BookStoreCategoryComponent } from './BookStore/page/book-store-category
     HomeComponent,
     BookstoreComponent,
     BookStoreCategoryComponent,
+    SingleProductComponent,
+    CartComponent,
+    ClientLoginComponent,
+    SignUpComponent,
+    CheckoutComponent,
     
 
   ],

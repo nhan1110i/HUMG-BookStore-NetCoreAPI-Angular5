@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <div class="card text-drank border-primary">
         <div class="card-body">
-            <h5 class="text-primary">FILTER PRODUCT</h5>
+            <h5 class="text-primary">LỌC SẢN PHẨM</h5>
             <hr>
             <div class="form-row">
               <div class="form-group col-md-3">
@@ -12,30 +12,36 @@
               </div>
               <div class="form-group col-md-3">
                 <label for="">Danh mục</label>
-                <select name="" id="" class="form-control">
-                  <option value="">Truyện ngắn </option>
+                <select name="" id="" class="form-control" [(ngModel)]="filter.category">
+                  <option value="0">Tất cả</option>
+                  <option *ngFor="let category of categories" value="{{ category.category.id }}">{{ category.category.categoryName }}</option>
                 </select>
               </div>
               <div class="form-group col-md-2">
                 <label for="">Giá bán</label>
-                <select name="" id="" class="form-control">
-                  <option value="">0 - 100.000 đ </option>
+                <select name="" id="" class="form-control" [(ngModel)]="filter.price">
+                  <option value="0">Tất cả</option>
+                  <option value="50000"> > 50.000 đ </option>
+                  <option value="100000"> > 100.000 đ </option>
+                  <option value="150000"> > 150.000 đ </option>
                 </select>
               </div>
               <div class="form-group col-md-2">
                 <label for="">Năm phát hành</label>
                 <select name="" id="" class="form-control">
-                  <option value="">2019</option>
+                  <option value="2019">2019</option>
                 </select>
               </div>
               <div class="form-group col-md-2">
                 <label for="">Trạng thái</label>
-                <select name="" id="" class="form-control">
-                  <option value="">Đang bán</option>
+                <select name="" id="" class="form-control" [(ngModel)]="filter.active">
+                  <option value="0">Tất cả</option>
+                  <option value="1">Đang bán</option>
+                  <option value="2">Chưa bán</option>
                 </select>
               </div>
               <div class="form-group col-md-12">
-                <button class="btn btn-info float-right"> <i class="fa fa-filter"></i> Lọc sản phẩm</button>
+                <button class="btn btn-info float-right" (click)="filterProducts()"> <i class="fa fa-filter"></i> Lọc sản phẩm</button>
               </div>
             </div>
         </div>
@@ -44,14 +50,14 @@
     <div class="col-sm-12 mt-15 ">
       <div class="card text-drank border-primary">
         <div class="card-body">
-          <h5 class="card-title text-primary">PRODUCTS</h5>
+          <h5 class="card-title text-primary">DANH SÁCH</h5>
           <hr>
           <div class="row">
               <div class="col-sm-2">
-                  <select name="" id="" class="form-control">
-                    <option>10 / page</option>
-                    <option>20 / page</option>
-                    <option>30 / page</option>
+                  <select name="" id="" class="form-control" [(ngModel)]="pageSize">
+                    <option value="5" [selected] = "pageSize == +5">5 / page</option>
+                    <option value="10" [selected] = "pageSize == +10">10 / page</option>
+                    <option value="15" [selected] = "pageSize == +15">15 / page</option>
                   </select>
                 </div>
                 <div class="col-sm-10">
@@ -76,7 +82,7 @@
                 <th>Năm</th>
                 <th>Action</th>
               </tr>
-              <tr *ngFor="let product of products | paginate: { itemsPerPage: 4, currentPage: p }" [class.bg-light]="getSelected(+product.product.id)">
+              <tr *ngFor="let product of products | paginate : { itemsPerPage : pageSize, currentPage: p }" [class.bg-light]="getSelected(+product.product.id)">
                 <td><input type="checkbox" (click)="selectProduct(+product.product.id)" [checked] = "getSelected(+product.product.id)" ></td>
                 <td>{{ product.product.productCode }}</td>
                 <td>{{ product.product.productName }}</td>

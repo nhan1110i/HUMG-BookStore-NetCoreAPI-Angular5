@@ -28,7 +28,15 @@ namespace BookStore_Models
                 param.Add("@Id", Id);
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<PublishingHouse>(Query, param, null, null, command);
-                return rs.Single();
+                DataConnection.Connection().Close();
+                if (rs.Count() != 0)
+                {
+                    return rs.FirstOrDefault();
+                }
+                else
+                {
+                    return new PublishingHouse();
+                }
             }
         }
         public async Task<List<PublishingHouse>> GetListPublishing()

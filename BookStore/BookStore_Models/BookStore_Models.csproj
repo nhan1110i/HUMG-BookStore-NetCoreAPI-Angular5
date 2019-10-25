@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="AccountInCustomer.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="Author.cs" />
     <Compile Include="Category.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="ProductInOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishingHouse.cs" />
+    <Compile Include="Statistical.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Town.cs" />
   </ItemGroup>

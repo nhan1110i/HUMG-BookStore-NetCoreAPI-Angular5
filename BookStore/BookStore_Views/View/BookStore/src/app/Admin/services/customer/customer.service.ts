@@ -5,6 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { url, GetAuthorization } from '../../config/config';
 import { error } from 'util';
+import { identifierModuleUrl } from '@angular/compiler';
 const httpOptions = {
 
   headers: new HttpHeaders({
@@ -32,6 +33,23 @@ export class CustomerService {
   activeCustomer(Id : any) : Observable <any>{
     return this.http.put(url.host + url.customer.active + "/" + Id.toString(),Id,httpOptions).pipe(
       tap(rs => {console.log(rs)}),catchError(error => of(console.log(error)))
+    )
+  }
+  getCities():Observable<any>{
+    return this.http.get<any>(url.host + url.city.cities,httpOptions).pipe(
+      tap(rs =>{
+        console.log(rs);
+      }), catchError(error => of(console.log(error)))
+    )
+  }
+  getTownsById(Id : number): Observable<any>{
+    return this.http.get<any>(url.host + url.town.townsByCityId + "/" + Id.toString(),httpOptions).pipe(
+      tap(rs =>{}),catchError(error => of())
+    )
+  }
+  insertAccountInCustomer(accountInCustomer : any) : Observable<any>{
+    return this.http.post<any>(url.host + url.customer.insert,accountInCustomer,httpOptions).pipe(
+      tap(rs => console.log(rs)),catchError(error => of(console.log(error)))
     )
   }
   constructor(

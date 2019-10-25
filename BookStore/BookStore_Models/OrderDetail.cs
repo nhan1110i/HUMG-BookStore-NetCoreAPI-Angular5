@@ -26,5 +26,22 @@ namespace BookStore_Models
                 return rs.ToList();
             }
         }
+        public async Task<int> InsertOrdeDetail(OrderDetail [] orderDetails)
+        {
+            using (DataConnection.Connection())
+            {
+                foreach(OrderDetail orderDetail in orderDetails)
+                {
+                    string Query = "INSERT INTO OrderDetail VAULES (@OrdeId, @ProductId, @ProductQuantity";
+                    var pa = new DynamicParameters();
+                    pa.Add("@OrderId", orderDetail.OrderId);
+                    pa.Add("@ProductId", orderDetail.ProductId);
+                    pa.Add("@ProductQuantity", orderDetail.ProductQuantity);
+                    CommandType c = CommandType.Text;
+                    var rs = await DataConnection.Connection().ExecuteAsync(Query, pa, null, null, c);
+                }
+            }
+            return 1;
+        }
     }
 }

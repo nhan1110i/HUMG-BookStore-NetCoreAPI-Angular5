@@ -106,6 +106,17 @@ namespace BookStore_Models
 
             }
         }
+        public async Task<int> GetLastCustomer()
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT TOP 1 Id FROM Customer ORDER BY Id DESC";
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().QueryAsync<Customer>(Query,null, null, null, c);
+                Customer s = rs.FirstOrDefault();
+                return s.Id;
+            }
+        }
 
     }
     

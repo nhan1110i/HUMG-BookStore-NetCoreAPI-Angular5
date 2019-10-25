@@ -10,7 +10,7 @@ namespace BookStore_Models
 {
     public class DataConnection
     {
-        static string _ConnectionString = @"Data Source=DESKTOP-AFGQQ55\NHAN111OI;Initial Catalog=BookStore;Integrated Security=True";
+        static string _ConnectionString = @"Data Source=DESKTOP-AFGQQ55\NHAN111OI;Initial Catalog=BookStore;Integrated Security=True;Max Pool Size=50000;Pooling=True;";
         public static string ConnectionString
         {
             get
@@ -30,6 +30,10 @@ namespace BookStore_Models
                 conn.Open();
             }
             return conn;
+        }
+        public static void CloseConnection(SqlConnection conn)
+        {
+            conn.Close();
         }
     }
 }

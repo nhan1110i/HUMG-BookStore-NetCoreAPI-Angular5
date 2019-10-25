@@ -56,7 +56,15 @@ namespace BookStore_Models
                 param.Add("@Id", Id);
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Category>(Query, param, null, null, command);
-                return rs.FirstOrDefault();
+                DataConnection.Connection().Close();
+                if (rs.Count() != 0 )
+                {
+                    return rs.FirstOrDefault();
+                }
+                else
+                {
+                    return new Category();
+                }
             }
         }
 

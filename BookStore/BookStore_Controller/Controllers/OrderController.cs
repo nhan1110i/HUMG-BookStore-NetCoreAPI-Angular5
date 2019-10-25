@@ -104,6 +104,19 @@ namespace BookStore_Controller.Controllers
             }
 
         }
+        [HttpPost]
+        public async Task<JsonResult> InsertOrder([FromBody] Order orderInsert)
+        {
+            var rs = await order.InsertOrder(orderInsert);
+            if(rs == 0)
+            {
+                return new JsonResult(new Notice(0, "Inserted"));
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Cant Insert"));
+            }
+        }
 
         // GET: api/Order/5
         

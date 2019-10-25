@@ -876,8 +876,6 @@ ul {
 
 /*---------- Cart ----------*/
 .table {
-  min-width: 1000px !important;
-  width: 100%;
   text-align: center;
 }
 
@@ -1199,6 +1197,10 @@ input[type=checkbox]:checked~.checkbox-btn::before {
   height: 55px;
   border-radius: 0;
 }
+.sign-up__container select {
+  height: 55px; 
+  border-radius: 0;
+}
 
 .sign-up__container label {
   margin-top: 1rem;
@@ -1208,7 +1210,7 @@ input[type=checkbox]:checked~.checkbox-btn::before {
   border-color: #82ae46;
   box-shadow: none;
 }
-.shop__container h3 {
+/* .shop__container h3 {
   text-align: center;
   border-top: 1px solid #82ae46;
   border-bottom: 1px solid #82ae46;
@@ -1217,7 +1219,7 @@ input[type=checkbox]:checked~.checkbox-btn::before {
   margin: 2rem auto;
   color: #82ae46;
   font-weight: 600;
-}
+} */
 
 /* responsive */
 @media (min-width: 992px) {

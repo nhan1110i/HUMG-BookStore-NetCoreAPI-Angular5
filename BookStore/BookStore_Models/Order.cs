@@ -66,5 +66,45 @@ namespace BookStore_Models
                 return rs.FirstOrDefault();
             }
         }
+        public async Task<int> CountOrder(DateTime Begin,DateTime End)
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT COUNT(Id) FROM [Order] WHERE OrderAt BETWEEN @begin AND @end";
+                var param = new DynamicParameters();
+                param.Add("@begin", Begin);
+                param.Add("@end", End);
+                CommandType c = CommandType.Text;
+                int rs = await DataConnection.Connection().ExecuteScalarAsync<int>(Query, param, null, null, c);
+                return rs;
+            }
+        }
+        public async Task<float> CountMoney(DateTime Begin, DateTime End)
+        {
+            string Query = "SELECT SUM(TotalMoney) FROM [Order] WHERE OrderAt BETWEEN @Begin AND @End";
+            var param = new DynamicParameters();
+            param.Add("@Begin", Begin);
+            param.Add("@End", End);
+            CommandType c = CommandType.Text;
+            float rs = await DataConnection.Connection().ExecuteScalarAsync<float>(Query, param, null, null, c);
+            return rs;
+        }
+        public async Task<int> InsertOrder(Order order)
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "INSERT INTO [Order] VALUES (@OrderCode,@TotalQuantity,@TotalMoney,@PaymentId,@StatusId,@CustomerId)";
+                var param = new DynamicParameters();
+                param.Add("@OrderCode", order.OrderCode);
+                param.Add("@TotalQuantity", order.TotalQuantity);
+                param.Add("@TotalMoney", order.TotalMoney);
+                param.Add("@PaymentId", order.PaymentId);
+                param.Add("@StatusId", order.StatusId);
+                param.Add("@CustomerId", order.CustomerId);
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, c);
+                return rs;
+            }
+        }
     }
 }

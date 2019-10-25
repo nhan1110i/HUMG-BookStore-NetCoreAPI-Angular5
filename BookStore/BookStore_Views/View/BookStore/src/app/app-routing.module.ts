@@ -15,6 +15,11 @@ import { OrderDetailComponent } from './Admin/directive/order-detail/order-detai
 import { BookstoreComponent } from './BookStore/bookstore.component';
 import { HomeComponent } from './BookStore/page/home/home.component';
 import { BookStoreCategoryComponent } from './BookStore/page/book-store-category/book-store-category.component';
+import { SingleProductComponent } from './BookStore/page/single-product/single-product.component';
+import { SignUpComponent } from './BookStore/page/sign-up/sign-up.component';
+import { ClientLoginComponent } from './BookStore/page/client-login/client-login.component';
+import { CheckoutComponent } from './BookStore/page/checkout/checkout.component';
+import { CartComponent } from './BookStore/page/cart/cart.component';
 
 
 const routes: Routes = [
@@ -36,7 +41,12 @@ const routes: Routes = [
   {
     path: "BookStore", component: BookstoreComponent, children: [
       { path: "Home", component: HomeComponent },
-      {path : "danh-muc/:id", component : BookStoreCategoryComponent}
+      {path : "Category/:id", component : BookStoreCategoryComponent},
+      {path : "Single-Product/:id", component : SingleProductComponent},
+      {path : "Sign-up", component : SignUpComponent},
+      {path : "Login", component: ClientLoginComponent},
+      {path : "CheckOut", component : CheckoutComponent},
+      {path : "Cart", component : CartComponent}
 
     ]
   }

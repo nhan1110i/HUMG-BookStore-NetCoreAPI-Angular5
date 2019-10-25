@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
   <div class="container">
-    <a class="navbar-brand">HUMG BookStore</a>
+    <a class="navbar-brand" routerLink="/BookStore/Home">HUMG BookStore</a>
     <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
       aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
@@ -17,8 +17,8 @@
             <a class="dropdown-item" href="checkout.html">Checkout</a>
           </div>
         </li>
-        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
-        <li class="nav-item"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span><i
+        <li class="nav-item"><a routerLink="/BookStore/Login" class="nav-link">Login</a></li>
+        <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
               class="icon ion-ios-cart"></i>&nbsp;[0]</a></li>
       </ul>
     </div>
@@ -35,14 +35,6 @@
 </div>
 <div class="shop__container ff">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-12 col-md-12">
-              <ul class="product-category">
-                  <li><a href="#" class="active">All</a></li>
-                  <li *ngFor="let category of categories"><a href="/BookStore/danh-muc/{{ category.id }}">{{ category.categoryName }}</a></li>
-              </ul>
-          </div>
-      </div>
       <router-outlet></router-outlet>  
   </div>
 </div>

@@ -69,7 +69,9 @@ namespace BookStore_Models
                 string Query = "SELECT * FROM product";
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Product>(Query, null, null, null, command);
+                DataConnection.Connection().Close();
                 return rs.ToList();
+                
             }
         }
         

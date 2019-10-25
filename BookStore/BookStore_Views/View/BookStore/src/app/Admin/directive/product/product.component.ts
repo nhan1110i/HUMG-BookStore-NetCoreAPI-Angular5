@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { formatCurrency } from '../../config/config';
 import { AdminService } from '../../AdminService/admin.service';
-import { alert } from '../../config/config'
+import { alert } from '../../config/config';
+import { CategoryService } from '../../services/category/category.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,13 +11,49 @@ import { alert } from '../../config/config'
 })
 export class ProductComponent implements OnInit {
   products: any;
-  selectedProducts: number[] = [0, 0]
+  selectedProducts: number[] = [0, 0];
+  pageSize : number = 5;
+  categories : any;
+  productsTemp : any;
+  filter : any = {
+    category : 0,
+    price : 0,
+    active : 0,
+  }
+  filterProducts(){
+    this.products = this.productsTemp;
+    console.log(this.filter)
+    if(this.filter.category !== 0){
+      this.products = this.products.filter(product => product.category.id == this.filter.category);
+    }
+    if(this.filter.price !== 0){
+      this.products = this.products.filter(product => product.product.productDiscount > +this.filter.price)
+    }
+    if(+this.filter.active !== 0){
+      let s : boolean = this.filter.active == 1 ? true : false;
+      this.products = this.products.filter(product => product.product.isActive == s);
+    } 
+  }
+  changePageSize(itemsPerPage : number){
+    this.pageSize = 5;
+  }
   // action
   getProducts(): any {
     this.productService.getProducts().subscribe(
       rs => {
         this.products = rs;
+        this.productsTemp = rs;
       }, err => {
+        console.log(err);
+      }
+    )
+  }
+  getCategory() : any{
+    this.categoryService.getCategories().subscribe(
+      rs =>{
+        this.categories = rs;
+        console.log(this.categories)
+      }, err=>{
         console.log(err);
       }
     )
@@ -112,11 +149,13 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit() {
-    this.getProducts()
+    this.getProducts(),
+    this.getCategory()
   }
 
 }

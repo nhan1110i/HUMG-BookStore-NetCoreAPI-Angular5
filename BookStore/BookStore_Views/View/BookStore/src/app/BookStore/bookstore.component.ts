@@ -6,6 +6,12 @@ import { CategoryService } from 'src/app/Admin/services/category/category.servic
   styleUrls: ['./bookstore.component.css']
 })
 export class BookstoreComponent implements OnInit {
+  orderDetail : any [] = [
+    {
+      productId : 0,
+      quantity :0 ,
+    }
+  ]
   categories: any;
   getCategories(){
     this.categoryService.getCategorisActive().subscribe(
@@ -24,6 +30,7 @@ export class BookstoreComponent implements OnInit {
   ngOnInit(
     
   ) {
+    localStorage.setItem("orderDetail",JSON.stringify(this.orderDetail));
     this.getCategories();
   }
 

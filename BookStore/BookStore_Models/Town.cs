@@ -32,5 +32,17 @@ namespace BookStore_Models
                 return rs.FirstOrDefault();
             }
         }
+        public async Task<List<Town>> GetTownsByCityId(int Id)
+        {
+            using (DataConnection.Connection())
+            {
+                string query = "SELECT * FROM Town WHERE CityId = @Id";
+                var par = new DynamicParameters();
+                par.Add("@Id", Id);
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().QueryAsync<Town>(query, par, null, null, c);
+                return rs.ToList();
+            }
+        }
     }
 }

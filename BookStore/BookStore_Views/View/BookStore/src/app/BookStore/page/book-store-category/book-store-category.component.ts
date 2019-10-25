@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProductService } from 'src/app/Admin/services/product/product.service';
 import { formatCurrency } from 'src/app/Admin/config/config';
+import { CategoryService } from 'src/app/Admin/services/category/category.service';
 
 @Component({
   selector: 'app-book-store-category',
@@ -11,9 +12,20 @@ import { formatCurrency } from 'src/app/Admin/config/config';
 })
 export class BookStoreCategoryComponent implements OnInit {
   products: any;
+  categories: any;
+  id = +this.activeRoute.snapshot.paramMap.get('id')
+  getCategories(){
+    this.categoryService.getCategorisActive().subscribe(
+      rs =>{
+        this.categories = rs;
+      },err =>{
+        console.log(err)
+      }
+    )
+  }
   getProductsByCategory(){
-    const id = +this.activeRoute.snapshot.paramMap.get('id');
-    this.productService.getProductsByCategoryId(id).subscribe(
+    
+    this.productService.getProductsByCategoryId(this.id).subscribe(
       rs => {
         this.products = rs;
         console.log(this.products)
@@ -38,10 +50,12 @@ export class BookStoreCategoryComponent implements OnInit {
     private productService: ProductService,
     private activeRoute: ActivatedRoute,
     private location: Location,
+    private categoryService : CategoryService
   ) { }
 
   ngOnInit() {
-    this.getProductsByCategory()
+    this.getProductsByCategory(),
+    this.getCategories()
   }
 
 }

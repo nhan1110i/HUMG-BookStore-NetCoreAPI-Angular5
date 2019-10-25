@@ -38,6 +38,7 @@ namespace BookStore_Models
                 string Query = "SELECT * FROM Author";
                 CommandType command = CommandType.Text;
                 var rs = await DataConnection.Connection().QueryAsync<Author>(Query, null, null,null, command);
+                DataConnection.Connection().Close();
                 return rs.ToList();
             }
         }
@@ -50,7 +51,14 @@ namespace BookStore_Models
                 var param = new DynamicParameters();
                 param.Add("@Id", Id);
                 var rs = await DataConnection.Connection().QueryAsync<Author>(Query, param, null, null, command);
-                return rs.FirstOrDefault();
+                if(rs.Count() != 0)
+                {
+                    return rs.FirstOrDefault();
+                }
+                else
+                {
+                    return new Author();
+                }
 
             }
 

@@ -1,0 +1,41 @@
+<div class="sign-up__container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <h2>Thông tin đăng nhập</h2>
+                <label>Username</label>
+                <input type="text" class="form-control" [(ngModel)] = "accountInCustomer.account.username">
+                
+                <label>Password</label>
+                <input type="password" class="form-control" [(ngModel)] = "accountInCustomer.account.password">
+                <label>Confirm password</label>
+                <input type="password" class="form-control">
+                
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <h2>Thông tin khách hàng</h2>
+                <label>Name</label>
+                <input type="text" class="form-control" [(ngModel)] = "accountInCustomer.customer.customerName">
+                <label>Phone</label>
+                <input type="text" class="form-control" [(ngModel)] = "accountInCustomer.customer.customerPhone">
+                <label>Email</label>
+                <input type="text" class="form-control" [(ngModel)] = "accountInCustomer.customer.customerMail">
+                <label>Tỉnh / Thành Phố</label>
+                <select class="form-control" [(ngModel)] = "accountInCustomer.customer.cityId" (change)="getTowns(accountInCustomer.customer.cityId)">
+                    <option value="0" [selected]="accountInCustomer.customer.cityId == 0" >Chọn tỉnh / thành</option>
+                    <option *ngFor="let city of cities" value="{{ city.id }}" [selected]="city.id == accountInCustomer.customer.cityId">{{ city.cityName }}</option>
+                    
+                </select>
+                <label>Quận / Huyện</label>
+                <select class="form-control" [(ngModel)]="accountInCustomer.customer.townId">
+                    <option value="0" [selected]="accountInCustomer.customer.townId == 0">Chọn quận / huyện </option>
+                    <option *ngFor="let town of towns" value="{{ town.id }}" [selected]="town.id == accountInCustomer.customer.townId">{{ town.townName }}</option>
+                    
+                </select>
+                <label>Địa chỉ</label>
+                <input type="text" class="form-control" [(ngModel)] = "accountInCustomer.customer.Address">
+                <button (click)="insert()">Đăng ký</button>
+            </div>
+        </div>
+    </div>
+</div>

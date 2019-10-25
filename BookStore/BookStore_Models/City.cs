@@ -37,6 +37,16 @@ namespace BookStore_Models
                 return rs.FirstOrDefault();
             }
         }
+        public async Task<List<City>> GetCities()
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT * FROM City";
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().QueryAsync<City>(Query, null, null, null, c);
+                return rs.ToList();
+            }
+        }
     }
     
 }
