@@ -1,47 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/BookStore/Home">HUMG BookStore</a>
-    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
-      aria-expanded="false">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="responsive-navbar">
-      <ul class="navbar-nav ml-auto navbar-nav-list">
-        <li class="nav-item active dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="shop_dropdown" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">Shop</a>
-          <div class="dropdown-menu" aria-labelledby="shop_dropdown">
-            <a class="dropdown-item" href="product-single.html">Single Product</a>
-            <a class="dropdown-item" href="cart.html">Cart</a>
-            <a class="dropdown-item" href="checkout.html">Checkout</a>
-          </div>
-        </li>
-        <li class="nav-item"><a routerLink="/BookStore/Login" class="nav-link">Login</a></li>
-        <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
-              class="icon ion-ios-cart"></i>&nbsp;[0]</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="shop__banner ff" style="background-image: url('http://getwallpapers.com/wallpaper/full/d/d/6/165874.jpg');">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1><span class="badge badge-info">BOOKSTORE HOME</span></h1>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="shop__container ff">
-  <div class="container">
       <router-outlet></router-outlet>  
-  </div>
-</div>
 
-
-
-<button class="shop__to-top"><i class="ion-ios-arrow-up"></i></button>
+      <button class="shop__to-top"><i class="ion-ios-arrow-up"></i></button>
 
 
 <div class="shop__subscribe ff">

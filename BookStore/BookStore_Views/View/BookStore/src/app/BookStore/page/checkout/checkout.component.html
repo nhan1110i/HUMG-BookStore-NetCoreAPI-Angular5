@@ -1,114 +1,153 @@
-<div class="checkout__container ff">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-bottom: 40px;">
-                <h3>Billing Details</h3>
+      <a class="navbar-brand" routerLink="/BookStore/Home">HUMG BookStore</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
+        aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="responsive-navbar">
+        <ul class="navbar-nav ml-auto navbar-nav-list">
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="shop_dropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Cửa hàng</a>
+            <div class="dropdown-menu" aria-labelledby="shop_dropdown">
+              <a class="dropdown-item" *ngFor="let category of categories" routerLink="/BookStore/Category/{{ category.id }}">{{ category.categoryName }}</a>
+              
+            </div>
+          </li>
+          <li class="nav-item" *ngIf="customer == 'not login'"><a routerLink="/BookStore/Login" class="nav-link">Đăng nhập</a></li>
+          <li class="nav-item" *ngIf="customer != 'not login'"><a routerLink="/BookStore/Login" class="nav-link">{{ customer.customerName }}</a></li>
+          <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
+                class="icon ion-ios-cart"></i>&nbsp;[ 0 sản phẩm ]</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="shop__banner ff" style="background-image: url('http://getwallpapers.com/wallpaper/full/d/d/6/165874.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1><span class="text-white">T H A N H T O Á N</span></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="shop__container ff">
+    <div class="container">
+        <div class="checkout__container ff">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12">
-                        <label>First Name</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label>Last Name</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label>State / Country</label>
-                        <div class="form-group d-flex">
-                            <div class="select-wrap">
-                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                <select name="" id="" class="form-control">
-                                    <option value="">Vietnam</option>
-                                    <option value="">United State</option>
-                                    <option value="">England</option>
-                                    <option value="">Germany</option>
-                                </select>
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-bottom: 40px;">
+                        <h3>Billing Details</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <label>First Name</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Last Name</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <label>State / Country</label>
+                                <div class="form-group d-flex">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Vietnam</option>
+                                            <option value="">United State</option>
+                                            <option value="">England</option>
+                                            <option value="">Germany</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <label>Street Address</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Town / City</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Postcode / ZIP *</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Phone</label>
+                                <input class="form-control">
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Email Address</label>
+                                <input class="form-control">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="radio">
+                                <input type="radio" name="option" id="acc">
+                                <label for="acc">Create an account?</label>
+                                <div class="radio-btn"></div>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="option" id="another">
+                                <label for="another">Ship to different address</label>
+                                <div class="radio-btn"></div>
+                            </div>  
+                        </div>
                     </div>
-                    <div class="col-md-12 col-sm-12">
-                        <label>Street Address</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label>Town / City</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label>Postcode / ZIP *</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label>Phone</label>
-                        <input class="form-control">
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <label>Email Address</label>
-                        <input class="form-control">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <div class="cart__container--total-div">
+                            <div class="pd-20 border-gray">
+                                <h5>Cart Totals</h5>
+                                <br/>
+                                <p class="d-flex">
+                                    <span>Subtotal</span>
+                                    <span>$20.60</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Delivery</span>
+                                    <span>$0.00</span>
+                                </p>
+                                <p class="d-flex">
+                                    <span>Discount</span>
+                                    <span>$3.00</span>
+                                </p>
+                                <hr/>
+                                <p class="d-flex">
+                                    <span>TOTAL</span>
+                                    <span>$17.60</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pd-20 border-gray payment-method">
+                            <h3>Payment Method</h3>
+                            <div class="radio">
+                                <input type="radio" name="option" id="bank">
+                                <label for="bank">Direct Bank Tranfer</label>
+                                <div class="radio-btn"></div>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="option" id="check">
+                                <label for="check">Check Payment</label>
+                                <div class="radio-btn"></div>
+                            </div>
+                            <div class="radio">
+                                <input type="radio" name="option" id="paypal">
+                                <label for="paypal">Paypal</label>
+                                <div class="radio-btn"></div>
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" id="condition">
+                                <label for="condition">I have read and accept the terms and conditions</label>
+                                <div class="checkbox-btn"></div>
+                            </div>                            
+                        </div>   
+                        <button>Place an order</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="radio">
-                        <input type="radio" name="option" id="acc">
-                        <label for="acc">Create an account?</label>
-                        <div class="radio-btn"></div>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="option" id="another">
-                        <label for="another">Ship to different address</label>
-                        <div class="radio-btn"></div>
-                    </div>  
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                <div class="cart__container--total-div">
-                    <div class="pd-20 border-gray">
-                        <h5>Cart Totals</h5>
-                        <br/>
-                        <p class="d-flex">
-                            <span>Subtotal</span>
-                            <span>$20.60</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Delivery</span>
-                            <span>$0.00</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Discount</span>
-                            <span>$3.00</span>
-                        </p>
-                        <hr/>
-                        <p class="d-flex">
-                            <span>TOTAL</span>
-                            <span>$17.60</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="pd-20 border-gray payment-method">
-                    <h3>Payment Method</h3>
-                    <div class="radio">
-                        <input type="radio" name="option" id="bank">
-                        <label for="bank">Direct Bank Tranfer</label>
-                        <div class="radio-btn"></div>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="option" id="check">
-                        <label for="check">Check Payment</label>
-                        <div class="radio-btn"></div>
-                    </div>
-                    <div class="radio">
-                        <input type="radio" name="option" id="paypal">
-                        <label for="paypal">Paypal</label>
-                        <div class="radio-btn"></div>
-                    </div>
-                    <div class="checkbox">
-                        <input type="checkbox" id="condition">
-                        <label for="condition">I have read and accept the terms and conditions</label>
-                        <div class="checkbox-btn"></div>
-                    </div>                            
-                </div>   
-                <button>Place an order</button>
             </div>
         </div>
     </div>
-</div>
+  </div>

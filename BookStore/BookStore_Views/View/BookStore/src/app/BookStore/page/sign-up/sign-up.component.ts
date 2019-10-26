@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/Admin/services/customer/customer.service';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
-
+import { CategoryService } from 'src/app/Admin/services/category/category.service';
+import { GetPage, GetCustomer } from 'src/app/Admin/config/config';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -29,8 +30,20 @@ export class SignUpComponent implements OnInit {
       customerId: 0,
     }
   }
+  categories: any;
+  customer : any;
+  page : any;
   cities: any;
   towns: any;
+  getCategories(){
+    this.categoryService.getCategorisActive().subscribe(
+      rs=>{
+        this.categories = rs
+      },err =>{
+        console.log(err)
+      }
+    )
+  }
   getCities() {
     this.customerService.getCities().subscribe(
       rs => {
@@ -65,12 +78,15 @@ export class SignUpComponent implements OnInit {
     )
   }
   constructor(
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private categoryService : CategoryService
   ) { }
 
   ngOnInit() {
     this.getCities();
-
+    this.getCategories();
+    this.page = GetPage();
+    this.customer = GetCustomer();
   }
 
 }

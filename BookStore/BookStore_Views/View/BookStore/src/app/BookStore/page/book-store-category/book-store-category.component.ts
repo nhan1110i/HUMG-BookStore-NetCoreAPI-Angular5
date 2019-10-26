@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ProductService } from 'src/app/Admin/services/product/product.service';
-import { formatCurrency } from 'src/app/Admin/config/config';
+import { formatCurrency, GetPage, GetCustomer } from 'src/app/Admin/config/config';
 import { CategoryService } from 'src/app/Admin/services/category/category.service';
 
 @Component({
@@ -13,6 +13,8 @@ import { CategoryService } from 'src/app/Admin/services/category/category.servic
 export class BookStoreCategoryComponent implements OnInit {
   products: any;
   categories: any;
+  customer : any;
+  page : any;
   id = +this.activeRoute.snapshot.paramMap.get('id')
   getCategories(){
     this.categoryService.getCategorisActive().subscribe(
@@ -55,7 +57,9 @@ export class BookStoreCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.getProductsByCategory(),
-    this.getCategories()
+    this.getCategories(),
+    this.page = GetPage();
+    this.customer = GetCustomer();
   }
 
 }

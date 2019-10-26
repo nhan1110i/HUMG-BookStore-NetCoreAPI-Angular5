@@ -1,53 +1,93 @@
-<div class="shop__container ff">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-12 col-md-12">
-              <ul class="product-category">
-                  <li><a href="#" class="active">All</a></li>
-                  <li *ngFor="let category of categories"><a routerLink="/BookStore/Category/{{ category.id }}">{{ category.categoryName }}</a></li>
-              </ul>
+    <a class="navbar-brand" routerLink="/BookStore/Home">HUMG BookStore</a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
+      aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="responsive-navbar">
+      <ul class="navbar-nav ml-auto navbar-nav-list">
+        <li class="nav-item active dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="shop_dropdown" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Cửa hàng</a>
+          <div class="dropdown-menu" aria-labelledby="shop_dropdown">
+            <a class="dropdown-item" *ngFor="let category of categories" routerLink="/BookStore/Category/{{ category.id }}">{{ category.categoryName }}</a>
+            
           </div>
-      </div>    
+        </li>
+        <li class="nav-item" *ngIf="customer == 'not login'"><a routerLink="/BookStore/Login" class="nav-link">Đăng nhập</a></li>
+        <li class="nav-item" *ngIf="customer != 'not login'"><a routerLink="/BookStore/Login" class="nav-link">{{ customer.customerName }}</a></li>
+        <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
+              class="icon ion-ios-cart"></i>&nbsp;[ {{ countCart }} sản phẩm ]</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="shop__banner ff" style="background-image: url('http://getwallpapers.com/wallpaper/full/d/d/6/165874.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1><span class="text-white">T R A N G C H Ủ</span></h1>
+      </div>
+    </div>
   </div>
 </div>
-<hr>
-<div *ngFor="let item of products">
-  <div class="row">
-    <div class="col-lg-3 col-md-6" *ngFor="let product of item.products">
-      <div class="shop__container--product">
-        <a routerLink="/BookStore/Single-Product/{{ product.id }}">
-          <img src="https://localhost:44315/image/{{ product.productImageList }}" alt="product">
-          <span class="discount">{{ ceil(product.productPrice,product.productDiscount) }}%</span>
-        </a>
-        <div class="text">
-          <a href="#">{{ product.productName }}</a>
-          <div class="pricing">
-            <p class="price">
-              <span class="price-dc">{{ formatMoney(product.productPrice) }}</span>
-              <span class="price-sale">{{ formatMoney(product.productDiscount) }}</span>
-            </p>
-          </div>
-        </div>
-        <div class="bottom-area">
-          <div style="margin: 0 auto;">
-            <a href="#"><span><i class="icon ion-ios-cart"></i></span></a>
-            <a href="#"><span><i class="icon ion-ios-heart"></i></span></a>
+<div class="shop__container ff">
+  <div class="container">
+    <div class="shop__container ff">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <ul class="product-category">
+              <li><a href="#" class="active">All</a></li>
+              <li *ngFor="let category of categories"><a
+                  routerLink="/BookStore/Category/{{ category.id }}">{{ category.categoryName }}</a></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+    <hr>
+    <div *ngFor="let item of products">
+      <div class="row">
+        <div class="col-lg-3 col-md-6" *ngFor="let product of item.products">
+          <div class="shop__container--product">
+            <a routerLink="/BookStore/Single-Product/{{ product.id }}">
+              <img src="https://localhost:44315/image/{{ product.productImageList }}" alt="product">
+              <span class="discount">{{ ceil(product.productPrice,product.productDiscount) }}%</span>
+            </a>
+            <div class="text">
+              <a href="#">{{ product.productName }}</a>
+              <div class="pricing">
+                <p class="price">
+                  <span class="price-dc">{{ formatMoney(product.productPrice) }}</span>
+                  <span class="price-sale">{{ formatMoney(product.productDiscount) }}</span>
+                </p>
+              </div>
+            </div>
+            <div class="bottom-area">
+              <div style="margin: 0 auto;">
+                <a (click)="AddProduct(+product.id,+1,+product.productPrice,product.productName,product.productImageList)"><span><i class="icon ion-ios-cart"></i></span></a>
+                <a href="#"><span><i class="icon ion-ios-heart"></i></span></a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  </div>
-  <nav aria-label="Page navigation ff">
-    <ul class="pagination justify-content-center shop__pagination">
-        <li class="page-item">
+      </div>
+      <nav aria-label="Page navigation ff">
+        <ul class="pagination justify-content-center shop__pagination">
+          <li class="page-item">
             <a class="page-link" href="#" tabindex="-1"><i class="icon ion-ios-return-left"></i></a>
-        </li>
-        <li class="page-item"><a class="page-link active" href="#">1</a></li>
-        <li class="page-item">
+          </li>
+          <li class="page-item"><a class="page-link active" href="#">1</a></li>
+          <li class="page-item">
             <a class="page-link" href="#"><i class="icon ion-ios-return-right"></i></a>
-        </li>
-    </ul>
-</nav>
-  <hr>
+          </li>
+        </ul>
+      </nav>
+      <hr>
+    </div>
+  </div>
 </div>

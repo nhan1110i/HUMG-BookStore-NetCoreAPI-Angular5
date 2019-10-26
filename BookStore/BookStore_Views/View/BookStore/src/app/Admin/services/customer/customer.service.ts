@@ -52,6 +52,11 @@ export class CustomerService {
       tap(rs => console.log(rs)),catchError(error => of(console.log(error)))
     )
   }
+  customerLogin(customer : any) : Observable<any>{
+    return this.http.post<any>(url.host + url.customer.login,customer,httpOptions).pipe(
+      tap(rs => {}),catchError(error => of())
+    )
+  }
   constructor(
     private http: HttpClient
   ) { }

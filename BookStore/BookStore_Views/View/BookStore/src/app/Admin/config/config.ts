@@ -1,58 +1,61 @@
+import { ProductService } from '../services/product/product.service'
+
 export var url = {
     host: "https://localhost:44315/",
-    category : {
-        categories : "Category/GetCategories",
-        parentCategories : "ParentCategory/GetParentCategories",
-        addCategory : "Category/AddCategory",
+    category: {
+        categories: "Category/GetCategories",
+        parentCategories: "ParentCategory/GetParentCategories",
+        addCategory: "Category/AddCategory",
         deleteCategory: "Category/DeleteCategory",
-        updateCategory : "Category/UpdateCategory",
+        updateCategory: "Category/UpdateCategory",
         categoriesActive: "Category/GetCategoriesActive"
     },
-    admin : {
+    admin: {
         login: "Admin/CheckLogin",
     },
-    product:{
+    product: {
         products: "Product/GetProducts",
-        insert : "Product/InsertProduct",
-        delete : "Product/DeleteProductById",
+        insert: "Product/InsertProduct",
+        delete: "Product/DeleteProductById",
         deleteProducts: "Product/DeleteProducts",
         getProductById: "Product/GetProductById/",
-        updateProduct : "Product/UpdateProduct",
-        productHome : "Product/GetNumberProductsByCategory",
+        updateProduct: "Product/UpdateProduct",
+        productHome: "Product/GetNumberProductsByCategory",
         productByCategoryId: "Product/GetProductByCategoryId"
     },
-    statistical : {
-        statistical : "Statistical/GetStatistical"
+    statistical: {
+        statistical: "Statistical/GetStatistical"
     },
     author: {
         authors: "Author/GetAuthors"
     },
     publishing: {
-        publishings :"PublishingHouse/GetListPublishing"
+        publishings: "PublishingHouse/GetListPublishing"
     },
     employee: {
-        employees : "Admin/GetAdmins",
-        insert : "Admin/CreateAdmin",
+        employees: "Admin/GetAdmins",
+        insert: "Admin/CreateAdmin",
         update: "Admin/UpdateAdmin",
         delete: "Admin/DeleteAdmin",
     },
-    customer : {
+    customer: {
         customers: "Customer/GetCustomers",
         delete: "Customer/DeleteCustomer",
-        active : "Customer/ActiveCustomer",
-        insert : "Customer/InsertAccountInCustomer"
+        active: "Customer/ActiveCustomer",
+        insert: "Customer/InsertAccountInCustomer",
+        login: "Account/CustomerLogin"
     },
-    order : {
+    order: {
         orders: "Order/GetOrders",
         complete: "Order/CompleteOrder",
         decline: "Order/DeclineOrder",
         delete: "Order/DeleteOrder",
     },
-    city :{
-        cities : "City/GetCities"
+    city: {
+        cities: "City/GetCities"
     },
-    town :{
-        townsByCityId : "Town/GetTownByCityId"
+    town: {
+        townsByCityId: "Town/GetTownByCityId"
     }
 }
 export var config = {
@@ -80,34 +83,34 @@ export var alert = {
         content: "Sai tên đăng nhập hoặc mật khẩu"
     },
     auth: {
-        style : "alert alert-warning",
-        title : "THÔNG BÁO",
-        content : "Không đủ quyền để thực hiện"
+        style: "alert alert-warning",
+        title: "THÔNG BÁO",
+        content: "Không đủ quyền để thực hiện"
     },
-    error : {
-        style : 'alert alert-danger',
+    error: {
+        style: 'alert alert-danger',
         title: 'THÔNG BÁO',
         content: 'Lỗi không xác định'
     },
     expire: {
-        style : 'alert alert-primary',
-        title : 'THÔNG BÁO',
-        content : "Hết phiên đăng nhập"
+        style: 'alert alert-primary',
+        title: 'THÔNG BÁO',
+        content: "Hết phiên đăng nhập"
     }
 }
 
-export var badges ={
-    product: (isActive : boolean) : string=>{
-        if(isActive == true){
+export var badges = {
+    product: (isActive: boolean): string => {
+        if (isActive == true) {
             return "Đang mở bán"
-        }else{
+        } else {
             return "Đang đóng"
         }
     },
-    category: (isActive : boolean) :string =>{
-        if(isActive == true){
+    category: (isActive: boolean): string => {
+        if (isActive == true) {
             return "đang mở"
-        }else{
+        } else {
             return "Đang đóng"
         }
     }
@@ -122,26 +125,84 @@ export var badges ={
 //         }
 //     }
 // }
-export function formatCurrency(money: number): string{
+export function formatCurrency(money: number): string {
     var s = money.toString();
     var regex = /\B(?=(\d{3})+(?!\d))/g;
     var ret = s.replace(regex, ".");
-    return ret.toString()+" đ";
+    return ret.toString() + " đ";
 }
-export function GetUsername() : string {
-    if(localStorage.getItem("Username")){
+export function GetUsername(): string {
+    if (localStorage.getItem("Username")) {
         return localStorage.getItem("Username");
-    }else{
+    } else {
         return "NoName"
     }
 }
-export function GetAuthorization() : string{
-    if(localStorage.getItem("Authorization")){
+export function GetAuthorization(): string {
+    if (localStorage.getItem("Authorization")) {
         return localStorage.getItem("Authorization");
-    }else{
+    } else {
         return "noAuthorziation"
     }
 }
-export function CloseAlert(alert : any){
+export function CloseAlert(alert: any) {
     alert = null;
+}
+export function GetCustomer(): any {
+
+    if (localStorage.getItem("customer")) {
+        return JSON.parse(localStorage.getItem("customer"));
+    } else {
+        return "not login";
+    }
+}
+export function GetPage(): any {
+    if (localStorage.getItem("page")) {
+        return localStorage.getItem("page").toString().trim()
+    } else {
+        return "B O O K S T O R E H O M E"
+    }
+}
+export function AddProductCart(Id: number, quantity: number, price: number,name : string, image : string) {
+    let product = {
+        Id: Id,
+        quantity: quantity,
+        price: price,
+        name : name,
+        image : image
+    }
+    if (localStorage.getItem("cart")) {
+        let orderDetail = JSON.parse(localStorage.getItem("cart"));
+        let index = orderDetail.findIndex(order => order.Id == Id);
+        if(index == -1){
+            orderDetail.push(product);
+        }else{
+            orderDetail[index].quantity = orderDetail[index].quantity + 1;
+        }
+        console.log(orderDetail);
+        localStorage.setItem("cart", JSON.stringify(orderDetail));
+    } else {
+        let arr = [
+            {
+                Id: 0,
+                quantity: 0,
+                price: 0,
+                name : "",
+                image : "",
+            }
+        ]
+        localStorage.setItem("cart", JSON.stringify(arr));
+        let orderDetail = JSON.parse(localStorage.getItem("cart"));
+        orderDetail.push(product);
+        console.log(orderDetail);
+        localStorage.setItem("cart", JSON.stringify(orderDetail));
+    }
+}
+export function CountCart() : number{
+    if(localStorage.getItem("cart")){
+        let s = JSON.parse(localStorage.getItem("cart")).length;
+        return s;
+    }else{
+        return 0;
+    }
 }

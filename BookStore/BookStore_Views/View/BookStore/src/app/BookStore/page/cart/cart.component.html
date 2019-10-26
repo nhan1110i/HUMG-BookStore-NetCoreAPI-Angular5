@@ -1,84 +1,108 @@
-<div class="cart__container ff">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top shop__navbar ff">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="cart-list">
-                    <table class="table">
-                        <thead class="thead-primary">
-                            <tr class="text-center">
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                                <th>Product name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-                                <td class="image-prod">
-                                    <img src="images/product-2.jpg" alt="product">
-                                </td>
-                                <td class="product-name">
-                                    <h3>Bell Pepper</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries</p>
-                                </td>
-                                <td class="price">$4.90</td>
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" >
-                                    </div>
-                                </td>
-                                <td class="total">$4.90</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
-                                <td class="image-prod">
-                                    <img src="images/product-2.jpg" alt="product">
-                                </td>
-                                <td class="product-name">
-                                    <h3>Bell Pepper</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries</p>
-                                </td>
-                                <td class="price">$15.70</td>
-                                <td class="quantity">
-                                    <div class="input-group mb-3">
-                                        <input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                                    </div>
-                                </td>
-                                <td class="total">$15.70</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+      <a class="navbar-brand" routerLink="/BookStore/Home">HUMG BookStore</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#responsive-navbar"
+        aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="responsive-navbar">
+        <ul class="navbar-nav ml-auto navbar-nav-list">
+          <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="shop_dropdown" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Cửa hàng</a>
+            <div class="dropdown-menu" aria-labelledby="shop_dropdown">
+              <a class="dropdown-item" *ngFor="let category of categories" routerLink="/BookStore/Category/{{ category.id }}">{{ category.categoryName }}</a>
+              
             </div>
-            <div class="col-sm-4">
-                <div class="cart__container--total-div">
-                    <div class="pd-20 border-gray">
-                        <h5>Cart Totals</h5>
-                        <br/>
-                        <p class="d-flex">
-                            <span>Subtotal</span>
-                            <span>$20.60</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Delivery</span>
-                            <span>$0.00</span>
-                        </p>
-                        <p class="d-flex">
-                            <span>Discount</span>
-                            <span>$3.00</span>
-                        </p>
-                        <hr/>
-                        <p class="d-flex">
-                            <span>TOTAL</span>
-                            <span>$17.60</span>
-                        </p>
-                    </div>
-                    <button>Proceed to Checkout</button>
-                </div>
-            </div>
-        </div>
+          </li>
+          <li class="nav-item" *ngIf="customer == 'not login'"><a routerLink="/BookStore/Login" class="nav-link">Đăng nhập</a></li>
+          <li class="nav-item" *ngIf="customer != 'not login'"><a routerLink="/BookStore/Login" class="nav-link">{{ customer.customerName }}</a></li>
+          <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
+                class="icon ion-ios-cart"></i>&nbsp;[ {{ carts.length }} sản phẩm ]</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
+  <div class="shop__banner ff" style="background-image: url('http://eskipaper.com/images/book-wallpaper-14.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1><span class="text-white">G I Ỏ H À N G</span></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="shop__container ff">
+  <div class="container">
+    <h5 class="text-center" *ngIf="carts.length == 0">Giỏ hàng trống</h5>
+    <div class="cart__container ff" *ngIf="carts.length != 0">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="cart-list">
+              <table class="table">
+                <thead class="thead-primary">
+                  <tr class="text-center">
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center" *ngFor="let cart of carts">
+                    <td class="product-remove"><a (click)="removeProductCart(cart.Id)"><span class="ion-ios-close"></span></a></td>
+                    <td class="image-prod">
+                      <img src="https://localhost:44315/image/{{ cart.image }}" alt="product">
+                    </td>
+                    <td class="product-name">
+                      <h3>{{ cart.name }}</h3>
+                      <p></p>
+                    </td>
+                    <td class="price">{{ formatCurrency(cart.price) }}</td>
+                    <td class="quantity">
+                      <div class="input-group mb-3">
+                        <input type="text" name="quantity" class="quantity form-control input-number" [(ngModel)]="cart.quantity" >
+                      </div>
+                    </td>
+                    <td class="total">{{ formatCurrency(cart.totalMoney) }}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="cart__container--total-div">
+              <div class="pd-20 border-gray">
+                <h5>Giá trị đơn hàng</h5>
+                <br />
+                <p class="d-flex">
+                  <span>Giá trị hàng</span>
+                  <span>{{ formatCurrency(totalCart) }}</span>
+                </p>
+                <p class="d-flex">
+                  <span>Phí vận chuyển</span>
+                  <span>0 đ</span>
+                </p>
+                <p class="d-flex">
+                  <span>Giảm giá</span>
+                  <span>0 đ</span>
+                </p>
+                <hr />
+                <p class="d-flex">
+                  <span>Thành tiền</span>
+                  <span>{{ formatCurrency(totalCart) }}</span>
+                </p>
+              </div>
+              <button>Tiến hành thanh toán</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
