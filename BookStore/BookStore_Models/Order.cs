@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookStore_Models
@@ -17,6 +16,7 @@ namespace BookStore_Models
         public int PaymentId { get; set; }
         public int StatusId { get; set; }
         public int CustomerId { get; set; }
+        public DateTime OrderAt { get; set; }
         public async Task<List<Order>> GetOrders()
         {
             using (DataConnection.Connection())
@@ -27,6 +27,7 @@ namespace BookStore_Models
                 return rs.ToList();
             }
         }
+
         public async Task<int> UpdateOrder(int Id, int status)
         {
             using (DataConnection.Connection())
@@ -41,6 +42,7 @@ namespace BookStore_Models
                 return idUpdate;
             }
         }
+
         public async Task<int> DeleteOrder(int Id)
         {
             using (DataConnection.Connection())
@@ -54,6 +56,7 @@ namespace BookStore_Models
                 return idDelete;
             }
         }
+
         public async Task<Order> GetOrderById(int Id)
         {
             using (DataConnection.Connection())
@@ -66,7 +69,8 @@ namespace BookStore_Models
                 return rs.FirstOrDefault();
             }
         }
-        public async Task<int> CountOrder(DateTime Begin,DateTime End)
+
+        public async Task<int> CountOrder(DateTime Begin, DateTime End)
         {
             using (DataConnection.Connection())
             {
@@ -79,6 +83,7 @@ namespace BookStore_Models
                 return rs;
             }
         }
+
         public async Task<float> CountMoney(DateTime Begin, DateTime End)
         {
             string Query = "SELECT SUM(TotalMoney) FROM [Order] WHERE OrderAt BETWEEN @Begin AND @End";
@@ -89,11 +94,13 @@ namespace BookStore_Models
             float rs = await DataConnection.Connection().ExecuteScalarAsync<float>(Query, param, null, null, c);
             return rs;
         }
+
         public async Task<int> InsertOrder(Order order)
         {
             using (DataConnection.Connection())
             {
-                string Query = "INSERT INTO [Order] VALUES (@OrderCode,@TotalQuantity,@TotalMoney,@PaymentId,@StatusId,@CustomerId)";
+                var rs = 0;
+                string Query = "INSERT INTO [Order] VALUES (@OrderCode,@CustomerId,@TotalQuantity,@TotalMoney,@PaymentId,@StatusId,@OrderAt)";
                 var param = new DynamicParameters();
                 param.Add("@OrderCode", order.OrderCode);
                 param.Add("@TotalQuantity", order.TotalQuantity);
@@ -101,9 +108,21 @@ namespace BookStore_Models
                 param.Add("@PaymentId", order.PaymentId);
                 param.Add("@StatusId", order.StatusId);
                 param.Add("@CustomerId", order.CustomerId);
+                param.Add("@OrderAt", order.OrderAt);
                 CommandType c = CommandType.Text;
-                var rs = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, c);
+                rs = await DataConnection.Connection().ExecuteAsync(Query, param, null, null, c);
                 return rs;
+            }
+        }
+
+        public async Task<int> GetLastIdOrder()
+        {
+            using (DataConnection.Connection())
+            {
+                string Query = "SELECT TOP 1 Id FROM [Order] ORDER BY Id DESC";
+                CommandType c = CommandType.Text;
+                var rs = await DataConnection.Connection().QueryAsync<Order>(Query, null, null, null, c);
+                return rs.FirstOrDefault().Id;
             }
         }
     }

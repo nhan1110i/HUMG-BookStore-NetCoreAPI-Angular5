@@ -37,98 +37,138 @@
     <div class="container">
         <div class="checkout__container ff">
             <div class="container">
+                    
                 <div class="row">
                     <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12" style="margin-bottom: 40px;">
-                        <h3>Billing Details</h3>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <label>First Name</label>
-                                <input class="form-control">
+                        <h3>THÔNG TIN GIAO HÀNG</h3>
+                        <div class="form-group">
+                            <div class="radio">
+                                <input type="radio" name="option" id="acc"  (click)="sameAddress = true">
+                                <label for="acc">Gửi tới địa chỉ của tôi</label>
+                                <div class="radio-btn"></div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <label>Last Name</label>
-                                <input class="form-control">
-                            </div>
+                            <div class="radio">
+                                <input type="radio" name="option" id="another"  (click)="sameAddress = false">
+                                <label for="another">Gửi tới địa chỉ khác</label>
+                                <div class="radio-btn"></div>
+                            </div>  
+                        </div>
+                        <div class="row" *ngIf="sameAddress">
                             <div class="col-md-12 col-sm-12">
-                                <label>State / Country</label>
+                                <label>Họ tên người nhận</label>
+                                <input class="form-control" [(ngModel)]="customerTemp.customerName" disabled>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Tỉnh / Thành phố</label>
+                                <div class="form-group d-flex">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="ion-ios-arrow-down" ></span></div>
+                                        <select name="" id="" class="form-control" disabled>
+                                            <option *ngFor="let city of cities" value="city.id" [selected]="customer.cityId == city.id">{{ city.cityName }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <label>Quận / Huyện</label>
                                 <div class="form-group d-flex">
                                     <div class="select-wrap">
                                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Vietnam</option>
-                                            <option value="">United State</option>
-                                            <option value="">England</option>
-                                            <option value="">Germany</option>
+                                        <select name="" id="" class="form-control" disabled>
+                                            <option *ngFor="let town of towns2" value="town.id" [selected]="town.id == customer.townId">{{ town.townName }}</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12">
-                                <label>Street Address</label>
-                                <input class="form-control">
+                                <label>Địa chỉ</label>
+                                <input class="form-control" [(ngModel)]="customerTemp.customerAddress" disabled >
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <label>Town / City</label>
-                                <input class="form-control">
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <label>Postcode / ZIP *</label>
-                                <input class="form-control">
+                                <label>Email</label>
+                                <input class="form-control" [(ngModel)]="customerTemp.customerMail" disabled>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <label>Phone</label>
-                                <input class="form-control">
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <label>Email Address</label>
-                                <input class="form-control">
+                                <input class="form-control" [(ngModel)]="customerTemp.customerPhone" disabled>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="radio">
-                                <input type="radio" name="option" id="acc">
-                                <label for="acc">Create an account?</label>
-                                <div class="radio-btn"></div>
+                        <div class="row" *ngIf="sameAddress == false">
+                                <div class="col-md-12 col-sm-12">
+                                    <label>Họ tên người nhận</label>
+                                    <input class="form-control" [(ngModel)]="customerTemp2.customerName" >
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label>Tỉnh / Thành phố</label>
+                                    <div class="form-group d-flex">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down" ></span></div>
+                                            <select name="" id="" class="form-control" [(ngModel)]="customerTemp2.cityId" (change)="getTowns(customerTemp2.cityId)" >
+                                                <option value="0" [selected]="customerTemp2.cityId == 0">Chọn tỉnh / thành</option>
+                                                <option *ngFor="let city of cities" value="{{ city.id }}" [selected]="customerTemp2.cityId == city.id">{{ city.cityName }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label>Quận / Huyện</label>
+                                    <div class="form-group d-flex">
+                                        <div class="select-wrap">
+                                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                            <select name="" id="" class="form-control" [(ngModel)]="customerTemp2.townId" >
+                                                <option value="0" [selected]="customerTemp2.townId == 0">Chọn quận / huyện</option>
+                                                <option *ngFor="let town of towns" value="{{ town.id }}" [selected]="town.id == customerTemp2.townId">{{ town.townName }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <label>Địa chỉ</label>
+                                    <input class="form-control" [(ngModel)]="customerTemp2.customerAddress"  >
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label>Email</label>
+                                    <input class="form-control" [(ngModel)]="customerTemp2.customerMail" >
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <label>Phone</label>
+                                    <input class="form-control" [(ngModel)]="customerTemp2.customerPhone" >
+                                </div>
                             </div>
-                            <div class="radio">
-                                <input type="radio" name="option" id="another">
-                                <label for="another">Ship to different address</label>
-                                <div class="radio-btn"></div>
-                            </div>  
-                        </div>
+                        
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                         <div class="cart__container--total-div">
                             <div class="pd-20 border-gray">
-                                <h5>Cart Totals</h5>
+                                <h5>THÔNG TIN THANH TOÁN</h5>
                                 <br/>
                                 <p class="d-flex">
-                                    <span>Subtotal</span>
-                                    <span>$20.60</span>
+                                    <span>Giá trị đơn</span>
+                                    <span>{{ formatCurrency(order.totalMoney) }}</span>
                                 </p>
                                 <p class="d-flex">
-                                    <span>Delivery</span>
-                                    <span>$0.00</span>
+                                    <span>Số lượng</span>
+                                    <span>{{ order.totalQuantity }}</span>
                                 </p>
                                 <p class="d-flex">
-                                    <span>Discount</span>
-                                    <span>$3.00</span>
+                                    <span>Giảm giá</span>
+                                    <span> 0 đ</span>
                                 </p>
                                 <hr/>
                                 <p class="d-flex">
-                                    <span>TOTAL</span>
-                                    <span>$17.60</span>
+                                    <span>Thành tiền</span>
+                                    <span>{{ formatCurrency(order.totalMoney) }}</span>
                                 </p>
                             </div>
                         </div>
                         <div class="pd-20 border-gray payment-method">
-                            <h3>Payment Method</h3>
+                            <h5>THANH TOÁN</h5>
                             <div class="radio">
-                                <input type="radio" name="option" id="bank">
-                                <label for="bank">Direct Bank Tranfer</label>
+                                <input type="radio" name="option" id="bank" checked>
+                                <label for="bank">Cash On Delivery</label>
                                 <div class="radio-btn"></div>
                             </div>
-                            <div class="radio">
+                            <!-- <div class="radio">
                                 <input type="radio" name="option" id="check">
                                 <label for="check">Check Payment</label>
                                 <div class="radio-btn"></div>
@@ -137,14 +177,9 @@
                                 <input type="radio" name="option" id="paypal">
                                 <label for="paypal">Paypal</label>
                                 <div class="radio-btn"></div>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="condition">
-                                <label for="condition">I have read and accept the terms and conditions</label>
-                                <div class="checkbox-btn"></div>
-                            </div>                            
+                            </div>                           -->
                         </div>   
-                        <button>Place an order</button>
+                        <button (click)="CheckoutOrder()" >Hoàn tất đơn hàng</button>
                     </div>
                 </div>
             </div>

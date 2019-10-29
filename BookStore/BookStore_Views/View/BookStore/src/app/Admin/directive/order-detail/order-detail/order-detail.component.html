@@ -1,1 +1,95 @@
-<p>order-detail works!</p>
+<div class="container" *ngIf="orderDetail">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card text-drank border-primary">
+        <div class="card-body">
+          <h5 class="card-title text-primary">THÔNG TIN KHÁCH HÀNG</h5>
+          <hr>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Họ tên :</label>
+            <div class="col-sm-8">
+              <span type="email" class="form-control">{{ orderDetail.customerInOrder.customer.customerName }}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Số điện thoại :</label>
+            <div class="col-sm-8">
+              <span class="form-control">{{ orderDetail.customerInOrder.customer.customerPhone }}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Email :</label>
+            <div class="col-sm-8">
+              <span class="form-control">{{ orderDetail.customerInOrder.customer.customerMail }}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-4 col-form-label">Địa chỉ :</label>
+            <div class="col-sm-8">
+              <span class="form-control">{{ orderDetail.customerInOrder.customer.customerAddress }} / {{ orderDetail.customerInOrder.town.townName }} / {{ orderDetail.customerInOrder.city.cityName }} </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card text-drank border-warning">
+          <div class="card-body">
+            <h5 class="card-title text-warning">THÔNG TIN ĐƠN HÀNG</h5>
+            <hr>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 col-form-label">Mã đơn :</label>
+              <div class="col-sm-8">
+                <span class="form-control" > {{ orderDetail.order.orderCode }} </span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 col-form-label">Số lượng :</label>
+              <div class="col-sm-8">
+                <span class="form-control"> {{ orderDetail.order.totalQuantity }} </span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 col-form-label">Tổng tiền :</label>
+              <div class="col-sm-8">
+                <span class="form-control"> {{ format(orderDetail.order.totalMoney) }} </span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 col-form-label">Trạng thái :</label>
+              <div class="col-sm-8">
+                <span class="form-control"> {{ getStatus(orderDetail.order.statusId) }} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 mt-15">
+            <button class="btn btn-danger" (click)="back()">Trở lại</button>
+      </div>
+      <div class="col-sm-12 mt-15">
+        <div class="card text-drank border-success">
+          <div class="card-body">
+            <h5 class="card-title text-success">DANH SÁCH SẢN PHẨM</h5>
+            <hr>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <td><strong>Ảnh</strong></td>
+                        <td><strong>Tên sách</strong></td>
+                        <td><strong>Đơn giá</strong></td>
+                        <td><strong>Số lượng</strong></td>
+                    </tr>
+                    <tr *ngFor="let product of orderDetail.productInOrder">
+                        <td><img src="https://localhost:44315/image/{{ product.product.productImageList }}" class="image"></td>
+                        <td>{{ product.product.productName }}</td>
+                        <td>{{ format(product.product.productPrice) }}</td>
+                        <td>{{ product.orderDetail.productQuantity }}</td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -14,5 +14,9 @@ namespace BookStore_Controller.Middlewares
         {
             return builder.UseMiddleware<RoleMiddleware>();
         }
+        public static IApplicationBuilder UseSystemLogMiddleware(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<SystemLogMiddleware>();
+        }
     }
 }

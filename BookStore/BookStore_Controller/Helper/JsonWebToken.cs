@@ -36,5 +36,11 @@ namespace BookStore_Controller.Helper
             string[] rs = role.Split('.');
             return rs;
         }
+        public static string GetUser(string Token)
+        {
+            JwtSecurityToken token = new JwtSecurityToken(jwtEncodedString: Token);
+            string user = token.Claims.First(c => c.Type == "AdminUsername").Value.ToString().Trim();
+            return user;
+        }
     }
 }

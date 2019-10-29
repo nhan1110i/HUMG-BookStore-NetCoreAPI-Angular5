@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { formatCurrency } from '../../config/config';
 import { OrderService } from '../../services/order/order.service';
-import { alert } from '../../config/config'
+import { alert, alert2 } from '../../config/config';
+import Swal from 'sweetalert2';
+var moment = require('moment');
+declare var require: any
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -13,11 +16,15 @@ export class OrderComponent implements OnInit {
   orders: any;
   ordersTemp: any;
   filter: number = 0;
+  formatTime(time : string) :string{
+    return moment(time).format("MMM Do YY");
+  }
   getOrders() {
     this.orderService.getOrder().subscribe(
       rs => {
         this.orders = rs;
         this.ordersTemp = rs;
+        console.log(this.orders);
       }, err => {
         console.log(err)
       }
@@ -37,21 +44,21 @@ export class OrderComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2("ERROR","Lỗi không xác định",'error')
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2("TOKEN EXPIRED","Hết phiên đăng nhập",'info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2("NO AUTHORITY","Tài khoản không đủ quyền",'warning')
             break;
           }
           default: {
             let index: number = this.orders.findIndex(order => order.order.id == id);
             this.orders[index].order.statusId = 2;
-            this.alert = alert.update;
+            alert2('UPDATED', 'Duyệt đơn hàng thành công','success');
             console.log(rs)
             break;
           }
@@ -68,21 +75,21 @@ export class OrderComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2("ERROR","Lỗi không xác định",'error')
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2("TOKEN EXPIRED","Hết phiên đăng nhập",'info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2("NO AUTHORITY","Tài khoản không đủ quyền",'warning')
             break;
           }
           default: {
             let index: number = this.orders.findIndex(order => order.order.id == id);
             this.orders[index].order.statusId = 3;
-            this.alert = alert.update;
+            alert2('UPDATED', 'Từ chối đơn hàng thành công','success');
             console.log(rs)
             break;
           }
@@ -98,21 +105,21 @@ export class OrderComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR','Lỗi không xác định','error')
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2("TOKEN EXPIRED","Hết phiên đăng nhập",'info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2("NO AUTHORITY","Tài khoản không đủ quyền",'warning')
             break;
           }
           default: {
             let index: number = this.orders.findIndex(order => order.order.id == id);
             this.orders.splice(index, 1);
-            this.alert = alert.delete;
+            alert2("DELETE","Xóa đơn hàng thành công",'success')
             console.log(rs)
             break;
           }

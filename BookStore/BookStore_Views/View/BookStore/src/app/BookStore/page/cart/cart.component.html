@@ -19,7 +19,7 @@
           <li class="nav-item" *ngIf="customer == 'not login'"><a routerLink="/BookStore/Login" class="nav-link">Đăng nhập</a></li>
           <li class="nav-item" *ngIf="customer != 'not login'"><a routerLink="/BookStore/Login" class="nav-link">{{ customer.customerName }}</a></li>
           <li class="nav-item"><a routerLink="/BookStore/Cart" class="nav-link"><span class="icon-shopping_cart"></span><i
-                class="icon ion-ios-cart"></i>&nbsp;[ {{ carts.length }} sản phẩm ]</a></li>
+                class="icon ion-ios-cart"></i>&nbsp;[ {{ totalQuantity }} sản phẩm ]</a></li>
         </ul>
       </div>
     </div>
@@ -65,7 +65,7 @@
                     <td class="price">{{ formatCurrency(cart.price) }}</td>
                     <td class="quantity">
                       <div class="input-group mb-3">
-                        <input type="text" name="quantity" class="quantity form-control input-number" [(ngModel)]="cart.quantity" >
+                        <input type="number" name="quantity" class="quantity form-control input-number" [(ngModel)]="cart.quantity" (change)="changeQuantity()">
                       </div>
                     </td>
                     <td class="total">{{ formatCurrency(cart.totalMoney) }}</td>
@@ -98,7 +98,7 @@
                   <span>{{ formatCurrency(totalCart) }}</span>
                 </p>
               </div>
-              <button>Tiến hành thanh toán</button>
+              <button routerLink="/BookStore/CheckOut">Tiến hành thanh toán</button>
             </div>
           </div>
         </div>

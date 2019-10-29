@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CategoryService } from '../../services/category/category.service';
-import { alert } from '../../config/config';
+import { alert, alert2 } from '../../config/config';
 
 @Component({
   selector: 'app-category',
@@ -38,20 +38,20 @@ export class CategoryComponent implements OnInit {
         console.log(rs);
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             this.categories.splice(this.categories.findIndex(category => category.category.id == Id), 1);
-            this.alert = alert.delete;
+            alert2('DELETE', 'Đã xóa danh mục thành công','success');
             break;
           }
         }
@@ -67,22 +67,22 @@ export class CategoryComponent implements OnInit {
         console.log(rs);
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             this.categorySelected.category.parentId = +this.categorySelected.category.parentId;
             this.categorySelected.parentCategory.id = this.categorySelected.category.parentId;
             this.categorySelected.parentCategory.parentName = this.parentCategories[this.parentCategories.findIndex(obj => obj.id == this.categorySelected.category.parentId)].parentName;
-            this.alert = alert.update;
+            alert2('UPDATE', 'Đã cập nhật danh mục thành công','success');
             this.categorySelected = null;
             break;
           }
@@ -102,15 +102,15 @@ export class CategoryComponent implements OnInit {
     this.categoryService.addCategory(category.value).subscribe((rs) => {
       switch (rs.Error) {
         case 1: {
-          this.alert = alert.error;
+          alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
           break;
         }
         case 2: {
-          this.alert = alert.expire;
+          alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
           break;
         }
         case 3: {
-          this.alert = alert.auth;
+          alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
           break;
         }
         default: {
@@ -123,7 +123,7 @@ export class CategoryComponent implements OnInit {
             }
           })
           console.log(rs);
-          
+          alert2('INSERT', 'Đã thêm mới danh mục thành công','success');
 
           break;
         }

@@ -44,7 +44,6 @@ namespace BookStore_Controller.Controllers
         public async Task<JsonResult> GetOrderById(int Id)
         {
             var orderResult = await order.GetOrderById(Id);
-            List<OrderInOrder> orders = new List<OrderInOrder>();
             if (orderResult != null)
             {
                 List<ProductInOrder> productsInOrder = new List<ProductInOrder>();
@@ -56,7 +55,7 @@ namespace BookStore_Controller.Controllers
                     Product product2 = await product.GetProductById(orderDetail.ProductId);
                     productsInOrder.Add(new ProductInOrder(product2, orderDetail));
                 }
-                orders.Add(new OrderInOrder(customerInOrder, orderResult, productsInOrder));
+                OrderInOrder orders =  new OrderInOrder(customerInOrder, orderResult, productsInOrder);
                 return new JsonResult(orders);
             }
             else
@@ -65,7 +64,7 @@ namespace BookStore_Controller.Controllers
             }
         }
         [HttpPut]
-        public async Task<JsonResult> CompleteOrder(int Id)
+        public async Task<JsonResult> CompleteOrder( [FromBody]int Id)
         {
             var rs = await order.UpdateOrder(Id, 2);
             if(rs == 0)
@@ -117,7 +116,68 @@ namespace BookStore_Controller.Controllers
                 return new JsonResult(new Notice(1, "Cant Insert"));
             }
         }
-
+        [HttpPost]
+        public async Task<JsonResult> CheckOutSameAddress([FromBody] CheckOut checkOut)
+        {
+            checkOut.Order.CustomerId = checkOut.Customer.Id;
+            int insertOrder = await order.InsertOrder(checkOut.Order);
+            if(insertOrder != 0)
+            {
+                int OrderId = await order.GetLastIdOrder();
+                foreach(OrderDetail orderDetail in checkOut.OrderDetail)
+                {
+                    orderDetail.OrderId = OrderId;
+                }
+                int insertOrderDetail = await orderDetail.InsertListOrderDetail(checkOut.OrderDetail);
+                if(insertOrderDetail != 0)
+                {
+                    return new JsonResult(new Notice(0, "inserted"));
+                }
+                else
+                {
+                    return new JsonResult(new Notice(1, "Cant Insert OrderDetail"));
+                }
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "Cant insert Order"));
+            }
+        }
+        public async Task<JsonResult> CheckOutDifferentAddress([FromBody] CheckOut checkOut)
+        {
+            int insertCustomer = await customer.InsertCustomer(checkOut.Customer);
+            if(insertCustomer != 0)
+            {
+                int customerId = await customer.GetLastCustomer();
+                checkOut.Order.CustomerId = customerId;
+                int insertOrder = await order.InsertOrder(checkOut.Order);
+                if(insertOrder != 0)
+                {
+                    int orderId = await order.GetLastIdOrder();
+                    foreach(OrderDetail orderDetail in checkOut.OrderDetail)
+                    {
+                        orderDetail.OrderId = orderId;
+                    }
+                    int insertOrderDetail = await orderDetail.InsertListOrderDetail(checkOut.OrderDetail);
+                    if(insertOrderDetail != 0)
+                    {
+                        return new JsonResult(new Notice(0, "inserted"));
+                    }
+                    else
+                    {
+                        return new JsonResult(new Notice(1, "cant insert order detail"));
+                    }
+                }
+                else
+                {
+                    return new JsonResult(new Notice(1, "cant insert order"));
+                }
+            }
+            else
+            {
+                return new JsonResult(new Notice(1, "cant insert customer"));
+            }
+        }
         // GET: api/Order/5
         
     }

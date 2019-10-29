@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/Admin/services/category/category.service';
-import { formatCurrency, GetPage, GetCustomer, AddProductCart, CountCart } from '../../../Admin/config/config';
+import { formatCurrency, GetPage, GetCustomer, AddProductCart, CountQuantityInCart } from '../../../Admin/config/config';
 import { ProductService } from 'src/app/Admin/services/product/product.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
   AddProduct(Id : number, quantity : number, price : number, name : string, image : string){
     AddProductCart(Id,quantity,price,name,image);
-    this.countCart = CountCart();
+    this.countCart = CountQuantityInCart();
   }
   constructor(
     private categoryService: CategoryService,
@@ -60,10 +60,8 @@ export class HomeComponent implements OnInit {
     // console.log(this.products)
     this.page = GetPage();
     this.customer = GetCustomer();
-    this.countCart = CountCart();
-    if(this.countCart > 0){
-      this.countCart--;
-    }
+    this.countCart = CountQuantityInCart();
+    
   }
 
 }

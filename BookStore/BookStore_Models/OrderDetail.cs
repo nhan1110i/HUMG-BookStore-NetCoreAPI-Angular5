@@ -26,13 +26,13 @@ namespace BookStore_Models
                 return rs.ToList();
             }
         }
-        public async Task<int> InsertOrdeDetail(OrderDetail [] orderDetails)
+        public async Task<int> InsertListOrderDetail(List<OrderDetail> orderDetails)
         {
             using (DataConnection.Connection())
             {
                 foreach(OrderDetail orderDetail in orderDetails)
                 {
-                    string Query = "INSERT INTO OrderDetail VAULES (@OrdeId, @ProductId, @ProductQuantity";
+                    string Query = "INSERT INTO OrderDetail VALUES (@OrderId, @ProductId, @ProductQuantity)";
                     var pa = new DynamicParameters();
                     pa.Add("@OrderId", orderDetail.OrderId);
                     pa.Add("@ProductId", orderDetail.ProductId);

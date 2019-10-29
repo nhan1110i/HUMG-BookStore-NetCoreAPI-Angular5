@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer/customer.service';
-import { alert } from '../../config/config';
+import { alert, alert2 } from '../../config/config';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -25,15 +25,15 @@ export class CustomerComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
@@ -43,7 +43,7 @@ export class CustomerComponent implements OnInit {
             } else {
               this.customers[this.customers.findIndex(custom => custom.customer.id == id)].customer.isActive = true
             }
-            this.alert = alert.update;
+            alert2("UPDATED","Đã cập nhật thành công",'success')
             break;
           }
         }
@@ -56,20 +56,20 @@ export class CustomerComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             this.customers.splice(this.customers.findIndex(custom => custom.customer.id == id), 1);
-            this.alert = alert.delete;
+            alert2("DELETED","Đã xóa thành công",'success')
 
             break;
           }

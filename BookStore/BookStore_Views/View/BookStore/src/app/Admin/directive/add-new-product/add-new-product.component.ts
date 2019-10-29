@@ -5,7 +5,7 @@ import { PublishingService } from '../../services/publishing/publishing.service'
 import { Moment } from 'moment'
 import { ProductService } from '../../services/product/product.service';
 import { Location } from '@angular/common';
-import { alert } from '../../config/config'
+import { alert, alert2 } from '../../config/config'
 var moment = require('moment');
 declare var require: any
 
@@ -72,19 +72,19 @@ export class AddNewProductComponent implements OnInit {
           irs => {
             switch (irs.Error) {
               case 1: {
-                this.alert = alert.error;
+                alert2('ERORR', 'Lỗi không xác định','error');
                 break;
               }
               case 2: {
-                this.alert = alert.expire;
+                alert2('TOKEN EXPIRED', 'Hết phiên đăng nhập','info');
                 break;
               }
               case 3: {
-                this.alert = alert.auth;
+                alert2('NO AUTHORITY', 'Tải khoản không có quyền thêm sản phẩm','warning');
                 break;
               }
               default: {
-                this.alert = alert.add;
+                alert2('INSERTED', 'Thêm mới sản phẩm thành công','success');
                 break;
               }
             }

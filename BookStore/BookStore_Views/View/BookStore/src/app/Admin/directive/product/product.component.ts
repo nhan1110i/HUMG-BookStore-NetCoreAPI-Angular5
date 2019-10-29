@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
-import { formatCurrency } from '../../config/config';
+import { formatCurrency, alert2 } from '../../config/config';
 import { AdminService } from '../../AdminService/admin.service';
 import { alert } from '../../config/config';
 import { CategoryService } from '../../services/category/category.service';
@@ -63,20 +63,20 @@ export class ProductComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
-            this.alert = alert.delete;
+            alert2('DELETED','Đã xóa sản phẩm thành công','success');
             break;
           }
         }
@@ -87,15 +87,15 @@ export class ProductComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
@@ -105,7 +105,7 @@ export class ProductComponent implements OnInit {
               this.products.splice(this.products.findIndex(product => product.product.id == id), 1);
             });
             this.selectedProducts = [0, 0];
-            this.alert = alert.delete;
+            alert2('DELETED','Đã xóa sản phẩm thành công','success')
             break;
           }
         }

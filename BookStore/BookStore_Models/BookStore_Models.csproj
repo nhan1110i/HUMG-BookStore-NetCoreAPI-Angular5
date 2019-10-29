@@ -56,11 +56,13 @@
     <Compile Include="Author.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryDetail.cs" />
+    <Compile Include="CheckOut.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerInOrder.cs" />
     <Compile Include="DataConnection.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Notice.cs" />

@@ -43,6 +43,23 @@ export class OrderService {
       tap(rs => {console.log(rs)}),catchError(error => of(console.log(error)))
     )
   }
+  getDetailOrder(id : number) : Observable<any>{
+    return this.http.get<any>(url.host + url.order.orderDetail + "/" + id.toString(),httpOptions).pipe(
+      tap(rs => {}),catchError(err => of([]))
+    )
+  }
+
+  // BookStore
+  checkOutSameAddress(checkout : any): Observable<any>{
+    return this.http.post<any>(url.host + url.order.checkOutSameAddress,checkout,httpOptions).pipe(
+      tap(rs => {}),catchError(error => of())
+    )
+  }
+  checkOutDifferentAddress(checkout : any) : Observable<any>{
+    return this.http.post<any>(url.host + url.order.checkOutDifferentAddress,checkout,httpOptions).pipe(
+      tap(rs => {}),catchError(error => of())
+    )
+  }
   
 
   constructor(

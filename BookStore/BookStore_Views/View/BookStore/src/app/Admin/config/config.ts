@@ -1,5 +1,5 @@
 import { ProductService } from '../services/product/product.service'
-
+import Swal from 'sweetalert2'
 export var url = {
     host: "https://localhost:44315/",
     category: {
@@ -50,6 +50,9 @@ export var url = {
         complete: "Order/CompleteOrder",
         decline: "Order/DeclineOrder",
         delete: "Order/DeleteOrder",
+        orderDetail: "Order/GetOrderById",
+        checkOutSameAddress: "Order/CheckOutSameAddress",
+        checkOutDifferentAddress: "Order/CheckOutDifferentAddress"
     },
     city: {
         cities: "City/GetCities"
@@ -60,6 +63,38 @@ export var url = {
 }
 export var config = {
     salt: "tingting"
+}
+export function alert2(title: string, text: string, type: string) {
+    switch (type) {
+        case 'error':
+            Swal.fire({
+                title: title,
+                text: text,
+                type: 'error',
+            })
+            break;
+        case 'success':
+            Swal.fire({
+                title: title,
+                text: text,
+                type: 'success',
+            })
+            break;
+        case 'warning':
+            Swal.fire({
+                title: title,
+                text: text,
+                type: 'warning',
+            })
+            break;
+        case 'info':
+            Swal.fire({
+                title: title,
+                text: text,
+                type: 'info',
+            })
+            break;
+    }
 }
 export var alert = {
     update: {
@@ -163,20 +198,20 @@ export function GetPage(): any {
         return "B O O K S T O R E H O M E"
     }
 }
-export function AddProductCart(Id: number, quantity: number, price: number,name : string, image : string) {
+export function AddProductCart(Id: number, quantity: number, price: number, name: string, image: string) {
     let product = {
         Id: Id,
         quantity: quantity,
         price: price,
-        name : name,
-        image : image
+        name: name,
+        image: image
     }
     if (localStorage.getItem("cart")) {
         let orderDetail = JSON.parse(localStorage.getItem("cart"));
         let index = orderDetail.findIndex(order => order.Id == Id);
-        if(index == -1){
+        if (index == -1) {
             orderDetail.push(product);
-        }else{
+        } else {
             orderDetail[index].quantity = orderDetail[index].quantity + 1;
         }
         console.log(orderDetail);
@@ -187,8 +222,8 @@ export function AddProductCart(Id: number, quantity: number, price: number,name 
                 Id: 0,
                 quantity: 0,
                 price: 0,
-                name : "",
-                image : "",
+                name: "",
+                image: "",
             }
         ]
         localStorage.setItem("cart", JSON.stringify(arr));
@@ -197,12 +232,27 @@ export function AddProductCart(Id: number, quantity: number, price: number,name 
         console.log(orderDetail);
         localStorage.setItem("cart", JSON.stringify(orderDetail));
     }
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    })
+
+    Toast.fire({
+        type: 'success',
+        title: 'Đã thêm vào giỏ hàng'
+    })
 }
-export function CountCart() : number{
-    if(localStorage.getItem("cart")){
-        let s = JSON.parse(localStorage.getItem("cart")).length;
-        return s;
-    }else{
+export function CountQuantityInCart(): number {
+    if (localStorage.getItem("cart")) {
+        let total = 0;
+        let s = JSON.parse(localStorage.getItem("cart"));
+        s.forEach(cart => {
+            total = total + cart.quantity;
+        });
+        return total;
+    } else {
         return 0;
     }
 }

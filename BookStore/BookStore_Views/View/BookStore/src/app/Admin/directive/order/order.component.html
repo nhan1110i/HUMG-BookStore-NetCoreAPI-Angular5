@@ -35,7 +35,7 @@
                 <th>Action</th>
               </tr>
               <tr *ngFor="let order of orders">
-                <td><input type="checkbox"></td>
+                <td>{{ formatTime(order.order.orderAt) }}</td>
                 <td>{{ order.order.orderCode }}</td>
                 <td>{{ order.customerInOrder.customer.customerName }}</td>
                 <td>{{ order.order.totalQuantity }}</td>

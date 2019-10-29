@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee/employee.service';
-import { GetUsername } from '../../config/config';
+import { GetUsername, alert2 } from '../../config/config';
 import { alert } from '../../config/config';
 @Component({
   selector: 'app-employee',
@@ -55,21 +55,22 @@ export class EmployeeComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             let employeeTemp = this.employeeAdd;
             employeeTemp.arrRole = this.arrRoleAdd;
             this.employees.push(employeeTemp)
+            alert2("INSERTED","Đã thêm mới nhân viên",'success')
             break;
           }
         }
@@ -97,19 +98,19 @@ export class EmployeeComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
-            this.alert = alert.update;
+            alert2("UPDATED","Đã cập nhật nhân viên",'success')
             break;
           }
         }
@@ -123,21 +124,21 @@ export class EmployeeComponent implements OnInit {
       rs => {
         switch (rs.Error) {
           case 1: {
-            this.alert = alert.error;
+            alert2('ERROR', 'Đã xảy ra lỗi không xác định','error');
             break;
           }
           case 2: {
-            this.alert = alert.expire;
+            alert2('TOKEN EXPIRED', 'Đã hết phiên đăng nhập','info');
             break;
           }
           case 3: {
-            this.alert = alert.auth;
+            alert2('NO AUTHORITY', 'Tài khoản không đủ quyền','warning');
             break;
           }
           default: {
             let index = this.employees.findIndex(emp => emp.id == id);
             this.employees.splice(index, 1);
-            this.alert = alert.delete;
+            alert2('DELETED',"Đã xóa nhân viên thành công",'success')
             break;
           }
         }

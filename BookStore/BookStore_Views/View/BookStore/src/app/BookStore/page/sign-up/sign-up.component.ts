@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from 'src/app/Admin/services/customer/customer.service';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { CategoryService } from 'src/app/Admin/services/category/category.service';
-import { GetPage, GetCustomer } from 'src/app/Admin/config/config';
+import { GetPage, GetCustomer, alert2 } from 'src/app/Admin/config/config';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -70,7 +70,7 @@ export class SignUpComponent implements OnInit {
     this.customerService.insertAccountInCustomer(this.accountInCustomer).subscribe(
       rs =>{
         if(rs.error == 0){
-          console.log("ok")
+          alert2("THÀNH CÔNG","Đã đăng kí thành công",'success')
         }
       },err =>{
         console.log(err);
